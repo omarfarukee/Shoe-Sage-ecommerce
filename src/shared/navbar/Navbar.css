@@ -1,0 +1,83 @@
+/* General styles for nav links */
+.nav-item {
+    position: relative;
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Before pseudo-element for the border */
+  .nav-item::before {
+    cursor: pointer;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--red) ;
+    transition: width 0.3s ease-in-out;
+  }
+  
+  /* Hover state for the border to grow from left to right */
+  .nav-item:hover::before {
+    width: 70%;
+  }
+  
+  /* Active link will have the full border by default */
+  .active::before {
+    width: 70%;
+  }
+
+
+/* Submenu container */
+.submenu {
+  position: absolute;
+  left: 0;
+  top: 40px; /* Position submenu just below the parent */
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border: 1px solid #ebebeb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0s 0.4s; /* Add delay to visibility */
+  z-index: 10;
+  font-size: 16px;
+  width: 250px;
+  border-radius: 10px;
+}
+
+/* Submenu items */
+.submenu-item {
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: color 0.4s;
+}
+
+.submenu-item:hover {
+ color: var(--red);
+}
+
+/* Show submenu on hover */
+.group:hover .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.4s ease; /* Remove delay when showing */
+}
+
+/* Navbar.css */
+.side-menu {
+  transform: translateX(100%); /* Hidden by default */
+  transition: transform 0.5s ease; /* Smooth transition */
+}
+.side-menu.open {
+  transform: translateX(0); /* Visible when opened */
+}
+
+
+  

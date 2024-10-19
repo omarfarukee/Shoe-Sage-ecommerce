@@ -5,7 +5,9 @@
   /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
   font-family: "Poppins", sans-serif;
   /* custom color and font sizes */
-  --red: #ff2100;
+  /* --red: #ff2100; */
+  --red: #c30010;
+  --titleXxl: 70px;
   --titleXl: 60px;
   --titleLg: 48px;
   --titleMd: 40px;

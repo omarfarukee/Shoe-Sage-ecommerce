@@ -1,47 +1,103 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo/logo.png";
 import { NavLink } from "react-router-dom";
-import { CiHeart, CiMenuFries, CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
-import { IoCloseOutline } from "react-icons/io5";
+import './Navbar.css'
+import {
+  CiHeart,
+  CiMenuFries,
+  CiSearch,
+  CiShoppingCart,
+  CiUser,
+} from "react-icons/ci";
+import {  IoCloseOutline } from "react-icons/io5";
+import { GoChevronDown } from "react-icons/go";
 export default function HomeNavbar() {
   const [scrolled, setScrolled] = useState(false);
   const [cart, setCart] = useState(5);
   const [wish, setWish] = useState(10);
   useEffect(() => {
     const handleScroll = () => {
-        const offset = window.scrollY;
-        if (offset > 100) {
-            setScrolled(true);
-        } else {
-            setScrolled(false);
-        }
+      const offset = window.scrollY;
+      if (offset > 100) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-        window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
-}, []);
+  }, []);
   return (
     <section>
-      <div className={`border-b h-24 flex  w-full fixed z-50 transition-all duration-500 ${scrolled ? "bg-white shadow-md px-[8%]" : "px-[5%] bg-transparent backdrop-blur-sm border-b border-[#37363844]"}`}>
+      <div
+        className={`border-b h-24 flex  w-full fixed z-50 transition-all duration-500 ${
+          scrolled
+            ? "bg-white shadow-md px-[8%]"
+            : "px-[5%] bg-transparent backdrop-blur-sm border-b border-[#37363844]"
+        }`}
+      >
         <div className="flex h-full  items-center px-4 py-2 w-[60%]">
           <img src={logo} className="w-40" alt="" />
           <div className="flex space-x-10 ">
-            <NavLink to="/">
+            <NavLink to="/" className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}>
               <a className="text-fontXsm ">Home</a>
             </NavLink>
-            <NavLink>
-              <a className="text-fontXsm ">Shop</a>
+            <div className="relative group">
+              <NavLink
+                to="/company/aboutUs"
+                className={({ isActive }) =>
+                  isActive ? "nav-item active" : "nav-item"
+                }
+              >
+                Shop <GoChevronDown />
+
+              </NavLink>
+              {/* Submenu */}
+              <div className="submenu">
+                <NavLink
+                  to="/shop/men"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-red submenu-item"
+                      : "text-black submenu-item"
+                  }
+                >
+                  Men
+                </NavLink>
+                <NavLink
+                  to="/shop/women"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-red submenu-item"
+                      : "text-black submenu-item"
+                  }
+                >
+                  Women
+                </NavLink>
+                <NavLink
+                  to="/shop/kids"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-red submenu-item"
+                      : "text-black submenu-item"
+                  }
+                >
+                  Kids
+                </NavLink>
+              </div>
+            </div>
+            <NavLink to='/about' className={({ isActive }) =>
+                  isActive ? "nav-item active" : "nav-item"
+                }>
+              <a className="text-fontXsm " >About</a>
             </NavLink>
-            <NavLink>
-              <a className="text-fontXsm ">About</a>
-            </NavLink>
-            <NavLink>
-              <a className="text-fontXsm ">Services</a>
-            </NavLink>
-            <NavLink to="/contact">
+            <NavLink to="/contact" className={({ isActive }) =>
+                  isActive ? "nav-item active" : "nav-item"
+                }>
               <a className="text-fontXsm ">Contact</a>
             </NavLink>
           </div>
@@ -75,7 +131,6 @@ export default function HomeNavbar() {
           <CiUser className="text-3xl" />
 
           <CiMenuFries className="text-3xl" />
-
         </div>
       </div>
     </section>

@@ -11,6 +11,7 @@ export default {
         red: 'var(--red)', 
       },
       fontSize: {
+      titleXxl: 'var(--titleXxl)',  
       titleXl: 'var(--titleXl)',  
       titleLg: 'var(--titleLg)',  
       titleMd: 'var(--titleMd)',  
