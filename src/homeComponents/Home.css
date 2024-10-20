@@ -1,0 +1,13 @@
+@keyframes wave {
+    0%, 100% {
+      transform: translateY(0); /* Original position */
+    }
+    50% {
+      transform: translateY(-20px); /* Move up by 20px */
+    }
+  }
+  
+  .img-wave {
+    animation: wave 5s ease-in-out infinite; /* 3 seconds duration, ease-in-out for smooth transition, infinite loop */
+  }
+  

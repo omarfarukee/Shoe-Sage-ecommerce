@@ -1,11 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 :root {
   /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
   font-family: "Poppins", sans-serif;
   /* custom color and font sizes */
-  /* --red: #ff2100; */
   --red: #c30010;
   --titleXxl: 70px;
   --titleXl: 60px;
@@ -14,15 +14,18 @@
   --titleSm: 27px;
   --titleXsm: 20px;
 }
-::-webkit-scrollbar{
-  width: 10px;
+
+body::-webkit-scrollbar {
+  width: 10px !important;
 }
-::-webkit-scrollbar-track{
-  background-color: #e3eefb;
+
+body::-webkit-scrollbar-track {
+  background-color: #e3eefb !important;
   border-radius: 10px;
-  border:1px solid rgba(0, 0, 0, 0.24);
+  border: 1px solid rgba(0, 0, 0, 0.24) !important;
 }
-::-webkit-scrollbar-thumb{
-  background: rgb(16, 76, 240);
-  border-radius: 4px;
+
+body::-webkit-scrollbar-thumb {
+  background: rgb(240, 31, 16) !important;
+  border-radius: 4px !important;
 }
