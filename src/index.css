@@ -7,12 +7,6 @@
   font-family: "Poppins", sans-serif;
   /* custom color and font sizes */
   --red: #c30010;
-  --titleXxl: 70px;
-  --titleXl: 60px;
-  --titleLg: 48px;
-  --titleMd: 40px;
-  --titleSm: 27px;
-  --titleXsm: 20px;
 }
 
 body::-webkit-scrollbar {
@@ -63,3 +57,45 @@ body::-webkit-scrollbar-thumb {
   }
 
   /* common button style start end*/
+
+  /* loader  */
+  @keyframes floats {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .floats-animation {
+    animation: floats 2s ease-in-out infinite;
+    width: 700px;
+  }
+  /* ========================= */
+  @keyframes dot-flashing {
+    0% {
+      opacity: 0;
+    }
+    50%,
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .dot-1 {
+    animation: dot-flashing 1s infinite steps(1, end);
+  }
+  
+  .dot-2 {
+    animation: dot-flashing 1s infinite steps(1, end) 0.2s;
+  }
+  
+  .dot-3 {
+    animation: dot-flashing 1s infinite steps(1, end) 0.4s;
+  }
+  
+  .loading-dots {
+    display: inline;
+  }
+  /* loader end */

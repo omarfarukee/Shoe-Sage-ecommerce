@@ -2,8 +2,14 @@ import React from 'react'
 import { Helmet } from "react-helmet";
 import HomeTopBanner from './HomeTopBanner';
 import HomeCategory from './HomeCategory';
+import useLoader from '../shared/loader/Loader';
+import FinalLoader from '../shared/loader/FinalLoader';
+import MakeYourWay from './MakeYourWay';
 const Home = () => {
-
+  const { loading, online } = useLoader();
+  if (loading || !online) {
+    return <FinalLoader />;
+  }
   return (
     <div>
       <Helmet>
@@ -21,6 +27,9 @@ const Home = () => {
       </div>
       <div>
         <HomeCategory/>
+      </div>
+      <div className='mt-20 mb-20'>
+        <MakeYourWay/>
       </div>
       </div>
       

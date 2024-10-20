@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo/logo.png";
 import { NavLink } from "react-router-dom";
-import './Navbar.css'
+import "./Navbar.css";
 import {
   CiHeart,
   CiMenuFries,
@@ -9,8 +9,9 @@ import {
   CiShoppingCart,
   CiUser,
 } from "react-icons/ci";
-import {  IoCloseOutline } from "react-icons/io5";
+import { IoCloseOutline } from "react-icons/io5";
 import { GoChevronDown } from "react-icons/go";
+import SearchNavbar from "./SearchNavbar";
 export default function HomeNavbar() {
   const [scrolled, setScrolled] = useState(false);
   const [cart, setCart] = useState(5);
@@ -43,7 +44,12 @@ export default function HomeNavbar() {
         <div className="flex h-full  items-center px-4 py-2 w-[60%]">
           <img src={logo} className="w-40" alt="" />
           <div className="flex space-x-10 ">
-            <NavLink to="/" className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "nav-item active" : "nav-item"
+              }
+            >
               <a className="text-fontXsm ">Home</a>
             </NavLink>
             <div className="relative group">
@@ -54,7 +60,6 @@ export default function HomeNavbar() {
                 }
               >
                 Shop <GoChevronDown />
-
               </NavLink>
               {/* Submenu */}
               <div className="submenu">
@@ -90,30 +95,40 @@ export default function HomeNavbar() {
                 </NavLink>
               </div>
             </div>
-            <NavLink to='/about' className={({ isActive }) =>
-                  isActive ? "nav-item active" : "nav-item"
-                }>
-              <a className="text-fontXsm " >About</a>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive ? "nav-item active" : "nav-item"
+              }
+            >
+              <a className="text-fontXsm ">About</a>
             </NavLink>
-            <NavLink to="/contact" className={({ isActive }) =>
-                  isActive ? "nav-item active" : "nav-item"
-                }>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                isActive ? "nav-item active" : "nav-item"
+              }
+            >
               <a className="text-fontXsm ">Contact</a>
             </NavLink>
           </div>
         </div>
         <div className=" w-[40%] gap-10 h-full flex items-center justify-end">
           {/* search icon start */}
-          <label className=" swap swap-rotate">
-            {/* this hidden checkbox controls the state */}
+          {/* <label className=" swap swap-rotate">
+            
             <input type="checkbox" />
 
-            {/* search icon */}
+            
             <CiSearch className="text-3xl swap-off" />
 
-            {/* close icon */}
+           
             <IoCloseOutline className="text-3xl swap-on" />
-          </label>
+          </label> */}
+          <div className="mt-2">
+          <SearchNavbar/>
+          </div>
+          
           {/* search icon end*/}
           <div>
             <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
@@ -130,8 +145,9 @@ export default function HomeNavbar() {
           </div>
           <CiUser className="text-3xl" />
 
-          <CiMenuFries className="text-3xl" />
+          <CiMenuFries className="text-3xl  "  />
         </div>
+        
       </div>
     </section>
   );

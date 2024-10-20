@@ -15,7 +15,7 @@ export default function HomeTopBanner() {
   useEffect(() => {
     const interval = setTimeout(() => {
       setActiveSlider((prev) => (prev === 3 ? 1 : prev + 1));
-    }, 10000);
+    }, 20000);
 
     // Cleanup the interval
     return () => clearTimeout(interval);
