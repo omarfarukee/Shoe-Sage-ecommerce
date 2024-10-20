@@ -1,6 +1,7 @@
 import React from 'react'
 import { Helmet } from "react-helmet";
 import HomeTopBanner from './HomeTopBanner';
+import HomeCategory from './HomeCategory';
 const Home = () => {
 
   return (
@@ -17,6 +18,9 @@ const Home = () => {
       {/* top banner start */}
       <div>
         <HomeTopBanner />
+      </div>
+      <div>
+        <HomeCategory/>
       </div>
       </div>
       

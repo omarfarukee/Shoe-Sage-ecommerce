@@ -3,9 +3,10 @@ import bannerBg from "../assets/backgrounds/bannerBg.webp";
 import shoe1 from "../assets/banner-shoe-img/shoe1.png";
 import shoe2 from "../assets/banner-shoe-img/shoe2.png";
 import shoe3 from "../assets/banner-shoe-img/shoe3.png";
+import blob1 from "../assets/blobs/blob2.gif";
+import blob2 from "../assets/blobs/blob3.gif";
 import "./Home.css";
 import 'animate.css';
-import "../shared/globalStyle/CommonButtonStyle.css";
 
 export default function HomeTopBanner() {
   const [activeSlider, setActiveSlider] = useState(1);
@@ -21,7 +22,7 @@ export default function HomeTopBanner() {
   }, [activeSlider]);
 
   return (
-    <div className="bg-[#f5e6e0] w-full min-h-[100vh] relative">
+    <div className="bg-[#f5e6e0] w-full min-h-[100vh] relative overflow-hidden">
       <img className="h-full absolute" src={bannerBg} alt="" />
 
       {/* Slider one start */}
@@ -32,20 +33,21 @@ export default function HomeTopBanner() {
             <div className="text-red ">Summer 2024</div>
           </div>
           <div className="overflow-hidden">
-            <div className="text-titleXxl animate__animated animate__fadeInUp">Hello New Season</div>
+            <div className="text-titleXxl animate__animated animate__fadeInUp leading-[60px]">Hello New Season New Collection</div>
           </div>
-          <div className="overflow-hidden">
+          <div className="overflow-hidden mt-5">
             <p className="text-titleXsm uppercase animate__animated animate__fadeInUp">Limited time offer - up to 60% off & free Shipping</p>
           </div>
-          <div className="overflow-hidden mt-10">
+          <div className="overflow-hidden mt-6">
             <button className="common-button uppercase animate__animated animate__fadeInUp" role="button">
               Discover More &gt;
             </button>
           </div>
         </div>
-        <div className="overflow-hidden">
+        <div className="">
           <div className="animate__animated animate__fadeInUp">
             <img className="w-[450px] img-wave" src={shoe1} alt="" />
+            {/* <img className="absolute bottom-[10%] left-[100%]" src={blob1} alt="" /> */}
           </div>
         </div>
       </div>
@@ -59,20 +61,21 @@ export default function HomeTopBanner() {
             <div className="text-red ">Summer 2024</div>
           </div>
           <div className="overflow-hidden">
-            <div className="text-titleXxl animate__animated animate__fadeInUp">Hello New Season</div>
+            <div className="text-titleXxl animate__animated animate__fadeInUp leading-[60px]">Good Collection this winter</div>
           </div>
-          <div className="overflow-hidden">
+          <div className="overflow-hidden mt-5">
             <p className="text-titleXsm uppercase animate__animated animate__fadeInUp">Limited time offer - up to 60% off & free Shipping</p>
           </div>
-          <div className="overflow-hidden mt-10">
+          <div className="overflow-hidden mt-6">
             <button className="common-button uppercase animate__animated animate__fadeInUp" role="button">
               Discover More &gt;
             </button>
           </div>
         </div>
-        <div className="overflow-hidden">
+        <div className="">
           <div className="animate__animated animate__fadeInUp">
-            <img className="w-[500px] border img-wave" src={shoe2} alt="" />
+            <img className="w-[500px] img-wave" src={shoe2} alt="" />
+            {/* <img className="absolute bottom-[2%] left-[95%]" src={blob1} alt="" /> */}
           </div>
         </div>
       </div>
@@ -86,27 +89,28 @@ export default function HomeTopBanner() {
             <div className="text-red ">Summer 2024</div>
           </div>
           <div className="overflow-hidden">
-            <div className="text-titleXxl animate__animated animate__fadeInUp">Hello New Season</div>
+            <div className="text-titleXxl animate__animated animate__fadeInUp leading-[60px]">Leet's Get your Favorite</div>
           </div>
-          <div className="overflow-hidden">
+          <div className="overflow-hidden mt-5">
             <p className="text-titleXsm uppercase animate__animated animate__fadeInUp">Limited time offer - up to 60% off & free Shipping</p>
           </div>
-          <div className="overflow-hidden mt-10">
+          <div className="overflow-hidden mt-6 ">
             <button className="common-button uppercase animate__animated animate__fadeInUp" role="button">
               Discover More &gt;
             </button>
           </div>
         </div>
-        <div className="overflow-hidden">
+        <div className="">
           <div className="animate__animated animate__fadeInUp">
             <img className="w-[500px] img-wave" src={shoe3} alt="" />
+            {/* <img className="absolute bottom-[10%] left-[95%]" src={blob2} alt="" /> */}
           </div>
         </div>
       </div>
       {/* Slider three end */}
 
       {/* Button for slider control start */}
-      <div className="flex items-center gap-2 absolute bottom-10 left-[10%] text-3xl">
+      <div className="flex items-center gap-2 absolute bottom-10 left-[8%] text-3xl">
         <button
           className={`${activeSlider === 1 ? 'text-red' : 'text-black'}`}
           onClick={() => setActiveSlider(1)}
