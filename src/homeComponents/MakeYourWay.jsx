@@ -12,7 +12,7 @@ export default function MakeYourWay() {
         }}
       ></div>
 
-      <div className="relative flex justify-center items-center w-full h-[500px]">
+      <div className="relative flex justify-center items-center w-full h-[600px]">
         {/* Image */}
         <img className="w-full h-full object-cover" src={gif1} alt="Gif" />
 

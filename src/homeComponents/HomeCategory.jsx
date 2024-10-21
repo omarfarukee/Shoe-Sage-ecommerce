@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import women from "../assets/category-img/women.jpg";
-import men from "../assets/category-img/man.jpg";
-import kids from "../assets/category-img/kids.jpg";
-import gifts from "../assets/category-img/gifts.jpg";
+import formal from "../assets/category-img/formal.jpg";
+import sports from "../assets/category-img/sports.jpg";
+import snickers from "../assets/category-img/snikers.jpg";
+import sandal from "../assets/category-img/sandel.jpg";
 import { CiShoppingBasket } from "react-icons/ci";
 
 export default function HomeCategory() {
@@ -16,14 +16,14 @@ export default function HomeCategory() {
           {/* Image */}
           <img
             className="w-[600px] rounded"
-            src={women}
+            src={formal}
             alt="Women's Collection"
           />
           {/* Text and Button */}
           <div className="absolute top-[70%] px-5 text-white  transition-opacity duration-300 z-10">
             <p className="uppercase">Hot list</p>
             <div className="text-titleSm">
-              <span className="font-bold">Women</span> Collection
+              <span className="font-bold">Formal</span> Collection
             </div>
             <button className="group uppercase transition-all duration-300">
               <span className="flex ">
@@ -41,18 +41,18 @@ export default function HomeCategory() {
         <div>
           {/* card 2 */}
           <div className="relative group mb-5" data-aos="fade-left"
-     data-aos-duration="1000">
+            data-aos-duration="1000">
             {/* Image */}
             <img
               className="w-[600px] rounded"
-              src={men}
+              src={sports}
               alt="Women's Collection"
             />
             {/* Text and Button */}
             <div className="absolute top-[50%] px-5 text-white  transition-opacity duration-300 z-10">
               <p className="uppercase">Hot list</p>
               <div className="text-titleSm">
-                <span className="font-bold">Men</span> Collection
+                <span className="font-bold">Sport's</span> Collection
               </div>
               <button className="group uppercase transition-all duration-300">
                 <span className="flex ">
@@ -64,24 +64,23 @@ export default function HomeCategory() {
             </div>
 
             {/* Overlay with gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#00000086] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#00000086] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded"></div>
           </div>
 
           <div className="flex gap-5">
             {/* card 3 */}
-            <div className="relative group mb-5 " data-aos="fade-up"
-     data-aos-duration="1000">
+            <div className="relative group mb-5 " data-aos="fade-up" data-aos-duration="1000">
               {/* Image */}
               <img
-                className="w-[290px] rounded"
-                src={kids}
+                className="w-[290px] h-[188px] rounded"
+                src={snickers}
                 alt="Women's Collection"
               />
               {/* Text and Button */}
               <div className="absolute top-[40%] px-5 text-white  transition-opacity duration-300 z-10 leading-[10px]">
                 <p className="uppercase">Hot list</p>
                 <div className="text-titleSm">
-                  <span className="font-bold leading-[60px]">Kids</span>{" "}
+                  <span className="font-bold leading-[60px]">Snicker</span>{" "}
                   Collection
                 </div>
                 <button className="group uppercase transition-all duration-300">
@@ -94,26 +93,24 @@ export default function HomeCategory() {
               </div>
 
               {/* Overlay with gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#00000086] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#00000086] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded"></div>
             </div>
-            {/* card 3 */}
+            {/* card 4 */}
             <div className="relative group mb-5 " data-aos="fade-up"
                 data-aos-duration="1500">
               {/* Image */}
               <img
-                className="w-[290px] rounded"
-                src={gifts}
+                className="w-[290px] h-[188px] rounded"
+                src={sandal}
                 alt="Women's Collection"
               />
               {/* Text and Button */}
-              <div className="absolute top-[25%] px-5 text-white  transition-opacity duration-300 z-10 leading-[10px]">
-                
+              <div className="absolute top-[40%] px-5 text-white  transition-opacity duration-300 z-10 leading-[10px]">
+                <p className="uppercase">Hot list</p>
                 <div className="text-titleSm">
-                  <span className="font-bold leading-[60px]">E-Gift </span>{" "}
-                  Cards
+                  <span className="font-bold leading-[60px]">Sandal</span>{" "}
+                  Collection
                 </div>
-                <p className="uppercase text-[12px] mb-5">Surprise someone with the gift they
-                really want.</p>
                 <button className="group uppercase transition-all duration-300">
                   <span className="flex items-center">
                     Shop Now
@@ -124,7 +121,7 @@ export default function HomeCategory() {
               </div>
 
               {/* Overlay with gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#000000c7] via-transparent to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#000000c7] via-transparent to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-500 rounded"></div>
             </div>
           </div>
         </div>
