@@ -5,6 +5,7 @@ import HomeCategory from './HomeCategory';
 import useLoader from '../shared/loader/Loader';
 import FinalLoader from '../shared/loader/FinalLoader';
 import MakeYourWay from './MakeYourWay';
+import HomeTrendyProduct from './HomeTrendyProduct';
 const Home = () => {
   const { loading, online } = useLoader();
   if (loading || !online) {
@@ -28,8 +29,11 @@ const Home = () => {
       <div>
         <HomeCategory/>
       </div>
-      <div className='mt-20 mb-20'>
+      <div className='mt-20 mb-16'>
         <MakeYourWay/>
+      </div>
+      <div>
+        <HomeTrendyProduct/>
       </div>
       </div>
       

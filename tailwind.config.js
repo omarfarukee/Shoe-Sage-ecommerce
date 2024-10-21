@@ -17,7 +17,7 @@ export default {
         titleMd: '40px',  
         titleSm: '27px',  
         titleXsm: '20px',  
-        titleXXsm: '16px',  
+        titleXXsm: '14px',  
       },
       
     },
