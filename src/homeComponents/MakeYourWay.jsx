@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import gif1 from "../assets/gif-img/gif1.gif";
 

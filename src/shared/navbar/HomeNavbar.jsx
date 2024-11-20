@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../../assets/logo/logo.png";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import {
   CiHeart,
   CiMenuFries,
-  CiSearch,
   CiShoppingCart,
   CiUser,
 } from "react-icons/ci";
-import { IoCloseOutline } from "react-icons/io5";
 import { GoChevronDown } from "react-icons/go";
 import SearchNavbar from "./SearchNavbar";
 export default function HomeNavbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [cart, setCart] = useState(5);
-  const [wish, setWish] = useState(10);
+  const [cart, setCart] = useState(0);
+  const [wish, setWish] = useState(0);
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -71,7 +69,7 @@ export default function HomeNavbar() {
                       : "text-black submenu-item"
                   }
                 >
-                  Men
+                  Men Formal
                 </NavLink>
                 <NavLink
                   to="/shop/women"
@@ -81,7 +79,7 @@ export default function HomeNavbar() {
                       : "text-black submenu-item"
                   }
                 >
-                  Women
+                  Men Sports
                 </NavLink>
                 <NavLink
                   to="/shop/kids"
@@ -91,7 +89,8 @@ export default function HomeNavbar() {
                       : "text-black submenu-item"
                   }
                 >
-                  Kids
+                  Men Snicker
+
                 </NavLink>
               </div>
             </div>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import bannerBg from "../assets/backgrounds/bannerBg.webp";
 import shoe1 from "../assets/banner-shoe-img/shoe1.png";
@@ -89,7 +90,7 @@ export default function HomeTopBanner() {
             <div className="text-red ">Summer 2024</div>
           </div>
           <div className="overflow-hidden">
-            <div className="text-titleXxl animate__animated animate__fadeInUp leading-[60px]">Leet's Get your Favorite</div>
+            <div className="text-titleXxl animate__animated animate__fadeInUp leading-[60px]">Leet&lsquo;s Get your Favorite</div>
           </div>
           <div className="overflow-hidden mt-5">
             <p className="text-titleXsm uppercase animate__animated animate__fadeInUp">Limited time offer - up to 60% off & free Shipping</p>

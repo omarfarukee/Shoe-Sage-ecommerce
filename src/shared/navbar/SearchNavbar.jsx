@@ -45,17 +45,17 @@ export default function SearchNavbar() {
         {/* lins buttons */}
         <div className="ml-[8%] mt-5">
         <button className="group text-sm uppercase transition-all duration-300">
-          Men Collection
+          Formal Collection
           <div className="w-8 h-[2px] bg-red group-hover:w-28 transition-all duration-300"></div>
         </button>
         <br />
         <button className="group text-sm uppercase transition-all duration-300 mt-4">
-          Women collection
+          Sports collection
           <div className="w-8 h-[2px] bg-red group-hover:w-28 transition-all duration-300"></div>
         </button>
         <br />
         <button className="group text-sm uppercase transition-all duration-300 mt-4">
-          Kids collection
+        Snicker collection
           <div className="w-8 h-[2px] bg-red group-hover:w-28 transition-all duration-300"></div>
         </button>    
         </div>

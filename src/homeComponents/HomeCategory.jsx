@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+/* eslint-disable no-unused-vars */
+import React from "react";
 import formal from "../assets/category-img/formal.jpg";
 import sports from "../assets/category-img/sports.jpg";
 import snickers from "../assets/category-img/snikers.jpg";
@@ -52,7 +53,7 @@ export default function HomeCategory() {
             <div className="absolute top-[50%] px-5 text-white  transition-opacity duration-300 z-10">
               <p className="uppercase">Hot list</p>
               <div className="text-titleSm">
-                <span className="font-bold">Sport's</span> Collection
+                <span className="font-bold">Sport&lsquo;s</span> Collection
               </div>
               <button className="group uppercase transition-all duration-300">
                 <span className="flex ">
