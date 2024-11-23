@@ -22,7 +22,7 @@ export default function MakeYourWay() {
 
         {/* Text on top of the image */}
         <div className="absolute flex justify-center items-center text-white text-center" data-aos="fade-up"
-              data-aos-duration="1000">
+              data-aos-duration="3000">
           <div>
             <div
               className="text-titleXxxl font-bold text-transparent  border-red inline-block"

@@ -9,20 +9,6 @@
   --red: #c30010;
 }
 
-body::-webkit-scrollbar {
-  width: 10px !important;
-}
-
-body::-webkit-scrollbar-track {
-  background-color: #e3eefb !important;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.24) !important;
-}
-
-body::-webkit-scrollbar-thumb {
-  background: rgb(240, 31, 16) !important;
-  border-radius: 4px !important;
-}
 
 /* common button style start*/
 .common-button {
@@ -99,3 +85,11 @@ body::-webkit-scrollbar-thumb {
     display: inline;
   }
   /* loader end */
+
+
+  /* formal collection  text font */
+  .formal-collection-text{
+    /* font-family: "Lobster", sans-serif; */
+    font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  }

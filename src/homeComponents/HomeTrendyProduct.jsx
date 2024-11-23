@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { CiHeart } from 'react-icons/ci';
 import { IoMdHeart } from 'react-icons/io';
-import { NavLink } from 'react-router-dom';
+
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 export default function HomeTrendyProduct() {
@@ -25,13 +25,15 @@ export default function HomeTrendyProduct() {
   return (
     <div>
       <div className="flex justify-center mb-5">
-        <div className="text-titleMd uppercase">
+        <div className="text-titleMd uppercase" data-aos="fade-down"
+              data-aos-duration="3000">
           Our trendy <span className="font-bold text-red">Products</span>
         </div>
       </div>
 
       {/* Display the fetched shoe data */}
-      <div className="flex justify-center">
+      <div className="flex justify-center" data-aos="fade-up"
+              data-aos-duration="3000">
         <div className="flex flex-wrap gap-6 w-[1200px] justify-center">
           {shoeData.slice(0, 8).map((shoe) => ( // Display only the top 8 items
             <div key={shoe.id} className="w-[260px]">
@@ -89,13 +91,7 @@ export default function HomeTrendyProduct() {
           ))}
         </div>
       </div>
-<div className='flex justify-center mt-10 mb-10'>
- <NavLink to="/products"><button className="group text-sm uppercase transition-all duration-300 mt-4">
-         Discover more
-          <div className="w-8 h-[2px] bg-red group-hover:w-28 transition-all duration-300"></div>
-        </button>
-  </NavLink> 
-</div>
+
       
 
     </div>
