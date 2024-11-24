@@ -10,7 +10,7 @@ export default function HomeLimitedEdition() {
   const [wish, setWish] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0); // Track current chunk (set of 4 cards)
   const itemsPerSlide = 4; // Number of items per slide
-  const autoSlideInterval = 6000; // 6 seconds
+  const autoSlideInterval = 10000; // 10 seconds
 
   // Fetch data with Axios
   useEffect(() => {

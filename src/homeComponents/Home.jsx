@@ -10,6 +10,8 @@ import HomeTrendyProduct from './HomeTrendyProduct';
 import HomeOfferCollection from './HomeOfferCollection';
 import HomeStartingAt from './HomeStartingAt';
 import HomeLimitedEdition from './HomeLimitedEdition';
+import HomeGallery from './HomeGallery';
+import Footer from '../shared/Footer/Footer';
 const Home = () => {
   const { loading, online } = useLoader();
   if (loading || !online) {
@@ -47,6 +49,12 @@ const Home = () => {
       </div>
       <div>
         <HomeLimitedEdition/>
+      </div>
+      <div>
+        <HomeGallery/>
+      </div>
+      <div>
+        <Footer/>
       </div>
       </div>
       
