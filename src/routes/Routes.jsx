@@ -4,6 +4,7 @@ import App from '../App';
 import NotFound from '../shared/notFound/NotFound';
 import Home from '../homeComponents/Home';
 import Contact from '../page/Contact/Contact';
+import Login from '../page/Login/Login';
 
 const routes = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ const routes = createBrowserRouter([
             {
                 path: '/contact',
                 element:<Contact/>,
+            },
+            {
+                path: '/login',
+                element:<Login/>,
             },
             {
                 path: '*',

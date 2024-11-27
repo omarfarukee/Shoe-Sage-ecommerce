@@ -30,6 +30,7 @@ export default function HomeNavbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  
   return (
     <section>
       <div
@@ -144,7 +145,12 @@ export default function HomeNavbar() {
           </div>
           <CiUser className="text-3xl" />
 
+          <NavLink to="/login"><p>Login</p></NavLink>
+          <NavLink to="/signUp"><p>Sign up</p></NavLink>
+
           <CiMenuFries className="text-3xl  "  />
+
+          
         </div>
         
       </div>
