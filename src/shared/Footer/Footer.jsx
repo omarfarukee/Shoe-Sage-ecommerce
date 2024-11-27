@@ -29,21 +29,24 @@ export default function Footer() {
             </div>
             <div className='border w-[300px] h-[300px] '>
                 <h3 className='text-lg mb-10'>Shop</h3>
-                <a href="" className=''><p>About us</p></a>
-                <a href=""><p className='mt-2'>About us</p></a>
-                <a href=""><p className='mt-2'>About us</p></a>
-                <a href=""><p className='mt-2'>About us</p></a>
-                <a href=""><p className='mt-2'>About us</p></a>
+                <a href="" className=''><p>Dhaka</p></a>
+                <a href=""><p className='mt-2'>uttora</p></a>
+                <a href=""><p className='mt-2'>dhaka</p></a>
+                <a href=""><p className='mt-2'>CMS</p></a>
+                <a href=""><p className='mt-2'>Dhaka</p></a>
             </div>
             <div className='border w-[300px] h-[300px] '>
                 <h3 className='text-lg mb-10'>Subscribe</h3>
                 <p className='mt-10'>Be the first to get the latest news about trends, promotions, and much more!</p>
-                <div>
-                  <input className='h-12 rounded-sm' type="email" />
-                  <button className='h-12  w-20 bg-white'>Join</button>
+                <div className='flex'>
+                  <input className='h-11 rounded-sm' type="email" />
+                  <button className='h-11  w-20 bg-white'>Join</button>
                 </div>
-                
+                <div className='mt-5'>
+              <p>Terms & conditions <span className='font-bold underline text-blue-600'>Policy</span> </p>
             </div>
+            </div>
+            
             </div>
 
         <div className='flex justify-center'>
