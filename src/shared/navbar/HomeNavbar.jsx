@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import logo from "../../assets/logo/logo.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "./Navbar.css";
 import {
   CiHeart,
@@ -31,6 +31,10 @@ export default function HomeNavbar() {
     };
   }, []);
   
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/login' || location.pathname === '/signUp';
+  
+
   return (
     <section>
       <div
@@ -49,13 +53,13 @@ export default function HomeNavbar() {
                 isActive ? "nav-item active" : "nav-item"
               }
             >
-              <a className="text-fontXsm ">Home</a>
+              <a className={`text-black text-fontXsm ${isLoginPage ? "text-white" : ""}`}>Home</a>
             </NavLink>
             <div className="relative group">
               <NavLink
                 to="/company/aboutUs"
                 className={({ isActive }) =>
-                  isActive ? "nav-item active" : "nav-item"
+                  `${isActive ? "nav-item active" : "nav-item"} ${isLoginPage ? "text-white" : ""}`
                 }
               >
                 Shop <GoChevronDown />
@@ -101,7 +105,7 @@ export default function HomeNavbar() {
                 isActive ? "nav-item active" : "nav-item"
               }
             >
-              <a className="text-fontXsm ">About</a>
+              <a className={`text-black text-fontXsm ${isLoginPage ? "text-white" : ""}`}>About</a>
             </NavLink>
             <NavLink
               to="/contact"
@@ -109,7 +113,7 @@ export default function HomeNavbar() {
                 isActive ? "nav-item active" : "nav-item"
               }
             >
-              <a className="text-fontXsm ">Contact</a>
+              <a className={`text-black text-fontXsm ${isLoginPage ? "text-white" : ""}`}>Contact</a>
             </NavLink>
           </div>
         </div>
@@ -134,21 +138,21 @@ export default function HomeNavbar() {
             <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
               {wish}
             </span>
-            <CiHeart className="text-3xl" />
+            <CiHeart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
           </div>
 
           <div>
             <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
               {cart}
             </span>
-            <CiShoppingCart className="text-3xl" />
+            <CiShoppingCart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
           </div>
-          <CiUser className="text-3xl" />
+          <CiUser className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
 
-          <NavLink to="/login"><p>Login</p></NavLink>
-          <NavLink to="/signUp"><p>Sign up</p></NavLink>
+          <NavLink to="/login"><p className={`text-black text-fontXsm  ${isLoginPage ? "text-white" : ""}`}>Login</p></NavLink>
+          <NavLink to="/signUp"><p className={`text-black text-fontXsm ${isLoginPage ? "text-white" : ""}`}>Sign up</p></NavLink>
 
-          <CiMenuFries className="text-3xl  "  />
+          <CiMenuFries className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`}  />
 
           
         </div>

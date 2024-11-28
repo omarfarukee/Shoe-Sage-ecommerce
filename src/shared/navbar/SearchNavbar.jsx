@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoCloseOutline } from "react-icons/io5";
+import { useLocation } from "react-router-dom";
 
 export default function SearchNavbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -8,15 +9,16 @@ export default function SearchNavbar() {
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen);
   };
-
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/login' || location.pathname === '/signUp';
   return (
     <div className="relative">
       {/* Search Icon Toggle */}
       <label className="swap swap-rotate" onClick={toggleSearch}>
         {!isSearchOpen ? (
-          <CiSearch className="text-3xl " />
+          <CiSearch className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
         ) : (
-          <IoCloseOutline className="text-3xl " />
+          <IoCloseOutline className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
         )}
       </label>
 
