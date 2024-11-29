@@ -10,7 +10,7 @@ export default function SearchNavbar() {
     setIsSearchOpen(!isSearchOpen);
   };
   const location = useLocation();
-  const isLoginPage = location.pathname === '/login' || location.pathname === '/signUp';
+  const isLoginPage = location.pathname === '/login' || location.pathname === '/signUp' || location.pathname === '/allShoes';
   return (
     <div className="relative">
       {/* Search Icon Toggle */}

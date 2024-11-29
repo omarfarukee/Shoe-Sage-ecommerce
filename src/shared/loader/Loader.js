@@ -10,7 +10,7 @@ const useLoader = () => {
       if (navigator.onLine) {
         setLoading(false);
       }
-    }, 1000);
+    }, 200);
 
     const handleOnline = () => setOnline(true);
     const handleOffline = () => setOnline(false);

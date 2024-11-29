@@ -32,7 +32,8 @@ export default function HomeNavbar() {
   }, []);
   
   const location = useLocation();
-  const isLoginPage = location.pathname === '/login' || location.pathname === '/signUp';
+  const isLoginPage = location.pathname === '/login' || location.pathname === '/signUp' || location.pathname === '/allShoes';
+  const navBg = location.pathname === '/allShoes'
   
 
   return (
@@ -40,7 +41,7 @@ export default function HomeNavbar() {
       <div
         className={`border-b h-24 flex  w-full fixed z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-white shadow-md px-[8%]"
+            ? `${navBg ?"bg-red shadow-md border-none px-[5.5%]": "shadow-md bg-white px-[5.5%]"} `
             : "px-[5%] bg-transparent backdrop-blur-sm border-b border-[#37363844]"
         }`}
       >
@@ -57,7 +58,7 @@ export default function HomeNavbar() {
             </NavLink>
             <div className="relative group">
               <NavLink
-                to="/company/aboutUs"
+                to="/allShoes"
                 className={({ isActive }) =>
                   `${isActive ? "nav-item active" : "nav-item"} ${isLoginPage ? "text-white" : ""}`
                 }
@@ -150,7 +151,7 @@ export default function HomeNavbar() {
           <CiUser className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
 
           <NavLink to="/login"><p className={`text-black text-fontXsm  ${isLoginPage ? "text-white" : ""}`}>Login</p></NavLink>
-          <NavLink to="/signUp"><p className={`text-black text-fontXsm ${isLoginPage ? "text-white" : ""}`}>Sign up</p></NavLink>
+          <NavLink to="/signUp"><p className={`text-black text-fontXsm w-16 ${isLoginPage ? "text-white" : ""}`}>Sign up</p></NavLink>
 
           <CiMenuFries className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`}  />
 

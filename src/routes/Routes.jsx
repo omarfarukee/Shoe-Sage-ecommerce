@@ -5,6 +5,8 @@ import NotFound from '../shared/notFound/NotFound';
 import Home from '../homeComponents/Home';
 import Contact from '../page/Contact/Contact';
 import Login from '../page/Login/Login';
+import SignUp from '../page/Login/SignUp';
+import AllShoe from '../page/AllShoePage/AllShoe';
 
 const routes = createBrowserRouter([
     {
@@ -22,6 +24,14 @@ const routes = createBrowserRouter([
             {
                 path: '/login',
                 element:<Login/>,
+            },
+            {
+                path: '/signUp',
+                element:<SignUp/>,
+            },
+            {
+                path: '/allShoes',
+                element:<AllShoe/>,
             },
             {
                 path: '*',
