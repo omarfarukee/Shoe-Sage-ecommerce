@@ -7,6 +7,7 @@ import Contact from '../page/Contact/Contact';
 import Login from '../page/Login/Login';
 import SignUp from '../page/Login/SignUp';
 import AllShoe from '../page/AllShoePage/AllShoe';
+import SingleShoesDetails from '../page/AllShoePage/SingleShoesDetails';
 
 const routes = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const routes = createBrowserRouter([
             {
                 path: '/allShoes',
                 element:<AllShoe/>,
+            },
+            {
+                path: '/shoe/:id',
+                element:<SingleShoesDetails/>,
             },
             {
                 path: '*',

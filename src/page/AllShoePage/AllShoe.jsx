@@ -5,13 +5,13 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { IoMdHeart } from "react-icons/io";
 import { CiHeart } from "react-icons/ci";
 import shoe from "../../assets/backgrounds/shoe3.jpeg";
+import { NavLink } from "react-router-dom";
 
 export default function AllShoe() {
   const [shoeData, setShoeData] = useState([]); // Store shoe data
   const [currentPage, setCurrentPage] = useState(1); // Current page
   const itemsPerPage = 8; // Number of items per page
   const [wish, setWish] = useState(false);
-
   // Fetch data with Axios
   useEffect(() => {
     axios
@@ -80,9 +80,10 @@ export default function AllShoe() {
         data-aos="fade-up"
         data-aos-duration="3000"
       >
+      
         <div className="flex flex-wrap gap-6 w-[1200px] justify-center">
           {currentData.map((shoe) => (
-            <div key={shoe.id} className="w-[260px]">
+            <NavLink key={shoe.id}  to={`/shoe/${shoe.id}`} className="w-[260px]">
               <div className="w-full shadow-lg rounded px-2 h-[280px] flex flex-col justify-center items-center transition-all group relative overflow-hidden">
                 {/* First Image */}
                 <img
@@ -139,7 +140,7 @@ export default function AllShoe() {
                   )}
                 </div>
               </div>
-            </div>
+            </NavLink>
           ))}
         </div>
       </div>

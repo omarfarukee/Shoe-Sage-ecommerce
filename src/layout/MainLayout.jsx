@@ -1,10 +1,10 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet} from 'react-router-dom';
 import HomeNavbar from '../shared/navbar/HomeNavbar';
 // import HomeNavbar from '../shared/navbar/HomeNavbar';
 // import CommonNavbar from "../shared/navbar/CommonNavbar"
 
 const MainLayout = () => {
-  const location = useLocation();
+  // const location = useLocation();
 
 //   const isHomePage = location.pathname === '/';
 
