@@ -23,9 +23,9 @@ export default {
     },
   },
   plugins: [
-    daisyui, // Using ES Module import
+    daisyui,
   ],
   daisyui: {
-    themes: [], // Completely disable DaisyUI themes
+    themes: [],
   },
 };
