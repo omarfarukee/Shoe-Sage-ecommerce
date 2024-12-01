@@ -7,6 +7,9 @@ import { CiHeart } from "react-icons/ci";
 import shoe from "../../assets/backgrounds/shoe3.jpeg";
 import { NavLink } from "react-router-dom";
 import Footer from "../../shared/Footer/Footer";
+import toast from "react-hot-toast";
+import useLoader from "../../shared/loader/Loader";
+import FinalLoader from "../../shared/loader/FinalLoader";
 
 export default function AllShoe() {
   const [shoeData, setShoeData] = useState([]); // Store shoe data
@@ -15,6 +18,11 @@ export default function AllShoe() {
   const [wish, setWish] = useState(false);
   const [maxPrice, setMaxPrice] = useState(30000);
   const [cartItems, setCartItems] = useState([]);
+  
+  const { loading, online } = useLoader();
+  
+
+
   const handleMaxPriceChange = (event) => {
     setMaxPrice(parseInt(event.target.value));
   };
@@ -72,7 +80,14 @@ export default function AllShoe() {
   const handleAddToCart = (shoe) => {
     // Check if the item is already in the cart
     if (cartItems.some((item) => item.id === shoe.id)) {
-      alert('This item is already in your cart!');
+      toast.success('Thank you for signing up!', {
+        style: {
+            borderRadius: '10px',
+            background: '#4caf50',
+            color: '#fff',
+            height: "70px"
+        },
+    });
       return;
     }
 
@@ -81,9 +96,21 @@ export default function AllShoe() {
     setCartItems(updatedCart);
     sessionStorage.setItem('cart', JSON.stringify(updatedCart));
 
-    alert(`${shoe.product_name} has been added to your cart!`);
+    toast.success(`${shoe?.product_name} Added to you cart`, {
+      style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+          height: "70px"
+      },
+  });
+  setTimeout(() => {
+    location.reload();
+  }, 1000);
   };
-
+  if (loading || !online) {
+    return <FinalLoader />;
+  }
   console.log(cartItems.map(items => items.id));
   return (
     <div className="overflow-hidden">
@@ -176,7 +203,7 @@ export default function AllShoe() {
           {/* product show using map  */}
           <div className="flex flex-wrap gap-6 w-[100%] justify-center ">
       {currentData.map((shoe) => (
-        <NavLink key={shoe.id} to={`/shoe/${shoe.id}`} className="w-[260px] transition-all duration-300 p-2 hover:shadow-lg">
+        <div key={shoe.id}  className="w-[260px] transition-all duration-300 p-2 hover:shadow-lg">
           <div className="w-full  rounded px-2 h-[280px] flex flex-col justify-center items-center transition-all group relative overflow-hidden">
             {/* First Image */}
             <img
@@ -228,7 +255,8 @@ export default function AllShoe() {
             </div>
           </div>
           <div>Price: {shoe?.price} $</div>
-          <div>
+       <NavLink to={`/shoe/${shoe.id}`}>  
+       <div>
             <p>{shoe?.product_name}</p>
             {/* Review Stars */}
             <div className="mt-2 flex">
@@ -247,7 +275,8 @@ export default function AllShoe() {
               )}
             </div>
           </div>
-        </NavLink>
+          </NavLink> 
+        </div>
       ))}
     </div>
           {/* product show using map end */}

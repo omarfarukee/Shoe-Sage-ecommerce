@@ -10,13 +10,22 @@ import {
 } from "react-icons/ci";
 import { GoChevronDown } from "react-icons/go";
 import SearchNavbar from "./SearchNavbar";
+import { TbShoppingCartOff } from "react-icons/tb";
+import { IoClose } from "react-icons/io5";
+import toast from "react-hot-toast";
 export default function HomeNavbar() {
   const [scrolled, setScrolled] = useState(false);
   // eslint-disable-next-line no-unused-vars
-  const [cart, setCart] = useState(0);
   // eslint-disable-next-line no-unused-vars
   const [wish, setWish] = useState(0);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    // Retrieve cart data from sessionStorage
+    const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
+    setCartItems(storedCart);
+  }, []);
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -43,7 +52,28 @@ export default function HomeNavbar() {
   const isLoginPage = location.pathname === '/login' || location.pathname === '/signUp' || location.pathname === '/allShoes';
   const navBg = location.pathname === '/allShoes'
 
+  // Function to remove an item
+  const removeItem = (id) => {
+    const updatedCart = cartItems.filter((item) => item.id !== id);
+    setCartItems(updatedCart);
+    sessionStorage.setItem('cart', JSON.stringify(updatedCart));
 
+    toast.success(`Removed...`, {
+      style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+          height: "70px"
+      },
+  });
+ 
+    location.reload();
+
+  };
+
+    // Calculate the grand total
+    const Total = cartItems.reduce((total, item) => total + item.price, 0);
+    const cart = cartItems.length
   return (
     <section>
       <div
@@ -183,7 +213,50 @@ export default function HomeNavbar() {
         {/* Side Menu Content */}
         <div className='p-10 '>
           
-
+        <div>
+      <h1 className="text-2xl font-semibold border-b">Cart Items ({cartItems?.length})</h1>
+      {cartItems.length > 0 ? (
+        <> <div className="mt-5 border-b w-[440px] h-[400px] overflow-y-scroll">
+         {cartItems.map((item) => (
+           <div key={item.id} className="p-4 rounded border-b w-[400px] flex items-center gap-3 relative">
+             <img src={item.img_1} alt={item.product_name} className="w-[100px] object-cover" />
+             <div>
+               <h2 className="text-lg font-semibold mt-2">{item.product_name}</h2>
+               <p className="text-gray-600">Price: {item.price} $</p>
+               <p className="text-gray-500 uppercase">{item.category}</p>
+             </div>
+             <IoClose
+               className="absolute right-2 top-2 text-titleSm cursor-pointer"
+               onClick={() => removeItem(item.id)}
+             />
+           </div>
+         ))}
+       </div>
+       <div className="flex flex-col justify-between">
+        <div className="sticky bottom-0 bg-white w-full border-t p-4 flex justify-between">
+            <h2 className="font-bold text-lg">Total:</h2>
+            <p className="text-lg">{Total} $</p>
+          </div>
+          <div className="flex flex-col gap-2 justify-center items-center mt-5">
+            <button className=" w-[300px] hover:bg-gray-100 transition-all duration-300 rounded-md h-10 bg-[#f7f7f7]">
+              View Cart
+            </button>
+            <button className="border bg-red  text-white rounded-lg w-[300px] h-10">
+              check out
+            </button>
+          </div>
+       </div>
+         
+          </>
+     ) : (
+        <div className="flex justify-center mt-20 items-center text-titleSm">
+          <p>Your cart is empty! 
+          </p>
+          <TbShoppingCartOff className="text-titleMd" />
+        </div>
+        
+      )}
+    </div>
 
         </div>
         {/* side menu end  */}

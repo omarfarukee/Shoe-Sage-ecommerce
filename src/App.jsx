@@ -3,6 +3,7 @@ import MainLayout from './layout/MainLayout'
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 import Lenis from 'lenis';
+import { Toaster } from 'react-hot-toast';
 function App() {
 
   useEffect(() => {
@@ -40,6 +41,9 @@ function App() {
   return (
   <>
     <MainLayout/>
+    <Toaster position="bottom-left"
+        reverseOrder={false} />
+  
   </>
   )
 }
