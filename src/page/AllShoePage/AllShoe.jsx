@@ -13,8 +13,8 @@ export default function AllShoe() {
   const [currentPage, setCurrentPage] = useState(1); // Current page
   const itemsPerPage = 8; // Number of items per page
   const [wish, setWish] = useState(false);
-  const [maxPrice, setMaxPrice] = useState(30987);
-
+  const [maxPrice, setMaxPrice] = useState(30000);
+  const [cartItems, setCartItems] = useState([]);
   const handleMaxPriceChange = (event) => {
     setMaxPrice(parseInt(event.target.value));
   };
@@ -62,6 +62,29 @@ export default function AllShoe() {
     }
   };
 
+
+  // Load cart items from sessionStorage on component mount
+  useEffect(() => {
+    const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
+    setCartItems(storedCart);
+  }, []);
+
+  const handleAddToCart = (shoe) => {
+    // Check if the item is already in the cart
+    if (cartItems.some((item) => item.id === shoe.id)) {
+      alert('This item is already in your cart!');
+      return;
+    }
+
+    // Add the new item to the cart
+    const updatedCart = [...cartItems, shoe];
+    setCartItems(updatedCart);
+    sessionStorage.setItem('cart', JSON.stringify(updatedCart));
+
+    alert(`${shoe.product_name} has been added to your cart!`);
+  };
+
+  console.log(cartItems.map(items => items.id));
   return (
     <div className="overflow-hidden">
       {/* Background Section */}
@@ -122,20 +145,22 @@ export default function AllShoe() {
                 type="range"
                 id="max-price"
                 min="20"
-                max="30987"
+                max="30000"
                 value={maxPrice}
                 onChange={handleMaxPriceChange}
                 className="w-full bg-transparent outline-none"
+
               />
             </div>
             <div className="flex justify-between mt-2">
-              <span className="text-sm text-gray-700">Min Price: $20</span>
-              <span className="text-sm text-gray-700">Max Price: ${maxPrice}</span>
+              <span className="text-sm text-gray-700 w-20">Min Price: $20</span>
+              <span className="text-sm text-gray-700 w-20">Max Price: ${maxPrice}</span>
             </div>
           </div>
 
         </div>
         {/* filter bar brand end*/}
+
         <div className="w-[1200px]">
           <p className="text-titleMd ml-5 mt-5 mb-5">All Collections</p>
           <div className="w-full h-16 bg-[#f7f7f7] items-center flex justify-between  px-10 mb-3 mx-3">
@@ -148,71 +173,85 @@ export default function AllShoe() {
               <option>Price heigh to low</option>
             </select>
           </div>
-          <div className="flex flex-wrap gap-6 w-[100%]  justify-center">
-            {currentData.map((shoe) => (
-              <NavLink key={shoe.id} to={`/shoe/${shoe.id}`} className="w-[260px]">
-                <div className="w-full hover:shadow-lg rounded px-2 h-[280px] flex flex-col justify-center items-center transition-all group relative overflow-hidden">
-                  {/* First Image */}
-                  <img
-                    src={shoe.img_1}
-                    alt={shoe.product_name}
-                    className="w-[200px] transition-opacity duration-500 opacity-100 group-hover:opacity-0 absolute"
-                  />
-                  {/* Second Image (on hover) */}
-                  <img
-                    src={shoe.img_3}
-                    alt={shoe.product_name}
-                    className="w-[200px] transition-opacity duration-500 opacity-0 group-hover:opacity-100"
-                  />
-                  <button className="absolute w-[230px] shadow-lg hover:bg-gray-200 transition-all duration-500 bg-gray-100 py-2 rounded uppercase top-[280px] group-hover:top-[230px] text-titleXXsm">
-                    Add to cart
-                  </button>
-                </div>
-                <div className="mt-4 flex items-center">
-                  <p className="text-titleXXsm text-gray-500 uppercase">
-                    {shoe?.category}
-                  </p>
-
-                  <div className="absolute flex ml-56">
-                    {!wish && (
-                      <CiHeart
-                        className="text-titleSm"
-                        onClick={() => setWish(true)}
-                      />
-                    )}
-                    {wish && (
-                      <IoMdHeart
-                        className="text-titleSm text-red"
-                        onClick={() => setWish(false)}
-                      />
-                    )}
-                  </div>
-                </div>
-                <div>
-                  Price: {shoe?.price}
-                </div>
-                <div>
-                  <p>{shoe?.product_name}</p>
-                  {/* Review Stars */}
-                  <div className="mt-2 flex">
-                    {Array.from({ length: 5 }, (_, index) =>
-                      index < shoe.review ? (
-                        <AiFillStar
-                          key={index}
-                          className="text-yellow-500 text-titleXXsm"
-                        />
-                      ) : (
-                        <AiOutlineStar
-                          key={index}
-                          className="text-gray-400 text-titleXXsm"
-                        />
-                      )
-                    )}
-                  </div>
-                </div>
-              </NavLink>
-            ))}
+          {/* product show using map  */}
+          <div className="flex flex-wrap gap-6 w-[100%] justify-center ">
+      {currentData.map((shoe) => (
+        <NavLink key={shoe.id} to={`/shoe/${shoe.id}`} className="w-[260px] transition-all duration-300 p-2 hover:shadow-lg">
+          <div className="w-full  rounded px-2 h-[280px] flex flex-col justify-center items-center transition-all group relative overflow-hidden">
+            {/* First Image */}
+            <img
+              src={shoe.img_1}
+              alt={shoe.product_name}
+              className="w-[200px] transition-opacity duration-500 opacity-100 group-hover:opacity-0 absolute"
+            />
+            {/* Second Image (on hover) */}
+            <img
+              src={shoe.img_3}
+              alt={shoe.product_name}
+              className="w-[200px] transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+            />
+            {cartItems.some((item) => item.id === shoe.id) ? (
+              <button
+                className="absolute w-[230px] shadow-lg hover:bg-gray-200 transition-all duration-500 bg-gray-100 py-2 rounded uppercase top-[280px] group-hover:top-[230px] text-titleXXsm cursor-not-allowed"
+              >
+                Already Added
+              </button>
+            ) : (
+              <button
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent navigation
+                  handleAddToCart(shoe);
+                }}
+                className="absolute w-[230px] shadow-lg hover:bg-gray-200 transition-all duration-500 bg-gray-100 py-2 rounded uppercase top-[280px] group-hover:top-[230px] text-titleXXsm"
+              >
+                Add to Cart
+              </button>
+            )}
           </div>
+          <div className="mt-4 flex items-center">
+            <p className="text-titleXXsm text-gray-500 uppercase">
+              {shoe?.category}
+            </p>
+            <div className="absolute flex ml-56">
+              {!wish && (
+                <CiHeart
+                  className="text-titleSm"
+                  onClick={() => setWish(true)}
+                />
+              )}
+              {wish && (
+                <IoMdHeart
+                  className="text-titleSm text-red"
+                  onClick={() => setWish(false)}
+                />
+              )}
+            </div>
+          </div>
+          <div>Price: {shoe?.price} $</div>
+          <div>
+            <p>{shoe?.product_name}</p>
+            {/* Review Stars */}
+            <div className="mt-2 flex">
+              {Array.from({ length: 5 }, (_, index) =>
+                index < shoe.review ? (
+                  <AiFillStar
+                    key={index}
+                    className="text-yellow-500 text-titleXXsm"
+                  />
+                ) : (
+                  <AiOutlineStar
+                    key={index}
+                    className="text-gray-400 text-titleXXsm"
+                  />
+                )
+              )}
+            </div>
+          </div>
+        </NavLink>
+      ))}
+    </div>
+          {/* product show using map end */}
+
           {/* Pagination Section */}
           <div className="flex justify-center items-center gap-4 mt-4 mb-8">
             <button

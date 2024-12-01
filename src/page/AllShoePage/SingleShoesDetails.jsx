@@ -82,7 +82,7 @@ export default function SingleShoesDetails() {
   };
   return (
     <div className="flex justify-center">
- <div className="pt-28 flex  w-[1200px] border justify-between">
+ <div className="pt-36 flex  w-[1200px] border justify-between">
       <div className="w-[600px] h-[500px]  flex justify-center gap-10 items-center">
         {/* Thumbnails */}
         <div className="flex flex-col gap-3">
