@@ -10,6 +10,7 @@ import AllShoe from '../page/AllShoePage/AllShoe';
 import SingleShoesDetails from '../page/AllShoePage/SingleShoesDetails';
 import Cart from '../page/Cart/Cart';
 import AboutUs from '../page/AboutUs/AboutUs';
+import CheckOut from '../page/CheckOut/CheckOut';
 
 const routes = createBrowserRouter([
     {
@@ -43,6 +44,10 @@ const routes = createBrowserRouter([
             {
                 path: '/about',
                 element:<AboutUs/>,
+            },
+            {
+                path: '/checkout',
+                element:<CheckOut/>,
             },
             {
                 path: '/shoe/:id',

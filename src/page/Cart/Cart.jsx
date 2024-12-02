@@ -170,9 +170,11 @@ const Cart = () => {
                             </p>
 
 
-                            <button className="border bg-red mt-10 h-16 uppercase  text-white rounded-lg w-[300px] ml-7">
-                                Proceed to check out
-                            </button>
+                            <NavLink to="/checkout">
+                                <button className="border bg-red mt-10 h-16 uppercase  text-white rounded-lg w-[300px] ml-7">
+                                    Proceed to check out
+                                </button>
+                            </NavLink>
                         </div>
 
                     </div>

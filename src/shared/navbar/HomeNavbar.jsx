@@ -60,26 +60,26 @@ export default function HomeNavbar() {
 
     toast.success(`Removed...`, {
       style: {
-          borderRadius: '10px',
-          background: '#333',
-          color: '#fff',
-          height: "70px"
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+        height: "70px"
       },
-  });
- 
+    });
+
     location.reload();
 
   };
 
-    // Calculate the grand total
-    const Total = cartItems.reduce((total, item) => total + item.price, 0);
-    const cart = cartItems.length
+  // Calculate the grand total
+  const Total = cartItems.reduce((total, item) => total + item.price, 0);
+  const cart = cartItems.length
   return (
     <section>
       <div
         className={`border-b h-24 flex  w-full fixed z-50 transition-all duration-500 ${scrolled
-            ? `${navBg ? "bg-red shadow-md border-none px-[5.5%]" : "shadow-md bg-white px-[5.5%]"} `
-            : "px-[5%] bg-transparent backdrop-blur-sm border-b border-[#37363844]"
+          ? `${navBg ? "bg-red shadow-md border-none px-[5.5%]" : "shadow-md bg-white px-[5.5%]"} `
+          : "px-[5%] bg-transparent backdrop-blur-sm border-b border-[#37363844]"
           }`}
       >
         <div className="flex h-full  items-center px-4 py-2 w-[60%]">
@@ -168,13 +168,13 @@ export default function HomeNavbar() {
             <CiHeart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
           </div>
 
-         <NavLink to="/cart"><div>
+          <NavLink to="/cart"><div>
             <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
               {cart}
             </span>
             <CiShoppingCart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
           </div>
-          </NavLink> 
+          </NavLink>
           <CiUser className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
 
           <NavLink to="/login"><p className={`text-black text-fontXsm  ${isLoginPage ? "text-white" : ""}`}>Login</p></NavLink>
@@ -195,61 +195,63 @@ export default function HomeNavbar() {
         {/* Close Button */}
         <div className="border border-[#f7f7f7] h-20 bg-[#f7f7f7]">
           <p className="mt-6 pl-5">Selected product </p>
-        <button onClick={toggleSideMenu} className='absolute text-4xl text-red top-5 right-5 hover:text-red-600'>
-          &times; {/* This is a close (X) button */}
-        </button>   
+          <button onClick={toggleSideMenu} className='absolute text-4xl text-red top-5 right-5 hover:text-red-600'>
+            &times; {/* This is a close (X) button */}
+          </button>
         </div>
-       
+
         {/* Side Menu Content */}
         <div className='p-10 '>
-          
-        <div>
-      <h1 className="text-2xl font-semibold border-b">Cart Items ({cartItems?.length})</h1>
-      {cartItems.length > 0 ? (
-        <> <div className="mt-5 border-b w-[440px] h-[400px] overflow-y-scroll">
-         {cartItems.map((item) => (
-           <div key={item.id} className="p-4 rounded border-b w-[400px] flex items-center gap-3 relative">
-             <img src={item.img_1} alt={item.product_name} className="w-[100px] object-cover" />
-             <NavLink to={`/shoe/${item.id}`}>
-               <h2 className="text-lg font-semibold mt-2">{item.product_name}</h2>
-               <p className="text-gray-600">Price: {item.price} $</p>
-               <p className="text-gray-500 uppercase">{item.category}</p>
-             </NavLink>
-             <IoClose
-               className="absolute right-2 top-2 text-titleSm cursor-pointer"
-               onClick={() => removeItem(item.id)}
-             />
-           </div>
-         ))}
-       </div>
-       <div className="flex flex-col justify-between">
-        <div className="sticky bottom-0 bg-white w-full border-t p-4 flex justify-between">
-            <h2 className="font-bold text-lg">Total:</h2>
-            <p className="text-lg">{Total} $</p>
+
+          <div>
+            <h1 className="text-2xl font-semibold border-b">Cart Items ({cartItems?.length})</h1>
+            {cartItems.length > 0 ? (
+              <> <div className="mt-5 border-b w-[440px] h-[400px] overflow-y-scroll">
+                {cartItems.map((item) => (
+                  <div key={item.id} className="p-4 rounded border-b w-[400px] flex items-center gap-3 relative">
+                    <img src={item.img_1} alt={item.product_name} className="w-[100px] object-cover" />
+                    <NavLink to={`/shoe/${item.id}`}>
+                      <h2 className="text-lg font-semibold mt-2">{item.product_name}</h2>
+                      <p className="text-gray-600">Price: {item.price} $</p>
+                      <p className="text-gray-500 uppercase">{item.category}</p>
+                    </NavLink>
+                    <IoClose
+                      className="absolute right-2 top-2 text-titleSm cursor-pointer"
+                      onClick={() => removeItem(item.id)}
+                    />
+                  </div>
+                ))}
+              </div>
+                <div className="flex flex-col justify-between">
+                  <div className="sticky bottom-0 bg-white w-full border-t p-4 flex justify-between">
+                    <h2 className="font-bold text-lg">Total:</h2>
+                    <p className="text-lg">{Total} $</p>
+                  </div>
+                  <div className="flex flex-col gap-2 justify-center items-center mt-5">
+                    <NavLink to="/cart">
+                      <button className=" w-[300px] hover:bg-gray-100 transition-all duration-300 rounded-md h-10 bg-[#f7f7f7]">
+                        View Cart
+                      </button>
+                    </NavLink>
+                    <NavLink to="/checkout">
+                      <button className="border bg-red  text-white rounded-lg w-[300px] h-10">
+                        check out
+                      </button>
+                    </NavLink>
+
+                  </div>
+                </div>
+
+              </>
+            ) : (
+              <div className="flex justify-center mt-20 items-center text-titleSm">
+                <p>Your cart is empty!
+                </p>
+                <TbShoppingCartOff className="text-titleMd" />
+              </div>
+
+            )}
           </div>
-          <div className="flex flex-col gap-2 justify-center items-center mt-5">
-            <NavLink to="/cart">
-            <button className=" w-[300px] hover:bg-gray-100 transition-all duration-300 rounded-md h-10 bg-[#f7f7f7]">
-              View Cart
-            </button>
-             </NavLink>
-           <button className="border bg-red  text-white rounded-lg w-[300px] h-10">
-              check out
-            </button>
-          
-          </div>
-       </div>
-         
-          </>
-     ) : (
-        <div className="flex justify-center mt-20 items-center text-titleSm">
-          <p>Your cart is empty! 
-          </p>
-          <TbShoppingCartOff className="text-titleMd" />
-        </div>
-        
-      )}
-    </div>
 
         </div>
         {/* side menu end  */}

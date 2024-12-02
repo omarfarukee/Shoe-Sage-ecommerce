@@ -19,15 +19,15 @@ export default function Footer() {
                   <FaInstagram/>
                 </div>
             </div>
-            <div className='border w-[300px] h-[300px] '>
+            <div className='border w-[300px] h-[300px] flex flex-col items-center'>
                 <h3 className='text-lg mb-10'>Company</h3>
-                <a href="" className=''><p>About us</p></a>
-                <a href=""><p className='mt-2'>About us</p></a>
+                <a href="" className=''><p>Team</p></a>
+                <a href=""><p className='mt-2'>Links</p></a>
                 <a href=""><p className='mt-2'>About us</p></a>
                 <a href=""><p className='mt-2'>About us</p></a>
                 <a href=""><p className='mt-2'>About us</p></a>
             </div>
-            <div className='border w-[300px] h-[300px] '>
+            <div className='border w-[300px] h-[300px]  flex flex-col items-center'>
                 <h3 className='text-lg mb-10'>Shop</h3>
                 <a href="" className=''><p>Dhaka</p></a>
                 <a href=""><p className='mt-2'>uttora</p></a>
