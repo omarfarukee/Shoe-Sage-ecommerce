@@ -156,17 +156,6 @@ export default function HomeNavbar() {
           </div>
         </div>
         <div className=" w-[40%] gap-10 h-full flex items-center justify-end">
-          {/* search icon start */}
-          {/* <label className=" swap swap-rotate">
-            
-            <input type="checkbox" />
-
-            
-            <CiSearch className="text-3xl swap-off" />
-
-           
-            <IoCloseOutline className="text-3xl swap-on" />
-          </label> */}
           <div className="mt-2">
             <SearchNavbar />
           </div>
@@ -179,12 +168,13 @@ export default function HomeNavbar() {
             <CiHeart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
           </div>
 
-          <div>
+         <NavLink to="/cart"><div>
             <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
               {cart}
             </span>
             <CiShoppingCart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
           </div>
+          </NavLink> 
           <CiUser className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
 
           <NavLink to="/login"><p className={`text-black text-fontXsm  ${isLoginPage ? "text-white" : ""}`}>Login</p></NavLink>
@@ -220,11 +210,11 @@ export default function HomeNavbar() {
          {cartItems.map((item) => (
            <div key={item.id} className="p-4 rounded border-b w-[400px] flex items-center gap-3 relative">
              <img src={item.img_1} alt={item.product_name} className="w-[100px] object-cover" />
-             <div>
+             <NavLink to={`/shoe/${item.id}`}>
                <h2 className="text-lg font-semibold mt-2">{item.product_name}</h2>
                <p className="text-gray-600">Price: {item.price} $</p>
                <p className="text-gray-500 uppercase">{item.category}</p>
-             </div>
+             </NavLink>
              <IoClose
                className="absolute right-2 top-2 text-titleSm cursor-pointer"
                onClick={() => removeItem(item.id)}
@@ -238,12 +228,15 @@ export default function HomeNavbar() {
             <p className="text-lg">{Total} $</p>
           </div>
           <div className="flex flex-col gap-2 justify-center items-center mt-5">
+            <NavLink to="/cart">
             <button className=" w-[300px] hover:bg-gray-100 transition-all duration-300 rounded-md h-10 bg-[#f7f7f7]">
               View Cart
             </button>
-            <button className="border bg-red  text-white rounded-lg w-[300px] h-10">
+             </NavLink>
+           <button className="border bg-red  text-white rounded-lg w-[300px] h-10">
               check out
             </button>
+          
           </div>
        </div>
          

@@ -104,9 +104,9 @@ export default function AllShoe() {
           height: "70px"
       },
   });
-  setTimeout(() => {
+  
     location.reload();
-  }, 1000);
+
   };
   if (loading || !online) {
     return <FinalLoader />;

@@ -8,6 +8,8 @@ import Login from '../page/Login/Login';
 import SignUp from '../page/Login/SignUp';
 import AllShoe from '../page/AllShoePage/AllShoe';
 import SingleShoesDetails from '../page/AllShoePage/SingleShoesDetails';
+import Cart from '../page/Cart/Cart';
+import AboutUs from '../page/AboutUs/AboutUs';
 
 const routes = createBrowserRouter([
     {
@@ -33,6 +35,14 @@ const routes = createBrowserRouter([
             {
                 path: '/allShoes',
                 element:<AllShoe/>,
+            },
+            {
+                path: '/cart',
+                element:<Cart/>,
+            },
+            {
+                path: '/about',
+                element:<AboutUs/>,
             },
             {
                 path: '/shoe/:id',

@@ -2,11 +2,14 @@
 import axios from "axios";
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
-import { FaMinus, FaPlus } from "react-icons/fa";
+import { FaMinus, FaPlus, FaStar } from "react-icons/fa";
 import { FaCartPlus } from "react-icons/fa6";
 import { RxRulerHorizontal } from "react-icons/rx";
 import { NavLink, useParams } from "react-router-dom";
 import Footer from "../../shared/Footer/Footer";
+import FinalLoader from "../../shared/loader/FinalLoader";
+import toast from "react-hot-toast";
+import useLoader from "../../shared/loader/Loader";
 
 export default function SingleShoesDetails() {
   const { id } = useParams(); // Get the ID from the URL
@@ -15,7 +18,19 @@ export default function SingleShoesDetails() {
   const [selectedSize, setSelectedSize] = useState(null); // State to track the selected size
   const sizes = [5, 6, 7, 8, 9, 10]; // Available sizes
   const [quantity, setQuantity] = useState(1);
+  const [rating, setRating] = useState(0);
+  const [activeTab, setActiveTab] = useState("info"); // Default to "info"
+  const [cartItems, setCartItems] = useState([]);
   const subtotal = quantity * shoe?.price
+
+  const { loading, online } = useLoader();
+
+  // Load cart items from sessionStorage on component mount
+  useEffect(() => {
+    const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
+    setCartItems(storedCart);
+  }, []);
+
   const handleSizeClick = (size) => {
     setSelectedSize(size); // Set the clicked size as the selected size
   };
@@ -81,131 +96,325 @@ export default function SingleShoesDetails() {
       setQuantity(quantity - 1);
     }
   };
+
+  // reviews area 
+
+  const handleRatingClick = (value) => {
+    setRating(value === rating ? 0 : value);
+  };
+
+  const renderRatingStars = () => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      const starClass = i <= rating ? 'text-yellow-500' : 'text-gray-300';
+      stars.push(
+        <span
+          key={i}
+          onClick={() => handleRatingClick(i)}
+          className={`text-titleSm font-extrabold cursor-pointer ${starClass}`}
+        >
+          ★
+        </span>
+      );
+    }
+    return stars;
+  };
+
+  // reviews area end
+
+
+
+
+  const handleAddToCart = (shoe) => {
+    // Check if the item is already in the cart
+    if (cartItems.some((item) => item.id === shoe.id)) {
+      toast.success('', {
+        style: {
+          borderRadius: '10px',
+          background: '#4caf50',
+          color: '#fff',
+          height: "70px"
+        },
+      });
+      return;
+    }
+
+    // Add the new item to the cart
+    const updatedCart = [...cartItems, shoe];
+    setCartItems(updatedCart);
+    sessionStorage.setItem('cart', JSON.stringify(updatedCart));
+
+    toast.success(`${shoe?.product_name} Added to you cart`, {
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+        height: "70px"
+      },
+    });
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
+  };
+  if (loading || !online) {
+    return <FinalLoader />;
+  }
+
   return (
     <div>
-    <div className="flex justify-center">
-      <div className="pt-36 flex  w-[1200px] justify-between">
-        <div className="w-[600px] h-[500px]  flex justify-center gap-10 items-center">
-          {/* Thumbnails */}
-          <div className="flex flex-col gap-3">
-            {[shoe.img_1, shoe.img_2, shoe.img_3, shoe.img_4].map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                alt=""
-                className={`h-20 object-contain w-20 rounded border p-2 cursor-pointer transition-opacity duration-300 ${selectedImage === img ? "opacity-100" : "opacity-40"
-                  }`}
-                onClick={() => handleImageClick(img)}
-              />
-            ))}
-          </div>
+      <div className="flex justify-center">
+        <div className="pt-36 flex  w-[1200px] justify-between">
+          <div className="w-[600px] h-[500px]  flex justify-center gap-10 items-center">
+            {/* Thumbnails */}
+            <div className="flex flex-col gap-3">
+              {[shoe.img_1, shoe.img_2, shoe.img_3, shoe.img_4].map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt=""
+                  className={`h-20 object-contain w-20 rounded border p-2 cursor-pointer transition-opacity duration-300 ${selectedImage === img ? "opacity-100" : "opacity-40"
+                    }`}
+                  onClick={() => handleImageClick(img)}
+                />
+              ))}
+            </div>
 
-          {/* Big Image with Zoom Effect */}
-          <div
-            className="relative w-[400px] h-[400px] overflow-hidden cursor-zoom-in"
-            style={zoomStyles.backgroundImage ? zoomStyles : {}} // Apply dynamic styles
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-          >
-            {!zoomStyles.backgroundImage && (
-              <img
-                className="w-full h-full object-contain "
-                src={selectedImage}
-                alt=""
-              />
-            )}
-          </div>
-        </div>
-        <div className="w-[600px] h-[500px] ml-16">
-          <NavLink to="/">Home /</NavLink>
-          <NavLink to="/allShoes"> Shope</NavLink>
-          <div className="mt-10">
-            <p className="text-titleMd font-semibold">{shoe?.product_name}</p>
-            <p className="text-titleXsm mt-5">Price: {shoe?.price}$</p>
-            <p className="mt-5">{shoe?.description}</p>
-            <div>
-              <p className="mt-5 flex items-center gap-10">Select Size: <RxRulerHorizontal className="text-titleSm" />
-              </p>
-              <div className="flex gap-4">
-                {sizes.map((size) => (
-                  <button
-                    key={size}
-                    className={`w-12 h-12 flex justify-center items-center border rounded-md text-lg font-semibold transition-all duration-300 ${selectedSize === size
-                      ? "bg-red text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-rose-300"
-                      }`}
-                    onClick={() => handleSizeClick(size)}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-              {selectedSize && (
-                <p className="mt-4 text-gray-700 text-md">
-                  Selected Size: <span className="font-bold">{selectedSize}</span>
-                </p>
+            {/* Big Image with Zoom Effect */}
+            <div
+              className="relative w-[400px] h-[400px] overflow-hidden cursor-zoom-in"
+              style={zoomStyles.backgroundImage ? zoomStyles : {}} // Apply dynamic styles
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
+              {!zoomStyles.backgroundImage && (
+                <img
+                  className="w-full h-full object-contain "
+                  src={selectedImage}
+                  alt=""
+                />
               )}
             </div>
           </div>
-          <div className="flex items-center gap-5">
-
-
-            <div className="mb-4 mt-5 w-48">
-              <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
-                Quantity
-              </label>
-              <div className="flex  items-center border border-gray-300 rounded-md p-2">
-                <button
-                  type="button"
-                  onClick={handleDecrement}
-                  className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-2 rounded-l"
-                >
-                  <FaMinus />
-                </button>
-                <input
-                  type="number"
-                  id="quantity"
-                  value={quantity}
-                  onChange={(e) => setQuantity(parseInt(e.target.value))}
-                  className="w-full ml-4 bg-transparent outline-none text-center"
-                  min="1"
-                />
-                <button
-                  type="button"
-                  onClick={handleIncrement}
-                  className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-2 rounded-r"
-                >
-                  <FaPlus />
-                </button>
+          <div className="w-[600px] h-[500px] ml-16">
+            <NavLink to="/">Home /</NavLink>
+            <NavLink to="/allShoes"> Shope</NavLink>
+            <div className="mt-10">
+              <p className="text-titleMd font-semibold">{shoe?.product_name}</p>
+              <p className="text-titleXsm mt-5">Price: {shoe?.price}$</p>
+              <p className="mt-5">{shoe?.description}</p>
+              <div>
+                <p className="mt-5 flex items-center gap-10">Select Size: <RxRulerHorizontal className="text-titleSm" />
+                </p>
+                <div className="flex gap-4">
+                  {sizes.map((size) => (
+                    <button
+                      key={size}
+                      className={`w-12 h-12 flex justify-center items-center border rounded-md text-lg font-semibold transition-all duration-300 ${selectedSize === size
+                        ? "bg-red text-white"
+                        : "bg-gray-200 text-gray-700 hover:bg-rose-300"
+                        }`}
+                      onClick={() => handleSizeClick(size)}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+                {selectedSize && (
+                  <p className="mt-4 text-gray-700 text-md">
+                    Selected Size: <span className="font-bold">{selectedSize}</span>
+                  </p>
+                )}
               </div>
-              <p className="mt-2 font-semibold">Subtotal: {subtotal} $</p>
             </div>
+            <div className="flex items-center gap-5">
 
-            <button className="w-48 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">Add To cart <FaCartPlus /></button>
+
+              <div className="mb-4 mt-5 w-48">
+                <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
+                  Quantity
+                </label>
+                <div className="flex  items-center border border-gray-300 rounded-md p-2">
+                  <button
+                    type="button"
+                    onClick={handleDecrement}
+                    className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-2 rounded-l"
+                  >
+                    <FaMinus />
+                  </button>
+                  <input
+                    type="number"
+                    id="quantity"
+                    value={quantity}
+                    onChange={(e) => setQuantity(parseInt(e.target.value))}
+                    className="w-full ml-4 bg-transparent outline-none text-center"
+                    min="1"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleIncrement}
+                    className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-2 rounded-r"
+                  >
+                    <FaPlus />
+                  </button>
+                </div>
+                <p className="mt-2 font-semibold">Subtotal: {subtotal} $</p>
+              </div>
+
+              {cartItems.some((item) => item.id === shoe.id) ? (
+                <button className="w-48 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">Added in your cart </button>
+              ) : (
+                <button
+                  onClick={(e) => {
+                    e.preventDefault(); // Prevent navigation
+                    handleAddToCart(shoe);
+                  }}
+                  className="w-48 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">Add To cart <FaCartPlus /></button>
+              )}
+
+
+
+            </div>
+          </div>
+
+          <div>
+
+
           </div>
         </div>
 
-        <div>
-
-
-        </div>
       </div>
-      
-    </div>
-    <div className="flex gap-5 justify-center mt-20 mb-20">
-        <button className=" w-[200px] border-red py-2 border-b">Additional Information</button>
-        <button className=" w-[200px] border-gray-100 border-b">Reviews</button>
-    </div>
-    <div className="flex justify-center mb-20 hidden">
-        this is additional info 
-    </div>
-    <div className="flex justify-center mb-20">
-        <div>
-          <h1 className="text-titleSm">Be the first to review “Message Cotton T-Shirt”</h1>
-          <p>Your email address will not be published. Required fields are marked *</p> 
+
+      <div>
+        {/* Tab Buttons */}
+        <div className="flex gap-5 justify-center mt-20 mb-20">
+          <button
+            className={`w-[200px] py-2 border-b ${activeTab === "info" ? "border-red" : "border-gray-100"
+              }`}
+            onClick={() => setActiveTab("info")}
+          >
+            Additional Information
+          </button>
+          <button
+            className={`w-[200px] py-2 border-b ${activeTab === "reviews" ? "border-red" : "border-gray-100"
+              }`}
+            onClick={() => setActiveTab("reviews")}
+          >
+            Reviews (2)
+          </button>
         </div>
-    </div>
-    <Footer/>
+
+        {/* Additional Info Content */}
+        <div className="flex justify-center">
+          <div
+            className={`  mb-20  w-[1000px] ${activeTab === "info" ? "block" : "hidden"
+              }`}
+          >
+            <div className="text-titleSm">{shoe?.product_name}</div>
+            <div className="mt-5 mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, facere. Praesentium nostrum sunt, iste rerum beatae velit, recusandae necessitatibus veritatis tempora fugit quibusdam dignissimos eaque, ut rem. Animi, earum non. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius odit nobis optio ipsam dolore consectetur labore adipisci, deserunt corporis eveniet a corrupti harum, praesentium ab asperiores aliquid voluptatibus, reprehenderit quod.</div>
+            <div>
+              <p className="text-titleSm">Why choose product?</p>
+              <li className="text-titleXXsm mt-5">Creat by cotton fibric with soft and smooth</li>
+              <li className="text-titleXXsm mt-5">Creat by cotton fibric with soft and smooth</li>
+              <li className="text-titleXXsm mt-5">Creat by cotton fibric with soft and smooth</li>
+            </div>
+          </div>
+        </div>
+
+
+        {/* Reviews Content */}
+        <div className="flex justify-center">
+          <div
+            className={` justify-center w-[1000px] mb-20 ${activeTab === "reviews" ? "block" : "hidden"
+              }`}
+          >
+            <div>
+              <h1 className="text-titleSm">Be the first to review “Message Cotton T-Shirt”</h1>
+              <p>Your email address will not be published. Required fields are marked *</p>
+              <div className='mt-2 rounded-xl'>
+
+                <div className='p-2'>
+                  <div className='flex items-center justify-center mt-2 font-bold gap-x-2'><p>What&apos;s your rating ?</p></div>
+                  <div className='flex justify-center mt-2 font-bold border-b-2 border-red'>
+                    {renderRatingStars()}
+                  </div>
+                  <form>
+                    <div className='mt-5'>
+                      {/* <label className="textArea"> <span className="text-lg label-text">Write Here:</span></label> */}
+                      <textarea
+                        className="w-full pt-3 h-28 input input-bordered rounded-3xl"
+                        placeholder="Write your valuable Feedback here..."
+                        name='textArea'
+                      />
+                    </div>
+                    <div className="flex justify-center mt-2 mb-5 text-center">
+                      <div>
+                        <button className='px-2 py-2 rounded bg-red text-white' type="submit" data-front="Submit Review ＋" data-back="Click to add ≣">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div className="text-titleSm">
+                Reviews
+              </div>
+              <div className="mt-5 mb-5">
+                {/* review show */}
+                <div className="">
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="flex items-center gap-2">
+                      <img className="w-16 rounded-full" src="https://avatars.githubusercontent.com/u/108360147?v=4" alt="" />
+                      <div>
+                        <p className="text-titleXXsm">Omar Faruk</p>
+                        <p className="text-titleXXsm">April 06, 2023</p>
+                      </div>
+                    </div>
+                    <div className="flex text-yellow-400">
+                      <p><FaStar /></p>
+                      <p><FaStar /></p>
+                      <p><FaStar /></p>
+                      <p><FaStar /></p>
+                      <p><FaStar /></p>
+                    </div>
+                  </div>
+
+                  <div className="text-titleXXsm pl-5 border-b border-red pb-2">
+                    <p>&quot;Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro dicta modi fugiat. Fugiat fugit error est repellendus veniam optio eveniet unde possimus placeat, neque, voluptates recusandae enim nesciunt. Rem, placeat.&quot;</p>
+                  </div>
+                </div>
+                <div className="mt-5">
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="flex items-center gap-2">
+                      <img className="w-16 rounded-full" src="https://avatars.githubusercontent.com/u/108360147?v=4" alt="" />
+                      <div>
+                        <p className="text-titleXXsm">Omar Faruk</p>
+                        <p className="text-titleXXsm">April 06, 2023</p>
+                      </div>
+                    </div>
+                    <div className="flex text-yellow-400">
+                      <p><FaStar /></p>
+                      <p><FaStar /></p>
+                      <p><FaStar /></p>
+                      <p><FaStar /></p>
+                      <p><FaStar /></p>
+                    </div>
+                  </div>
+
+                  <div className="text-titleXXsm pl-5 border-b border-red pb-2">
+                    <p>&quot;Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro dicta modi fugiat. Fugiat fugit error est repellendus veniam optio eveniet unde possimus placeat, neque, voluptates recusandae enim nesciunt. Rem, placeat.&quot;</p>
+                  </div>
+                </div>
+                {/* review show end */}
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <Footer />
     </div>
   );
 }
