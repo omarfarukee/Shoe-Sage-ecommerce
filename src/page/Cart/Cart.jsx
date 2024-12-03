@@ -166,7 +166,7 @@ const Cart = () => {
                                 <p className="uppercase  flex justify-between">Vat : <span>20 $</span></p>
                             </div>}
                             <p className="uppercase font-bold flex justify-between mt-5">
-                                Total: {Total === 0 ? "0" : <span>{Total} $</span>}
+                                Total: {Total === 0 ? "0" : <span>{grandTotal} $</span>}
                             </p>
 
 
