@@ -82,7 +82,7 @@ const Cart = () => {
     return (
         <div>
             <div className="pt-28 flex justify-center">
-                <div className="w-[90vw] h-[80vh]">
+                <div className="w-[90vw] h-[100vh]">
                     <h1 className="text-titleLg font-semibold border-b border-red">
                         Cart ({cartItems?.length})
                     </h1>
@@ -91,7 +91,7 @@ const Cart = () => {
                             {cartItems.length > 0 ? (
                                 <>
                                     <div className="mt-5  h-[70vh] overflow-y-scroll">
-                                        {cartItems.map((item) => (
+                                        {cartItems?.map((item) => (
                                             <div key={item.id}>
                                                 <div className="p-4 rounded border-b w-full flex items-center gap-3 relative">
                                                     <img

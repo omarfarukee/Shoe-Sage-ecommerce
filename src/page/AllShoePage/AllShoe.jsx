@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { AiFillStar, AiOutlineStar, AiOutlineTable } from "react-icons/ai";
-import { IoIosArrowDown, IoMdHeart } from "react-icons/io";
+import { IoIosArrowDown} from "react-icons/io";
 import { CiHeart } from "react-icons/ci";
 import shoe from "../../assets/backgrounds/shoe3.jpeg";
 import { NavLink } from "react-router-dom";
@@ -15,7 +15,6 @@ export default function AllShoe() {
   const [shoeData, setShoeData] = useState([]); // Store shoe data
   const [currentPage, setCurrentPage] = useState(1); // Current page
   const itemsPerPage = 8; // Number of items per page
-  const [wish, setWish] = useState(false);
   const [maxPrice, setMaxPrice] = useState(30000);
   const [cartItems, setCartItems] = useState([]);
   
@@ -72,15 +71,24 @@ export default function AllShoe() {
 
 
   // Load cart items from sessionStorage on component mount
-  useEffect(() => {
+  const fetchCart = () => {
     const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
     setCartItems(storedCart);
+  };
+  // Polling for updated wishlist every second
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchCart();
+    }, 1000); // Poll every 1 second
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
   }, []);
+
 
   const handleAddToCart = (shoe) => {
     // Check if the item is already in the cart
-    if (cartItems.some((item) => item.id === shoe.id)) {
-      toast.success('Thank you for signing up!', {
+    if (cartItems?.some((item) => item.id === shoe.id)) {
+      toast.success('', {
         style: {
             borderRadius: '10px',
             background: '#4caf50',
@@ -104,14 +112,12 @@ export default function AllShoe() {
           height: "70px"
       },
   });
-  
-    location.reload();
-
+location.reload();
   };
   if (loading || !online) {
     return <FinalLoader />;
   }
-  console.log(cartItems.map(items => items.id));
+
   return (
     <div className="overflow-hidden">
       {/* Background Section */}
@@ -202,7 +208,7 @@ export default function AllShoe() {
           </div>
           {/* product show using map  */}
           <div className="flex flex-wrap gap-6 w-[100%] justify-center ">
-      {currentData.map((shoe) => (
+      {currentData?.map((shoe) => (
         <div key={shoe.id}  className="w-[260px] transition-all duration-300 p-2 hover:shadow-lg">
           <div className="w-full  rounded px-2 h-[280px] flex flex-col justify-center items-center transition-all group relative overflow-hidden">
             {/* First Image */}
@@ -217,7 +223,7 @@ export default function AllShoe() {
               alt={shoe.product_name}
               className="w-[200px] transition-opacity duration-500 opacity-0 group-hover:opacity-100"
             />
-            {cartItems.some((item) => item.id === shoe.id) ? (
+            {cartItems?.some((item) => item.id === shoe.id) ? (
               <button
                 className="absolute w-[230px] shadow-lg hover:bg-gray-200 transition-all duration-500 bg-gray-100 py-2 rounded uppercase top-[280px] group-hover:top-[230px] text-titleXXsm cursor-not-allowed"
               >
@@ -240,18 +246,13 @@ export default function AllShoe() {
               {shoe?.category}
             </p>
             <div className="absolute flex ml-56">
-              {!wish && (
+              { (
                 <CiHeart
                   className="text-titleSm"
-                  onClick={() => setWish(true)}
+                 
                 />
               )}
-              {wish && (
-                <IoMdHeart
-                  className="text-titleSm text-red"
-                  onClick={() => setWish(false)}
-                />
-              )}
+              
             </div>
           </div>
           <div>Price: {shoe?.price} $</div>

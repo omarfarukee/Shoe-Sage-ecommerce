@@ -11,6 +11,8 @@ import SingleShoesDetails from '../page/AllShoePage/SingleShoesDetails';
 import Cart from '../page/Cart/Cart';
 import AboutUs from '../page/AboutUs/AboutUs';
 import CheckOut from '../page/CheckOut/CheckOut';
+import Wishlist from '../page/Wishlist/Wishlist';
+import UserProfile from '../page/UserProfile/UserProfile';
 
 const routes = createBrowserRouter([
     {
@@ -48,6 +50,14 @@ const routes = createBrowserRouter([
             {
                 path: '/checkout',
                 element:<CheckOut/>,
+            },
+            {
+                path: '/wishlist',
+                element:<Wishlist/>,
+            },
+            {
+                path: '/settings',
+                element:<UserProfile/>,
             },
             {
                 path: '/shoe/:id',

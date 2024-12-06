@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import logo from "../../assets/logo/logo.png";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import {
   CiHeart,
@@ -11,15 +11,27 @@ import {
 import { GoChevronDown } from "react-icons/go";
 import SearchNavbar from "./SearchNavbar";
 import { TbShoppingCartOff } from "react-icons/tb";
-import { IoClose } from "react-icons/io5";
+import { IoClose, IoSettingsOutline } from "react-icons/io5";
 import toast from "react-hot-toast";
+import { IoIosLogOut } from "react-icons/io";
 export default function HomeNavbar() {
   const [scrolled, setScrolled] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  // eslint-disable-next-line no-unused-vars
-  const [wish, setWish] = useState(0);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
+  const fetchWishlist = () => {
+    const storedWishlist = JSON.parse(sessionStorage.getItem('wishlist')) || [];
+    setWishlist(storedWishlist);
+  };
+
+  // Polling for updated wishlist every second
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchWishlist();
+    }, 1000); // Poll every 1 second
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, []);
 
   useEffect(() => {
     // Retrieve cart data from sessionStorage
@@ -74,6 +86,22 @@ export default function HomeNavbar() {
   // Calculate the grand total
   const Total = cartItems.reduce((total, item) => total + item.price, 0);
   const cart = cartItems.length
+  const user = JSON.parse(sessionStorage.getItem('user'));
+  console.log(user);
+
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear user data from sessionStorage
+    sessionStorage.removeItem('user');
+    toast.success('Logged out successfully.') 
+    console.log('User logged out successfully.')
+
+    // Redirect to login page
+    navigate('/login');
+  };
+
   return (
     <section>
       <div
@@ -161,12 +189,14 @@ export default function HomeNavbar() {
           </div>
 
           {/* search icon end*/}
-          <div>
-            <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
-              {wish}
-            </span>
-            <CiHeart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
-          </div>
+          <NavLink to='/wishlist'>
+            <div>
+              <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
+                {wishlist.length}
+              </span>
+              <CiHeart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
+            </div>
+          </NavLink>
 
           <NavLink to="/cart"><div>
             <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
@@ -175,16 +205,35 @@ export default function HomeNavbar() {
             <CiShoppingCart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
           </div>
           </NavLink>
-          <CiUser className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
 
-          <NavLink to="/login"><p className={`text-black text-fontXsm  ${isLoginPage ? "text-white" : ""}`}>Login</p></NavLink>
-          <NavLink to="/signUp"><p className={`text-black text-fontXsm w-16 ${isLoginPage ? "text-white" : ""}`}>Sign up</p></NavLink>
+          {user !== null && <div className="relative group">
+             
+               <CiUser className={`text-black text-fontXsm cursor-pointer text-3xl ${isLoginPage ? "text-white" : ""}`} />
+        
+              {/* Submenu */}
+              <div className="submenu-user">
+                <NavLink
+                  to="/settings"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-red submenu-item"
+                      : "text-black submenu-item"
+                  }
+                >
+                  <p className="flex justify-center items-center gap-2">settings<IoSettingsOutline /></p>
+
+                </NavLink>
+                  <button onClick={handleLogout} className="flex justify-center items-center gap-2 bg-rose-100 rounded-md">
+                  Log-out <IoIosLogOut />
+
+            </button>
+              </div>
+            </div>}
+
+          {user === null &&<NavLink to="/login"><p className={`text-black text-fontXsm  ${isLoginPage ? "text-white" : ""}`}>Login</p></NavLink>}
+          {user === null &&<NavLink to="/signUp"><p className={`text-black text-fontXsm w-16 ${isLoginPage ? "text-white" : ""}`}>Sign up</p></NavLink>}
 
           <CiMenuFries onClick={toggleSideMenu} className={`text-black text-fontXsm text-3xl cursor-pointer ${isLoginPage ? "text-white" : ""}`} />
-
-
-
-
         </div>
 
       </div>
@@ -201,13 +250,13 @@ export default function HomeNavbar() {
         </div>
 
         {/* Side Menu Content */}
-        <div className='p-10 '>
+        <div className='p-2 '>
 
           <div>
             <h1 className="text-2xl font-semibold border-b">Cart Items ({cartItems?.length})</h1>
             {cartItems.length > 0 ? (
-              <> <div className="mt-5 border-b w-[440px] h-[400px] overflow-y-scroll">
-                {cartItems.map((item) => (
+              <> <div className="mt-5 border-b w-[440px] h-[300px] overflow-y-scroll">
+                {cartItems?.map((item) => (
                   <div key={item.id} className="p-4 rounded border-b w-[400px] flex items-center gap-3 relative">
                     <img src={item.img_1} alt={item.product_name} className="w-[100px] object-cover" />
                     <NavLink to={`/shoe/${item.id}`}>

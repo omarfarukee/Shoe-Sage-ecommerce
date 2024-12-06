@@ -127,7 +127,7 @@ export default function SingleShoesDetails() {
 
   const handleAddToCart = (shoe) => {
     // Check if the item is already in the cart
-    if (cartItems.some((item) => item.id === shoe.id)) {
+    if (cartItems?.some((item) => item.id === shoe.id)) {
       toast.success('', {
         style: {
           borderRadius: '10px',
@@ -167,7 +167,7 @@ export default function SingleShoesDetails() {
           <div className="w-[600px] h-[500px]  flex justify-center gap-10 items-center">
             {/* Thumbnails */}
             <div className="flex flex-col gap-3">
-              {[shoe.img_1, shoe.img_2, shoe.img_3, shoe.img_4].map((img, index) => (
+              {[shoe.img_1, shoe.img_2, shoe.img_3, shoe.img_4]?.map((img, index) => (
                 <img
                   key={index}
                   src={img}
@@ -206,7 +206,7 @@ export default function SingleShoesDetails() {
                 <p className="mt-5 flex items-center gap-10">Select Size: <RxRulerHorizontal className="text-titleSm" />
                 </p>
                 <div className="flex gap-4">
-                  {sizes.map((size) => (
+                  {sizes?.map((size) => (
                     <button
                       key={size}
                       className={`w-12 h-12 flex justify-center items-center border rounded-md text-lg font-semibold transition-all duration-300 ${selectedSize === size
@@ -260,8 +260,12 @@ export default function SingleShoesDetails() {
                 <p className="mt-2 font-semibold">Subtotal: {subtotal} $</p>
               </div>
 
-              {cartItems.some((item) => item.id === shoe.id) ? (
-                <button className="w-48 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">Added in your cart </button>
+              {cartItems?.some((item) => item.id === shoe.id) ? (
+               <> <button className="w-48 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">Added in your cart </button> 
+              <NavLink to='/cart'>
+                <button className="w-24 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">View cart</button>
+              </NavLink> 
+               </>
               ) : (
                 <button
                   onClick={(e) => {

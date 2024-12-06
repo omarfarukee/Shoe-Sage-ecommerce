@@ -79,5 +79,30 @@
   transform: translateX(0); /* Visible when opened */
 }
 
+.submenu-user {
+  position: absolute;
+  left:-40px;
+  top: 40px; /* Position submenu just below the parent */
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border: 1px solid #ebebeb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0s 0.4s; /* Add delay to visibility */
+  z-index: 10;
+  font-size: 16px;
+  width: 150px;
+  border-radius: 10px;
+  padding: 5px;
+}
+.group:hover .submenu-user {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.4s ease; /* Remove delay when showing */
+}
 
   
