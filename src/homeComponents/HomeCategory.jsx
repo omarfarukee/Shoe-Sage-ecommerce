@@ -5,6 +5,7 @@ import sports from "../assets/category-img/sports.jpg";
 import snickers from "../assets/category-img/snikers.jpg";
 import sandal from "../assets/category-img/sandel.jpg";
 import { CiShoppingBasket } from "react-icons/ci";
+import { NavLink } from "react-router-dom";
 
 export default function HomeCategory() {
 
@@ -26,13 +27,15 @@ export default function HomeCategory() {
             <div className="text-titleSm">
               <span className="font-bold">Formal</span> Collection
             </div>
-            <button className="group uppercase transition-all duration-300">
+         <NavLink to="/shop/formal">
+         <button className="group uppercase transition-all duration-300">
               <span className="flex ">
                 Shop Now
                 <CiShoppingBasket className="text-[20px] transition-all duration-300" />
               </span>
               <div className="w-5 h-[2px] bg-white group-hover:w-20 transition-all duration-300"></div>
             </button>
+          </NavLink>   
           </div>
 
           {/* Overlay with gradient */}
@@ -55,6 +58,7 @@ export default function HomeCategory() {
               <div className="text-titleSm">
                 <span className="font-bold">Sport&lsquo;s</span> Collection
               </div>
+              <NavLink to="/shop/sports">
               <button className="group uppercase transition-all duration-300">
                 <span className="flex ">
                   Shop Now
@@ -62,6 +66,7 @@ export default function HomeCategory() {
                 </span>
                 <div className="w-5 h-[2px] bg-white group-hover:w-20 transition-all duration-300"></div>
               </button>
+              </NavLink>
             </div>
 
             {/* Overlay with gradient */}
@@ -84,6 +89,7 @@ export default function HomeCategory() {
                   <span className="font-bold leading-[60px]">Snicker</span>{" "}
                   Collection
                 </div>
+                <NavLink to="/shop/sneakers">
                 <button className="group uppercase transition-all duration-300">
                   <span className="flex items-center">
                     Shop Now
@@ -91,6 +97,7 @@ export default function HomeCategory() {
                   </span>
                   <div className="w-5 h-[2px] bg-white group-hover:w-20 transition-all duration-300"></div>
                 </button>
+                </NavLink>
               </div>
 
               {/* Overlay with gradient */}

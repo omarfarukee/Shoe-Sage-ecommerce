@@ -61,8 +61,8 @@ export default function HomeNavbar() {
   };
 
   const location = useLocation();
-  const isLoginPage = location.pathname === '/login' || location.pathname === '/signUp' || location.pathname === '/allShoes';
-  const navBg = location.pathname === '/allShoes'
+  const isLoginPage = location.pathname === '/login' || location.pathname === '/signUp' || location.pathname === '/allShoes' || location.pathname === '/shop/formal' || location.pathname === '/shop/sports' || location.pathname === '/shop/sneakers' || location.pathname === '/settings' || location.pathname === '/contact';
+  const navBg = location.pathname === '/allShoes' || location.pathname === '/allShoes' || location.pathname === '/shop/formal' || location.pathname === '/shop/sports' || location.pathname === '/shop/sneakers' || location.pathname === '/settings' || location.pathname === '/contact';
 
   // Function to remove an item
   const removeItem = (id) => {
@@ -86,6 +86,8 @@ export default function HomeNavbar() {
   // Calculate the grand total
   const Total = cartItems.reduce((total, item) => total + item.price, 0);
   const cart = cartItems.length
+
+  // get user data
   const user = JSON.parse(sessionStorage.getItem('user'));
   console.log(user);
 
@@ -133,7 +135,7 @@ export default function HomeNavbar() {
               {/* Submenu */}
               <div className="submenu">
                 <NavLink
-                  to="/shop/men"
+                  to="/shop/formal"
                   className={({ isActive }) =>
                     isActive
                       ? "text-red submenu-item"
@@ -143,7 +145,7 @@ export default function HomeNavbar() {
                   Men Formal
                 </NavLink>
                 <NavLink
-                  to="/shop/women"
+                  to="/shop/sports"
                   className={({ isActive }) =>
                     isActive
                       ? "text-red submenu-item"
@@ -153,14 +155,14 @@ export default function HomeNavbar() {
                   Men Sports
                 </NavLink>
                 <NavLink
-                  to="/shop/kids"
+                  to="/shop/sneakers"
                   className={({ isActive }) =>
                     isActive
                       ? "text-red submenu-item"
                       : "text-black submenu-item"
                   }
                 >
-                  Men Snicker
+                  Men Sneakers
 
                 </NavLink>
               </div>

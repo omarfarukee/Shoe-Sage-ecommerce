@@ -13,6 +13,9 @@ import AboutUs from '../page/AboutUs/AboutUs';
 import CheckOut from '../page/CheckOut/CheckOut';
 import Wishlist from '../page/Wishlist/Wishlist';
 import UserProfile from '../page/UserProfile/UserProfile';
+import Formal from '../page/CategoryPage/Formal';
+import Sports from '../page/CategoryPage/Sports';
+import Sneakers from '../page/CategoryPage/Sneakers';
 
 const routes = createBrowserRouter([
     {
@@ -38,6 +41,18 @@ const routes = createBrowserRouter([
             {
                 path: '/allShoes',
                 element:<AllShoe/>,
+            },
+            {
+                path: '/shop/formal',
+                element:<Formal/>,
+            },
+            {
+                path: '/shop/sports',
+                element:<Sports/>,
+            },
+            {
+                path: '/shop/sneakers',
+                element:<Sneakers/>,
             },
             {
                 path: '/cart',

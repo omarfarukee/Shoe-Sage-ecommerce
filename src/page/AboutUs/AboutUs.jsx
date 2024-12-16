@@ -1,8 +1,14 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import Footer from '../../shared/Footer/Footer';
-
+import useLoader from '../../shared/loader/Loader';
+import FinalLoader from '../../shared/loader/FinalLoader';
 const AboutUs = () => {
+    const { loading, online } = useLoader();
+    if (loading || !online) {
+        return <FinalLoader />;
+      }
+    
     return (
         <div className='pt-28'>
             <div className='flex justify-center mb-20'>
