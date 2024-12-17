@@ -82,18 +82,18 @@ const Cart = () => {
     return (
         <div>
             <div className="pt-28 flex justify-center">
-                <div className="w-[90vw] h-[100vh]">
+                <div className="lg:w-[90vw] lg:h-[100vh]">
                     <h1 className="text-titleLg font-semibold border-b border-red">
                         Cart ({cartItems?.length})
                     </h1>
-                    <div className="flex justify-center gap-5 mt-20">
-                        <div className=" w-[50%]">
+                    <div className="lg:flex justify-center gap-5 mt-20">
+                        <div className=" lg:w-[50%] px-5">
                             {cartItems.length > 0 ? (
                                 <>
-                                    <div className="mt-5  h-[70vh] overflow-y-scroll">
+                                    <div className="mt-5   lg:h-[70vh] overflow-y-scroll mb-2">
                                         {cartItems?.map((item) => (
                                             <div key={item.id}>
-                                                <div className="p-4 rounded border-b w-full flex items-center gap-3 relative">
+                                                <div className="lg:p-4 rounded border-b w-full flex lg:flex-row items-center gap-3 relative flex-col">
                                                     <img
                                                         src={item.img_1}
                                                         alt={item.product_name}
@@ -109,7 +109,7 @@ const Cart = () => {
                                                         onClick={() => removeItem(item.id)}
                                                     />
                                                     {/* Quantity */}
-                                                    <div className="mb-4 mt-5 w-48 ml-[20%]">
+                                                    <div className="mb-4 mt-5 w-48 lg:ml-[20%]">
                                                         <label
                                                             htmlFor={`quantity-${item.id}`}
                                                             className="block text-sm font-medium text-gray-700"
@@ -157,7 +157,7 @@ const Cart = () => {
                                 </div>
                             )}
                         </div>
-                        <div className="border h-[400px] w-[400px] p-5">
+                        <div className="border h-[400px] lg:w-[400px] lg:p-5 p-2">
                             <h1 className="uppercase text-titleSm">Cart Totals</h1>
                             <p className="uppercase border-b flex justify-between">SubTotal: <span>{Total} $</span></p>
 
@@ -171,7 +171,7 @@ const Cart = () => {
 
 
                             <NavLink to="/checkout">
-                                <button className="border bg-red mt-10 h-16 uppercase  text-white rounded-lg w-[300px] ml-7">
+                                <button className="border bg-red mt-10 h-16 uppercase  text-white rounded-lg w-[300px] lg:ml-7">
                                     Proceed to check out
                                 </button>
                             </NavLink>

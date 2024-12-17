@@ -21,9 +21,8 @@ export default function HomeNavbar() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [wishlist, setWishlist] = useState([]);
-  // const [countryOpen, setCountryOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [countryOpen, setCountryOpen] = useState(false);
+  const [navbarOpen, setNavbarOpen] = useState(false);
 
   const fetchWishlist = () => {
     const storedWishlist = JSON.parse(sessionStorage.getItem('wishlist')) || [];
@@ -267,10 +266,10 @@ export default function HomeNavbar() {
           <div>
             <h1 className="text-2xl font-semibold border-b">Cart Items ({cartItems?.length})</h1>
             {cartItems.length > 0 ? (
-              <> <div className="mt-5 border-b w-[440px] h-[300px] overflow-y-scroll">
+              <> <div className="mt-5 border-b lg:w-[440px] h-[300px] overflow-y-scroll">
                 {cartItems?.map((item) => (
-                  <div key={item.id} className="p-4 rounded border-b w-[400px] flex items-center gap-3 relative">
-                    <img src={item.img_1} alt={item.product_name} className="w-[100px] object-cover" />
+                  <div key={item.id} className="p-4 rounded border-b lg:w-[400px] flex items-center gap-3 relative">
+                    <img src={item.img_1} alt={item.product_name} className="lg:w-[100px] w-[70px] object-cover" />
                     <NavLink to={`/shoe/${item.id}`}>
                       <h2 className="text-lg font-semibold mt-2">{item.product_name}</h2>
                       <p className="text-gray-600">Price: {item.price} $</p>
@@ -329,22 +328,47 @@ export default function HomeNavbar() {
         <div className="flex items-center justify-between w-[57%]">
           <div className="relative">
             {/* Main Menu Icon */}
-            <div className="nav-items ml-3">
+            {!menuOpen ?<div className="nav-items ml-3">
               <p
                 className="text-2xl flex items-center cursor-pointer w-14"
                 onClick={() => setMenuOpen(!menuOpen)} // Toggle menu visibility
               >
                 <RiMenu2Fill />
               </p>
-            </div>
+            </div>:
+            <div className="nav-items ml-3">
+              <p
+                className="text-2xl flex items-center cursor-pointer w-14"
+                onClick={() => setMenuOpen(!menuOpen)} // Toggle menu visibility
+              >
+                <IoClose />
+
+              </p>
+            </div>}
 
             {/* Main Menu */}
             <div
               className={`hamburger-submenu px-4 py-2 w-[200px] gap-5 absolute top-full left-0 bg-white shadow-md transition-all duration-300 ${
-                menuOpen ? "block" : "hidden"
+                menuOpen ? 'active' : ''
               }`}
             >
               <div className="flex flex-col gap-3">
+              <NavLink to='/wishlist'>
+              <div className="flex items-center gap-2">
+                <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
+                  {wishlist.length} 
+                </span>
+                <CiHeart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
+                WishList
+              </div>
+            </NavLink>
+            <NavLink to="/cart"><div>
+              <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
+                {cart}
+              </span>
+              <CiShoppingCart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
+            </div>
+            </NavLink>
                 <a href="#" className="w-full">
                   <div className="rounded-md w-full text-start px-2 hover:text-[#000000] hover:bg-[#b051514f] transition-all duration-300">
                     Home
@@ -355,7 +379,7 @@ export default function HomeNavbar() {
                 <div className="w-full">
                   <div
                     className="rounded-md w-full text-start px-2 flex items-center justify-between hover:text-[#000000] hover:bg-[#b051514f] transition-all duration-300 cursor-pointer"
-                    onClick={() => setCountryOpen(!countryOpen)}
+                    onClick={() => setNavbarOpen(!navbarOpen)}
                   >
                     Shop <FaCaretDown />
                   </div>
@@ -363,7 +387,7 @@ export default function HomeNavbar() {
                   {/* Submenu for country */}
                   <div
                     className={`overflow-hidden transition-all duration-500 bg-[#71252514] ${
-                      countryOpen ? "max-h-[200px]" : "max-h-0"
+                      navbarOpen ? "max-h-[200px]" : "max-h-0"
                     }`}
                   >
                     <a href="" className="w-1/3">
@@ -425,15 +449,23 @@ export default function HomeNavbar() {
 
         <div className="flex gap-3 justify-end items-center">
           {user ? (
-            <CiUser className="text-titleSm" />
+            ""
           ) : (
-            <a href="#">
-              <button className="w-16 border py-1 rounded-lg hover:bg-[#3e8d61c4] transition-all duration-300 hover:border-none">
+            <NavLink to="/login">
+               <button className="w-16 border py-1 rounded-lg hover:bg-[#3e8d61c4] transition-all duration-300 hover:border-none">
                 Login
               </button>
-            </a>
+            </NavLink>
+             
+            
           )}
         </div>
+        <div onClick={toggleSideMenu}>
+              <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
+                {cart}
+              </span>
+              <CiShoppingCart  className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
+            </div>
       </div>
     </div>
     
