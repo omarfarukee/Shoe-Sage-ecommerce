@@ -11,7 +11,7 @@ export default function HomeCategory() {
 
   return (
     <div className="flex justify-center mt-20">
-      <div className="p-5 flex gap-5 w-[1300px] justify-center overflow-hidden">
+      <div className="p-5 flex lg:flex-row flex-col gap-5 w-[1300px] justify-center overflow-hidden">
         {/* card 1 */}
         <div className="relative group" data-aos="fade-right"
      data-aos-duration="1000">
@@ -22,7 +22,7 @@ export default function HomeCategory() {
             alt="Women's Collection"
           />
           {/* Text and Button */}
-          <div className="absolute top-[70%] px-5 text-white  transition-opacity duration-300 z-10">
+          <div className="absolute lg:top-[70%] top-[50%] px-5 text-white  transition-opacity duration-300 z-10">
             <p className="uppercase">Hot list</p>
             <div className="text-titleSm">
               <span className="font-bold">Formal</span> Collection
@@ -53,7 +53,7 @@ export default function HomeCategory() {
               alt="Women's Collection"
             />
             {/* Text and Button */}
-            <div className="absolute top-[50%] px-5 text-white  transition-opacity duration-300 z-10">
+            <div className="absolute top-[25%] lg:top-[50%] px-5 text-white  transition-opacity duration-300 z-10">
               <p className="uppercase">Hot list</p>
               <div className="text-titleSm">
                 <span className="font-bold">Sport&lsquo;s</span> Collection
@@ -78,19 +78,19 @@ export default function HomeCategory() {
             <div className="relative group mb-5 " data-aos="fade-up" data-aos-duration="1000">
               {/* Image */}
               <img
-                className="w-[290px] h-[188px] rounded"
+                className="w-[290px] lg:h-[188px] h-[170px] rounded"
                 src={snickers}
                 alt="Women's Collection"
               />
               {/* Text and Button */}
-              <div className="absolute top-[40%] px-5 text-white  transition-opacity duration-300 z-10 leading-[10px]">
+              <div className="absolute lg:top-[40%] top-[20%] lg:px-5 pl-3 text-white  transition-opacity duration-300 z-10 leading-[10px]">
                 <p className="uppercase">Hot list</p>
-                <div className="text-titleSm">
+                <div className="lg:text-titleSm text-titleXsm">
                   <span className="font-bold leading-[60px]">Snicker</span>{" "}
                   Collection
                 </div>
                 <NavLink to="/shop/sneakers">
-                <button className="group uppercase transition-all duration-300">
+                <button className="group uppercase transition-all duration-300 mt-3">
                   <span className="flex items-center">
                     Shop Now
                     <CiShoppingBasket className="text-[20px] transition-all duration-300" />
@@ -108,18 +108,18 @@ export default function HomeCategory() {
                 data-aos-duration="1500">
               {/* Image */}
               <img
-                className="w-[290px] h-[188px] rounded"
+                className="w-[290px] lg:h-[188px] h-[170px] rounded"
                 src={sandal}
                 alt="Women's Collection"
               />
               {/* Text and Button */}
-              <div className="absolute top-[40%] px-5 text-white  transition-opacity duration-300 z-10 leading-[10px]">
+              <div className="absolute lg:top-[40%] top-[20%] lg:px-5 pl-3 text-white  transition-opacity duration-300 z-10 leading-[10px]">
                 <p className="uppercase">Hot list</p>
-                <div className="text-titleSm">
+                <div className="lg:text-titleSm text-titleXsm">
                   <span className="font-bold leading-[60px]">Sandal</span>{" "}
                   Collection
                 </div>
-                <button className="group uppercase transition-all duration-300">
+                <button className="group uppercase transition-all duration-300 mt-3">
                   <span className="flex items-center">
                     Shop Now
                     <CiShoppingBasket className="text-[20px] transition-all duration-300" />

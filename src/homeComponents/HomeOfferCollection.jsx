@@ -41,9 +41,9 @@ export default function HomeOfferCollection() {
     }, []);
     return (
         <div className="mb-20 mt-20">
-            <div className="px-10">
+            <div className="lg:px-10 px-5">
                 <div
-                    className="relative items-center flex justify-center h-[75vh] rounded-sm "
+                    className="relative items-center flex justify-center lg:h-[75vh] h-[600px] rounded-sm "
                     style={{
                         backgroundImage: `url(${background})`,
                         backgroundSize: "cover",
@@ -55,11 +55,11 @@ export default function HomeOfferCollection() {
                     <div className="absolute inset-0 bg-black opacity-10"></div>
 
                     {/* Content */}
-                    <div className="relative z-10 flex items-center  w-full justify-evenly">
+                    <div className="relative px-3 lg:px-0 z-10 flex lg:flex-row flex-col-reverse items-center  w-full justify-evenly">
                         <div className="">
                             <p className="text-red uppercase" data-aos="fade-right"
                                 data-aos-duration="3000">Deal of the week</p>
-                            <h1 className=" mb-4 text-titleXl uppercase" data-aos="fade-right"
+                            <h1 className=" mb-4 lg:text-titleXl text-titleSm text-titleSm uppercase" data-aos="fade-right"
                                 data-aos-duration="3000"><span className="font-bold">Winter</span> Collection</h1>
                             <p className="text-lg" data-aos="fade-right"
                                 data-aos-duration="3000">
@@ -77,25 +77,25 @@ export default function HomeOfferCollection() {
                             <div className="flex gap-5 mt-5" data-aos="fade-right"
                                 data-aos-duration="3000">
                                 <div>
-                                    <span className="font-mono text-titleXl">
+                                    <span className="font-mono lg:text-titleXl text-titleSm">
                                         <span>{timeLeft.days}</span>
                                     </span>
                                     days
                                 </div>
                                 <div>
-                                    <span className="font-mono text-titleXl">
+                                    <span className="font-mono lg:text-titleXl text-titleSm">
                                         <span>{timeLeft.hours}</span>
                                     </span>
                                     hours
                                 </div>
                                 <div>
-                                    <span className=" font-mono text-titleXl">
+                                    <span className=" font-mono lg:text-titleXl text-titleSm">
                                         <span>{timeLeft.minutes}</span>
                                     </span>
                                     min
                                 </div>
                                 <div>
-                                    <span className="font-mono text-titleXl">
+                                    <span className="font-mono lg:text-titleXl text-titleSm">
                                         <span>{timeLeft.seconds}</span>
                                     </span>
                                     sec

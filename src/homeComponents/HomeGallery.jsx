@@ -159,7 +159,7 @@ export default function HomeGallery() {
         </div>
       </div>
 
-      <div className='flex justify-center gap-10 mt-10'>
+      <div className='flex lg:flex-row flex-col items-center justify-center gap-10 mt-10'>
         <div className='w-[300px]  h-[200px] flex flex-col justify-center items-center' data-aos="fade-down"
         data-aos-duration="1000">
             <RiCaravanLine className='text-7xl text-red' />

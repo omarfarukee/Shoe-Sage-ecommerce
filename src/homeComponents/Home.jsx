@@ -18,7 +18,7 @@ const Home = () => {
     return <FinalLoader />;
   }
   return (
-    <div>
+    <div className=''>
       <Helmet>
         {/* for SEC */}
         <title>Home - CoderXen</title>
@@ -29,31 +29,31 @@ const Home = () => {
         <meta property="og:type" content="website" />
       </Helmet>
       {/* top banner start */}
-      <div>
+      <div className=''>
         <HomeTopBanner />
       </div>
-      <div>
+      <div className=''>
         <HomeCategory/>
       </div>
       <div className='mt-20 mb-16'>
         <MakeYourWay/>
       </div>
-      <div>
+      <div className=''>
         <HomeTrendyProduct/>
       </div>
-      <div>
+      <div className=''>
         <HomeOfferCollection/>
       </div>
-      <div>
+      <div className=''>
         <HomeStartingAt/>
       </div>
-      <div>
+      <div className='hidden lg:block'>
         <HomeLimitedEdition/>
       </div>
-      <div>
+      <div className='mt-40 lg:mt-0'>
         <HomeGallery/>
       </div>
-      <div>
+      <div className=''>
         <Footer/>
       </div>
       </div>

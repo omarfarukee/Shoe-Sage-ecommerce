@@ -25,7 +25,7 @@ export default function MakeYourWay() {
               data-aos-duration="3000">
           <div>
             <div
-              className="text-titleXxxl font-bold text-transparent  border-red inline-block"
+              className="lg:text-titleXxxl text-titleLg font-bold text-transparent  border-red inline-block"
               style={{ WebkitTextStroke: "2px var(--red)" }}
               
             >

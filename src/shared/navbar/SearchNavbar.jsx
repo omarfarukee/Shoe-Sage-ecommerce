@@ -10,7 +10,7 @@ export default function SearchNavbar() {
     setIsSearchOpen(!isSearchOpen);
   };
   const location = useLocation();
-  const isLoginPage = location.pathname === '/login' || location.pathname === '/signUp' || location.pathname === '/allShoes' || location.pathname === '/shop/formal' || location.pathname === '/shop/sports' || location.pathname === '/shop/sneakers' || location.pathname === '/settings';
+  const isLoginPage = location.pathname === '/login' || location.pathname === '/signUp' || location.pathname === '/allShoes' || location.pathname === '/shop/formal' || location.pathname === '/shop/sports' || location.pathname === '/shop/sneakers' || location.pathname === '/settings' || location.pathname === '/contact';
   return (
     <div className="relative">
       {/* Search Icon Toggle */}

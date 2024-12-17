@@ -14,11 +14,17 @@ import { TbShoppingCartOff } from "react-icons/tb";
 import { IoClose, IoSettingsOutline } from "react-icons/io5";
 import toast from "react-hot-toast";
 import { IoIosLogOut } from "react-icons/io";
+import { FaCaretDown } from "react-icons/fa";
+import { RiMenu2Fill } from "react-icons/ri";
 export default function HomeNavbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [wishlist, setWishlist] = useState([]);
+  // const [countryOpen, setCountryOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [countryOpen, setCountryOpen] = useState(false);
+
   const fetchWishlist = () => {
     const storedWishlist = JSON.parse(sessionStorage.getItem('wishlist')) || [];
     setWishlist(storedWishlist);
@@ -97,121 +103,124 @@ export default function HomeNavbar() {
   const handleLogout = () => {
     // Clear user data from sessionStorage
     sessionStorage.removeItem('user');
-    toast.success('Logged out successfully.') 
+    toast.success('Logged out successfully.')
     console.log('User logged out successfully.')
 
     // Redirect to login page
     navigate('/login');
   };
 
+  
+
   return (
     <section>
-      <div
-        className={`border-b h-24 flex  w-full fixed z-50 transition-all duration-500 ${scrolled
-          ? `${navBg ? "bg-red shadow-md border-none px-[5.5%]" : "shadow-md bg-white px-[5.5%]"} `
-          : "px-[5%] bg-transparent backdrop-blur-sm border-b border-[#37363844]"
-          }`}
-      >
-        <div className="flex h-full  items-center px-4 py-2 w-[60%]">
-          <img src={logo} className="w-40" alt="" />
-          <div className="flex space-x-10 ">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? "nav-item active" : "nav-item"
-              }
-            >
-              <a className={`text-black text-fontXsm ${isLoginPage ? "text-white" : ""}`}>Home</a>
-            </NavLink>
-            <div className="relative group">
+      <div className="hidden lg:block ">
+        <div
+          className={`border-b h-24 flex w-full fixed z-50 transition-all duration-500 ${scrolled
+            ? `${navBg ? "bg-red shadow-md border-none px-[5.5%]" : "shadow-md bg-white px-[5.5%]"} `
+            : "px-[5%] bg-transparent backdrop-blur-sm border-b border-[#37363844]"
+            }`}
+        >
+          <div className="flex h-full  items-center px-4 py-2 w-[60%]">
+            <img src={logo} className="w-40" alt="" />
+            <div className="flex space-x-10 ">
               <NavLink
-                to="/allShoes"
+                to="/"
                 className={({ isActive }) =>
-                  `${isActive ? "nav-item active" : "nav-item"} ${isLoginPage ? "text-white" : ""}`
+                  isActive ? "nav-item active" : "nav-item"
                 }
               >
-                Shop <GoChevronDown />
+                <a className={`text-black text-fontXsm ${isLoginPage ? "text-white" : ""}`}>Home</a>
               </NavLink>
-              {/* Submenu */}
-              <div className="submenu">
+              <div className="relative group">
                 <NavLink
-                  to="/shop/formal"
+                  to="/allShoes"
                   className={({ isActive }) =>
-                    isActive
-                      ? "text-red submenu-item"
-                      : "text-black submenu-item"
+                    `${isActive ? "nav-item active" : "nav-item"} ${isLoginPage ? "text-white" : ""}`
                   }
                 >
-                  Men Formal
+                  Shop <GoChevronDown />
                 </NavLink>
-                <NavLink
-                  to="/shop/sports"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-red submenu-item"
-                      : "text-black submenu-item"
-                  }
-                >
-                  Men Sports
-                </NavLink>
-                <NavLink
-                  to="/shop/sneakers"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-red submenu-item"
-                      : "text-black submenu-item"
-                  }
-                >
-                  Men Sneakers
+                {/* Submenu */}
+                <div className="submenu">
+                  <NavLink
+                    to="/shop/formal"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-red submenu-item"
+                        : "text-black submenu-item"
+                    }
+                  >
+                    Men Formal
+                  </NavLink>
+                  <NavLink
+                    to="/shop/sports"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-red submenu-item"
+                        : "text-black submenu-item"
+                    }
+                  >
+                    Men Sports
+                  </NavLink>
+                  <NavLink
+                    to="/shop/sneakers"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-red submenu-item"
+                        : "text-black submenu-item"
+                    }
+                  >
+                    Men Sneakers
 
-                </NavLink>
+                  </NavLink>
+                </div>
               </div>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  isActive ? "nav-item active" : "nav-item"
+                }
+              >
+                <a className={`text-black text-fontXsm ${isLoginPage ? "text-white" : ""}`}>About</a>
+              </NavLink>
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  isActive ? "nav-item active" : "nav-item"
+                }
+              >
+                <a className={`text-black text-fontXsm ${isLoginPage ? "text-white" : ""}`}>Contact</a>
+              </NavLink>
             </div>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                isActive ? "nav-item active" : "nav-item"
-              }
-            >
-              <a className={`text-black text-fontXsm ${isLoginPage ? "text-white" : ""}`}>About</a>
-            </NavLink>
-            <NavLink
-              to="/contact"
-              className={({ isActive }) =>
-                isActive ? "nav-item active" : "nav-item"
-              }
-            >
-              <a className={`text-black text-fontXsm ${isLoginPage ? "text-white" : ""}`}>Contact</a>
-            </NavLink>
           </div>
-        </div>
-        <div className=" w-[40%] gap-10 h-full flex items-center justify-end">
-          <div className="mt-2">
-            <SearchNavbar />
-          </div>
+          <div className=" w-[40%] gap-10 h-full flex items-center justify-end">
+            <div className="mt-2">
+              <SearchNavbar />
+            </div>
 
-          {/* search icon end*/}
-          <NavLink to='/wishlist'>
-            <div>
+            {/* search icon end*/}
+            <NavLink to='/wishlist'>
+              <div>
+                <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
+                  {wishlist.length}
+                </span>
+                <CiHeart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
+              </div>
+            </NavLink>
+
+            <NavLink to="/cart"><div>
               <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
-                {wishlist.length}
+                {cart}
               </span>
-              <CiHeart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
+              <CiShoppingCart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
             </div>
-          </NavLink>
+            </NavLink>
 
-          <NavLink to="/cart"><div>
-            <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
-              {cart}
-            </span>
-            <CiShoppingCart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
-          </div>
-          </NavLink>
+            {user !== null && <div className="relative group">
 
-          {user !== null && <div className="relative group">
-             
-               <CiUser className={`text-black text-fontXsm cursor-pointer text-3xl ${isLoginPage ? "text-white" : ""}`} />
-        
+              <CiUser className={`text-black text-fontXsm cursor-pointer text-3xl ${isLoginPage ? "text-white" : ""}`} />
+
               {/* Submenu */}
               <div className="submenu-user">
                 <NavLink
@@ -225,19 +234,20 @@ export default function HomeNavbar() {
                   <p className="flex justify-center items-center gap-2">settings<IoSettingsOutline /></p>
 
                 </NavLink>
-                  <button onClick={handleLogout} className="flex justify-center items-center gap-2 bg-rose-100 rounded-md">
+                <button onClick={handleLogout} className="flex justify-center items-center gap-2 bg-rose-100 rounded-md">
                   Log-out <IoIosLogOut />
 
-            </button>
+                </button>
               </div>
             </div>}
 
-          {user === null &&<NavLink to="/login"><p className={`text-black text-fontXsm  ${isLoginPage ? "text-white" : ""}`}>Login</p></NavLink>}
-          {user === null &&<NavLink to="/signUp"><p className={`text-black text-fontXsm w-16 ${isLoginPage ? "text-white" : ""}`}>Sign up</p></NavLink>}
+            {user === null && <NavLink to="/login"><p className={`text-black text-fontXsm  ${isLoginPage ? "text-white" : ""}`}>Login</p></NavLink>}
+            {user === null && <NavLink to="/signUp"><p className={`text-black text-fontXsm w-16 ${isLoginPage ? "text-white" : ""}`}>Sign up</p></NavLink>}
 
-          <CiMenuFries onClick={toggleSideMenu} className={`text-black text-fontXsm text-3xl cursor-pointer ${isLoginPage ? "text-white" : ""}`} />
+            <CiMenuFries onClick={toggleSideMenu} className={`text-black text-fontXsm text-3xl cursor-pointer ${isLoginPage ? "text-white" : ""}`} />
+          </div>
+
         </div>
-
       </div>
       <div
         className={`fixed top-0 right-0 h-[100vh] border-l border-[#696969] w-[85%] md:w-[500px] bg-white transition-transform duration-500 ease-in-out transform ${isSideMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
@@ -307,8 +317,126 @@ export default function HomeNavbar() {
         </div>
         {/* side menu end  */}
       </div>
+{/* mobile view navbar */}
+<div
+      className={`border-b h-16 block lg:hidden w-full fixed z-50 transition-all duration-500 ${
+        scrolled
+          ? `${navBg ? "bg-red shadow-md border-none px-[5.5%]" : "shadow-md bg-white"}`
+          : "px-[2px] bg-transparent backdrop-blur-sm border-b border-[#37363844]"
+      }`}
+    >
+      <div className="h-full justify-between flex items-center px-2">
+        <div className="flex items-center justify-between w-[57%]">
+          <div className="relative">
+            {/* Main Menu Icon */}
+            <div className="nav-items ml-3">
+              <p
+                className="text-2xl flex items-center cursor-pointer w-14"
+                onClick={() => setMenuOpen(!menuOpen)} // Toggle menu visibility
+              >
+                <RiMenu2Fill />
+              </p>
+            </div>
 
+            {/* Main Menu */}
+            <div
+              className={`hamburger-submenu px-4 py-2 w-[200px] gap-5 absolute top-full left-0 bg-white shadow-md transition-all duration-300 ${
+                menuOpen ? "block" : "hidden"
+              }`}
+            >
+              <div className="flex flex-col gap-3">
+                <a href="#" className="w-full">
+                  <div className="rounded-md w-full text-start px-2 hover:text-[#000000] hover:bg-[#b051514f] transition-all duration-300">
+                    Home
+                  </div>
+                </a>
 
+                {/* Country with Submenu */}
+                <div className="w-full">
+                  <div
+                    className="rounded-md w-full text-start px-2 flex items-center justify-between hover:text-[#000000] hover:bg-[#b051514f] transition-all duration-300 cursor-pointer"
+                    onClick={() => setCountryOpen(!countryOpen)}
+                  >
+                    Shop <FaCaretDown />
+                  </div>
+
+                  {/* Submenu for country */}
+                  <div
+                    className={`overflow-hidden transition-all duration-500 bg-[#71252514] ${
+                      countryOpen ? "max-h-[200px]" : "max-h-0"
+                    }`}
+                  >
+                    <a href="" className="w-1/3">
+                      <div className="submenu-item rounded-md">Formal</div>
+                    </a>
+                    <a href="" className="w-1/3">
+                      <div className="submenu-item rounded-md">Sports</div>
+                    </a>
+                    <a href="" className="w-1/3">
+                      <div className="submenu-item rounded-md">Sneakers</div>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Other Menu Items */}
+                <a href="#" className="w-full">
+                  <div className="rounded-md w-full text-start px-2 hover:text-[#000000] hover:bg-[#b051514f] transition-all duration-300">
+                    Contact
+                  </div>
+                </a>
+                <a href="#" className="w-full">
+                  <div className="rounded-md w-full text-start px-2 hover:text-[#000000] hover:bg-[#b051514f] transition-all duration-300">
+                    About us
+                  </div>
+                </a>
+
+                {user ? (
+                  <>
+                    <a href="#" className="w-full">
+                      <div className="rounded-md w-full text-start px-2 hover:text-[#000000] hover:bg-[#b051514f] transition-all duration-300">
+                        My Profile
+                      </div>
+                    </a>
+                    <a href="#" className="w-full">
+                      <div className="rounded-md w-full text-start px-2 hover:text-[#000000] hover:bg-[#b051514f] transition-all duration-300">
+                        Settings
+                      </div>
+                    </a>
+                    <a href="#" className="w-full">
+                      <div className="rounded-md w-full text-start px-2 py-[2px] bg-red-200 hover:text-[#000000] hover:bg-[#b051514f] transition-all duration-300">
+                        Logout
+                      </div>
+                    </a>
+                  </>
+                ) : (
+                  <a href="#" className="w-full">
+                    <div className="rounded-md w-full text-start px-2 hover:text-[#000000] hover:bg-[#b051514f] transition-all duration-300">
+                      Sign up
+                    </div>
+                  </a>
+                )}
+              </div>
+            </div>
+            {/* Main Menu end */}
+          </div>
+
+          <img className="w-20 absolute ml-[35%]" src={logo} alt="Logo" />
+        </div>
+
+        <div className="flex gap-3 justify-end items-center">
+          {user ? (
+            <CiUser className="text-titleSm" />
+          ) : (
+            <a href="#">
+              <button className="w-16 border py-1 rounded-lg hover:bg-[#3e8d61c4] transition-all duration-300 hover:border-none">
+                Login
+              </button>
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+    
 
     </section>
   );

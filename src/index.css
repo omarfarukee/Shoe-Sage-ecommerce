@@ -13,7 +13,6 @@
 /* common button style start*/
 .common-button {
   width: 200px;
-    /* margin: 10px; */
     padding: 10px 30px;
     text-align: center;
     text-transform: uppercase;
@@ -93,3 +92,99 @@
     font-family: "Great Vibes", cursive;
   font-weight: 400;
   }
+
+
+
+
+  /* navbar submenu  mobile view*/
+
+/* Submenu container */
+.submenu {
+  position: absolute;
+  left: 0;
+  top: 40px; /* Position submenu just below the parent */
+  flex-direction: column;
+  background-color: #d1a9a9;
+  border: 1px solid #ebebeb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0s 0.4s; /* Add delay to visibility */
+  z-index: 10;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+
+
+/* Submenu items */
+.submenu-item {
+  text-decoration: none;
+  transition: all 0.2s;
+  width: 150px;
+  padding: 5px;
+  text-align: center;
+}
+
+/* .submenu-item:hover{
+  color: #439094;
+  background: #9512124f;
+} */
+/* Show submenu on hover */
+.group:hover .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.2s ease; /* Remove delay when showing */
+}
+
+.profile-submenu {
+  position: absolute;
+  right: 0;
+  top: 40px; /* Position submenu just below the parent */
+  flex-direction: column;
+  background-color: #ebebeb;
+  border: 1px solid #ebebeb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0s 0.4s; /* Add delay to visibility */
+  z-index: 10;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+/* Show submenu on hover */
+.group:hover .profile-submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.2s ease; /* Remove delay when showing */
+}
+
+.hamburger-submenu {
+  position: absolute;
+  left: 0;
+  top: 40px; /* Position submenu just below the parent */
+  flex-direction: column;
+  background-color: #ebebeb;
+  border: 1px solid #ebebeb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0s 0.4s; /* Add delay to visibility */
+  z-index: 10;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+/* Show submenu on hover */
+.group:hover .hamburger-submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.2s ease; /* Remove delay when showing */
+}

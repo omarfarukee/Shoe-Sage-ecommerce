@@ -50,7 +50,7 @@ export default function HomeTrendyProduct() {
     <div>
       <div className="flex justify-center mb-5">
         <div
-          className="text-titleMd uppercase"
+          className="text-titleMd uppercase text-center"
           data-aos="fade-down"
           data-aos-duration="3000"
         >

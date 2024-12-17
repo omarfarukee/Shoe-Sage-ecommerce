@@ -24,19 +24,19 @@ export default function HomeTopBanner() {
 
   return (
     <div className="bg-[#f5e6e0] w-full min-h-[100vh] relative overflow-hidden">
-      <img className="h-full absolute" src={bannerBg} alt="" />
+      <img className="h-full absolute object-cover" src={bannerBg} alt="" />
 
       {/* Slider one start */}
-      <div className={`pt-[23vh] relative flex justify-center ${activeSlider === 1 ? 'block' : 'hidden'}`}>
-        <div className="h-[500px] w-[50%] flex flex-col justify-center">
+      <div className={`pt-24 lg:pt-[23vh] relative flex lg:flex-row flex-col-reverse items-center justify-center ${activeSlider === 1 ? 'block' : 'hidden'}`}>
+        <div className="lg:h-[500px] lg:w-[50%] flex flex-col justify-center items-center lg:items-start px-3 lg:px-0">
           <div className="flex items-center gap-5 animate__animated animate__fadeInUp overflow-hidden">
             <div className="h-[2px] w-14 bg-red rounded-md"></div>
             <div className="text-red ">Summer 2024</div>
           </div>
           <div className="overflow-hidden">
-            <div className="text-titleXxl animate__animated animate__fadeInUp leading-[60px]">Hello New Season New Collection</div>
+            <div className="lg:text-titleXxl animate__animated animate__fadeInUp leading-[60px]">Hello New Season New Collection</div>
           </div>
-          <div className="overflow-hidden mt-5">
+          <div className="overflow-hidden lg:mt-5 text-center">
             <p className="text-titleXsm uppercase animate__animated animate__fadeInUp">Limited time offer - up to 60% off & free Shipping</p>
           </div>
           <div className="overflow-hidden mt-6">
@@ -47,7 +47,7 @@ export default function HomeTopBanner() {
         </div>
         <div className="">
           <div className="animate__animated animate__fadeInUp">
-            <img className="w-[450px] img-wave" src={shoe1} alt="" />
+            <img className="lg:w-[450px] w-[250px] img-wave" src={shoe1} alt="" />
             {/* <img className="absolute bottom-[10%] left-[100%]" src={blob1} alt="" /> */}
           </div>
         </div>
@@ -55,16 +55,16 @@ export default function HomeTopBanner() {
       {/* Slider one end */}
 
       {/* Slider two start */}
-      <div className={`pt-[23vh] relative flex justify-center ${activeSlider === 2 ? 'block' : 'hidden'}`}>
-        <div className="h-[500px] w-[50%] flex flex-col justify-center">
+      <div className={`pt-24 lg:pt-[23vh]  relative flex lg:flex-row flex-col-reverse items-center justify-center ${activeSlider === 2 ? 'block' : 'hidden'}`}>
+        <div className="lg:h-[500px] lg:w-[50%] flex flex-col justify-center items-center lg:items-start px-3 lg:px-0">
           <div className="flex items-center gap-5 animate__animated animate__fadeInUp overflow-hidden">
             <div className="h-[2px] w-14 bg-red rounded-md"></div>
             <div className="text-red ">Summer 2024</div>
           </div>
           <div className="overflow-hidden">
-            <div className="text-titleXxl animate__animated animate__fadeInUp leading-[60px]">Good Collection this winter</div>
+            <div className="lg:text-titleXxl animate__animated animate__fadeInUp leading-[60px]">Good Collection this winter</div>
           </div>
-          <div className="overflow-hidden mt-5">
+          <div className="overflow-hidden lg:mt-5 text-center">
             <p className="text-titleXsm uppercase animate__animated animate__fadeInUp">Limited time offer - up to 60% off & free Shipping</p>
           </div>
           <div className="overflow-hidden mt-6">
@@ -75,27 +75,27 @@ export default function HomeTopBanner() {
         </div>
         <div className="">
           <div className="animate__animated animate__fadeInUp">
-            <img className="w-[500px] img-wave" src={shoe2} alt="" />
-            {/* <img className="absolute bottom-[2%] left-[95%]" src={blob1} alt="" /> */}
+            <img className="lg:w-[450px] w-[250px] img-wave" src={shoe2} alt="" />
+            {/* <img className="absolute bottom-[10%] left-[100%]" src={blob1} alt="" /> */}
           </div>
         </div>
       </div>
       {/* Slider two end */}
 
       {/* Slider three start */}
-      <div className={`pt-[23vh] relative flex justify-center ${activeSlider === 3 ? 'block' : 'hidden'}`}>
-        <div className="h-[500px] w-[50%] flex flex-col justify-center">
+      <div className={`pt-24 lg:pt-[23vh] relative flex lg:flex-row flex-col-reverse items-center justify-center ${activeSlider === 3 ? 'block' : 'hidden'}`}>
+        <div className="lg:h-[500px] lg:w-[50%] flex flex-col justify-center items-center lg:items-start px-3 lg:px-0">
           <div className="flex items-center gap-5 animate__animated animate__fadeInUp overflow-hidden">
             <div className="h-[2px] w-14 bg-red rounded-md"></div>
             <div className="text-red ">Summer 2024</div>
           </div>
           <div className="overflow-hidden">
-            <div className="text-titleXxl animate__animated animate__fadeInUp leading-[60px]">Leet&lsquo;s Get your Favorite</div>
+            <div className="lg:text-titleXxl animate__animated animate__fadeInUp leading-[60px]">Leet‘s Get your Favorite</div>
           </div>
-          <div className="overflow-hidden mt-5">
+          <div className="overflow-hidden lg:mt-5 text-center">
             <p className="text-titleXsm uppercase animate__animated animate__fadeInUp">Limited time offer - up to 60% off & free Shipping</p>
           </div>
-          <div className="overflow-hidden mt-6 ">
+          <div className="overflow-hidden mt-6">
             <button className="common-button uppercase animate__animated animate__fadeInUp" role="button">
               Discover More &gt;
             </button>
@@ -103,15 +103,16 @@ export default function HomeTopBanner() {
         </div>
         <div className="">
           <div className="animate__animated animate__fadeInUp">
-            <img className="w-[500px] img-wave" src={shoe3} alt="" />
-            {/* <img className="absolute bottom-[10%] left-[95%]" src={blob2} alt="" /> */}
+            <img className="lg:w-[450px] w-[250px] img-wave" src={shoe3} alt="" />
+            {/* <img className="absolute bottom-[10%] left-[100%]" src={blob1} alt="" /> */}
           </div>
         </div>
       </div>
       {/* Slider three end */}
 
       {/* Button for slider control start */}
-      <div className="flex items-center gap-2 absolute bottom-10 left-[8%] text-3xl">
+      <div className="flex justify-center">
+        <div className="flex items-center gap-2 absolute bottom-10 lg:left-[8%] text-3xl">
         <button
           className={`${activeSlider === 1 ? 'text-red' : 'text-black'}`}
           onClick={() => setActiveSlider(1)}
@@ -133,6 +134,8 @@ export default function HomeTopBanner() {
           03
         </button>
       </div>
+      </div>
+      
       {/* Button for slider control end */}
     </div>
   );
