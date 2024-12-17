@@ -168,8 +168,6 @@ const Cart = () => {
                             <p className="uppercase font-bold flex justify-between mt-5">
                                 Total: {Total === 0 ? "0" : <span>{grandTotal} $</span>}
                             </p>
-
-
                             <NavLink to="/checkout">
                                 <button className="border bg-red mt-10 h-16 uppercase  text-white rounded-lg w-[300px] lg:ml-7">
                                     Proceed to check out
