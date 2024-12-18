@@ -50,7 +50,7 @@ const SignUp = () => {
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <form
         onSubmit={handleSubmit}
-        className="mt-20 animate__animated animate__backInUp bg-transparent backdrop-blur-md border p-6 rounded-lg shadow-2xl w-[400px] border-[#180c003b] z-10 relative"
+        className="mt-20 animate__animated animate__backInUp mx-3 lg:mx-0 bg-transparent backdrop-blur-md border p-6 rounded-lg shadow-2xl w-[400px] border-[#180c003b] z-10 relative"
       >
         <div className="flex justify-center text-white">
           <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>

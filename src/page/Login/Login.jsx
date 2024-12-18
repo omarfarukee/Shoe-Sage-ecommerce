@@ -37,7 +37,7 @@ const Login = () => {
             <div className="absolute inset-0 bg-black opacity-50"></div>
             <form
                 onSubmit={handleSubmit}
-                className="animate__animated animate__backInUp bg-transparent backdrop-blur-md  p-6 rounded-lg shadow-2xl w-[400px] h-[400px] z-10 relative border border-[#180c003b]"
+                className="animate__animated animate__backInUp bg-transparent mx-3 lg:mx-0 backdrop-blur-md  p-6 rounded-lg shadow-2xl w-[400px] h-[400px] z-10 relative border border-[#180c003b]"
             >
                 <div className="flex justify-center text-white">
                     <h2 className="text-2xl font-semibold mb-4">Login</h2>

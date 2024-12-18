@@ -134,19 +134,19 @@ export default function Sneakers() {
           }}
         >
           <div className="absolute h-[65vh] inset-0 bg-black opacity-50"></div>
-          <div className="relative z-10 formal-collection-text text-[12em] text-red">
+          <div className="relative z-10 formal-collection-text text-titleXl  lg:text-[12em] text-red">
             <h1>Mens Sneakers</h1>
           </div>
         </div>
   
         {/* Shoe Items Section */}
         <div
-          className="flex  justify-center  mb-20"
+          className="flex  lg:flex-row flex-col items-center justify-center mb-20"
           data-aos="fade-up"
           data-aos-duration="3000"
         >
           {/* filter bar with brand*/}
-          <div className="w-[250px] h-[100vh]  pt-2 sticky">
+          <div className="w-[250px] lg:h-[100vh]  pt-2 sticky">
             <div className="bg-[#f7f7f7] rounded mx-3 h-10 flex gap-3 text-titleXsm px-3 items-center">
               <IoIosArrowDown />
               <p>Brands</p>
@@ -197,11 +197,11 @@ export default function Sneakers() {
           </div>
           {/* filter bar brand end*/}
   
-          <div className="w-[1200px]">
+          <div className="lg:w-[1200px]">
             <p className="text-titleMd ml-5 mt-5 mb-5">Sneakers</p>
             <div className="w-full h-16 bg-[#f7f7f7] items-center flex justify-between  px-10 mb-3 mx-3">
   
-              <p className=" flex items-center gap-5">View as: <AiOutlineTable className="text-titleSm" />
+              <p className=" flex items-center lg:gap-5 gap-2">View as: <AiOutlineTable className="lg:text-titleSm" />
               </p>
               <select className="select max-w-xs border border-[#0000002f]">
                 <option disabled selected>Featured</option>

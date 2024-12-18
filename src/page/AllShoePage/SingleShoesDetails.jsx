@@ -163,10 +163,10 @@ export default function SingleShoesDetails() {
   return (
     <div>
       <div className="flex justify-center">
-        <div className="pt-36 flex  w-[1200px] justify-between">
-          <div className="w-[600px] h-[500px]  flex justify-center gap-10 items-center">
+        <div className="pt-36 flex lg:flex-row flex-col w-[1200px] justify-between">
+          <div className="lg:w-[600px] lg:h-[500px]  flex lg:flex-row flex-col justify-center gap-10 items-center">
             {/* Thumbnails */}
-            <div className="flex flex-col gap-3">
+            <div className="flex lg:flex-col  gap-3">
               {[shoe.img_1, shoe.img_2, shoe.img_3, shoe.img_4]?.map((img, index) => (
                 <img
                   key={index}
@@ -181,7 +181,7 @@ export default function SingleShoesDetails() {
 
             {/* Big Image with Zoom Effect */}
             <div
-              className="relative w-[400px] h-[400px] overflow-hidden cursor-zoom-in"
+              className="relative lg:w-[400px] w-[300px] h-[300px] lg:h-[400px] overflow-hidden cursor-zoom-in"
               style={zoomStyles.backgroundImage ? zoomStyles : {}} // Apply dynamic styles
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
@@ -195,7 +195,7 @@ export default function SingleShoesDetails() {
               )}
             </div>
           </div>
-          <div className="w-[600px] h-[500px] ml-16">
+          <div className="lg:w-[600px] lg:h-[500px] lg:ml-16 ml-3">
             <NavLink to="/">Home /</NavLink>
             <NavLink to="/allShoes"> Shope</NavLink>
             <div className="mt-10">
@@ -205,7 +205,7 @@ export default function SingleShoesDetails() {
               <div>
                 <p className="mt-5 flex items-center gap-10">Select Size: <RxRulerHorizontal className="text-titleSm" />
                 </p>
-                <div className="flex gap-4">
+                <div className="flex flex-wrap lg:w-full w-[350px] gap-4">
                   {sizes?.map((size) => (
                     <button
                       key={size}
@@ -226,10 +226,10 @@ export default function SingleShoesDetails() {
                 )}
               </div>
             </div>
-            <div className="flex items-center gap-5">
+            <div className="flex lg:flex-row flex-col  items-center gap-5">
 
 
-              <div className="mb-4 mt-5 w-48">
+              <div className="mb-4 mt-5 lg:w-48">
                 <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
                   Quantity
                 </label>
@@ -279,10 +279,7 @@ export default function SingleShoesDetails() {
 
             </div>
           </div>
-
           <div>
-
-
           </div>
         </div>
 

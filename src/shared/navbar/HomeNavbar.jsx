@@ -375,9 +375,9 @@ export default function HomeNavbar() {
                   </div>
                 </a>
 
-                {/* Country with Submenu */}
+                {/*Submenu */}
                 <div className="w-full">
-                  <div
+                <div
                     className="rounded-md w-full text-start px-2 flex items-center justify-between hover:text-[#000000] hover:bg-[#b051514f] transition-all duration-300 cursor-pointer"
                     onClick={() => setNavbarOpen(!navbarOpen)}
                   >
@@ -390,6 +390,11 @@ export default function HomeNavbar() {
                       navbarOpen ? "max-h-[200px]" : "max-h-0"
                     }`}
                   >
+                    <NavLink to='/allShoes'>
+                           <div className="submenu-item rounded-md">All Collection</div>
+                    </NavLink>
+                     
+                  
                     <a href="" className="w-1/3">
                       <div className="submenu-item rounded-md">Formal</div>
                     </a>
@@ -448,11 +453,19 @@ export default function HomeNavbar() {
         </div>
 
         <div className="flex gap-3 justify-end items-center">
+        <div className="mt-2">
+              <SearchNavbar />
+            </div>
           {user ? (
-            ""
+          <div onClick={toggleSideMenu}>
+              <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
+                {cart}
+              </span>
+              <CiShoppingCart  className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
+            </div>
           ) : (
             <NavLink to="/login">
-               <button className="w-16 border py-1 rounded-lg hover:bg-[#3e8d61c4] transition-all duration-300 hover:border-none">
+               <button className="w-16 border py-1 rounded-lg hover:bg-[#8d3e3ec4] transition-all duration-300 hover:border-none">
                 Login
               </button>
             </NavLink>
@@ -460,12 +473,7 @@ export default function HomeNavbar() {
             
           )}
         </div>
-        <div onClick={toggleSideMenu}>
-              <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
-                {cart}
-              </span>
-              <CiShoppingCart  className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
-            </div>
+        
       </div>
     </div>
     
