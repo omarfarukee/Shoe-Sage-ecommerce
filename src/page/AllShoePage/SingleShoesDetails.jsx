@@ -246,7 +246,7 @@ export default function SingleShoesDetails() {
                     id="quantity"
                     value={quantity}
                     onChange={(e) => setQuantity(parseInt(e.target.value))}
-                    className="w-full ml-4 bg-transparent outline-none text-center"
+                    className="w-full lg:ml-4 bg-transparent outline-none text-center"
                     min="1"
                   />
                   <button
@@ -305,7 +305,7 @@ export default function SingleShoesDetails() {
         </div>
 
         {/* Additional Info Content */}
-        <div className="flex justify-center">
+        <div className="lg:px-0 px-3 flex justify-center">
           <div
             className={`  mb-20  w-[1000px] ${activeTab === "info" ? "block" : "hidden"
               }`}
@@ -323,7 +323,7 @@ export default function SingleShoesDetails() {
 
 
         {/* Reviews Content */}
-        <div className="flex justify-center">
+        <div className="flex lg:px-0 px-3 justify-center">
           <div
             className={` justify-center w-[1000px] mb-20 ${activeTab === "reviews" ? "block" : "hidden"
               }`}

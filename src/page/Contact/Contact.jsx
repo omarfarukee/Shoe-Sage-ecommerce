@@ -23,7 +23,7 @@ export default function Contact() {
               }}
             >
               <div className="absolute h-[65vh] inset-0 bg-black opacity-50"></div>
-              <div className="relative z-10 formal-collection-text text-[12em] text-red">
+              <div className="relative z-10 formal-collection-text text-titleXl  lg:text-[12em] text-red">
                 <h1>Contact</h1>
               </div>
             </div>
@@ -31,20 +31,23 @@ export default function Contact() {
                         <div className='pt-28 text-titleLg p-5'>
                             Message Us
                         </div>
-                        <div className='flex justify-center mt-5'>
-                        <div className='w-[700px]'>
+                        <div className='flex lg:flex-row flex-col justify-center mt-5'>
+                        <div className='lg:w-[700px]'>
                             <form>
-                                <div className='flex gap-3'>
+                                <div className='flex flex-row gap-3'>
                                     <input type="text" placeholder="First name..." className="input input-bordered w-full max-w-xs" />
                                     <input type="text" placeholder="Last name..." className="input input-bordered w-full max-w-xs " />
                                 </div>
-                                <input type="text" placeholder="Email..." className="mt-3 input input-bordered w-[650px]" />
-                                <input type="text" placeholder="Phone..." className="mt-3 input input-bordered w-[650px]" />
+                                <input type="text" placeholder="Email..." className="mt-3 input input-bordered w-[99%] lg:w-[650px]" />
+                                <input type="text" placeholder="Phone..." className="mt-3 input input-bordered w-[99%] lg:w-[650px]" />
                                 
-                                <textarea type="text" placeholder="Write message..." className="mt-3 pt-3 input input-bordered w-[650px] h-40" />
-                                <button className="border bg-red mt-5 h-12 uppercase  text-white rounded-lg w-[300px] ml-">
+                                <textarea type="text" placeholder="Write message..." className="mt-3 pt-3 input input-bordered lg:w-[650px] w-[99%] h-40" />
+                                <div className='flex justify-center'>
+                                   <button className=" bg-red mt-5 h-12 uppercase  text-white rounded-lg w-[300px] ml-">
                                     Submit
                                 </button>
+                                </div>
+                               
                             </form>
                         </div>
                         {/* cart */}

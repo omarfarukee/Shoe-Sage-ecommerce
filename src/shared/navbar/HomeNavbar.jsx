@@ -320,7 +320,7 @@ export default function HomeNavbar() {
 <div
       className={`border-b h-16 block lg:hidden w-full fixed z-50 transition-all duration-500 ${
         scrolled
-          ? `${navBg ? "bg-red shadow-md border-none px-[5.5%]" : "shadow-md bg-white"}`
+          ? `${navBg ? "bg-red shadow-md border-none lg:px-[5.5%]" : "shadow-md bg-white"}`
           : "px-[2px] bg-transparent backdrop-blur-sm border-b border-[#37363844]"
       }`}
     >

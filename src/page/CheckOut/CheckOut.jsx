@@ -11,26 +11,26 @@ const CheckOut = () => {
     }
     return (
         <div className='p-2'>
-            <div className='pt-28 text-titleLg p-5 border-b'>
+            <div className='pt-28 text-titleMd lg:text-titleLg p-5 border-b'>
                 Shipping and Checkout
             </div>
-            <div className='flex justify-center mt-5'>
-            <div className='w-[700px]'>
+            <div className='flex lg:flex-row flex-col justify-center mt-5'>
+            <div className='lg:w-[700px]'>
                 <p className='mt-3'>BILLING DETAILS</p>
                 <form>
                     <div className='flex gap-3'>
                         <input type="text" placeholder="First name..." className="input input-bordered w-full max-w-xs" />
                         <input type="text" placeholder="Last name..." className="input input-bordered w-full max-w-xs " />
                     </div>
-                    <input type="text" placeholder="Email..." className="mt-3 input input-bordered w-[650px]" />
-                    <input type="text" placeholder="Phone..." className="mt-3 input input-bordered w-[650px]" />
-                    <input type="text" placeholder="Address..." className="mt-3 input input-bordered w-[650px]" />
-                    <input type="text" placeholder="Town/city..." className="mt-3 input input-bordered w-[650px]" />
-                    <input type="text" placeholder="Order note..." className="mt-3 input input-bordered w-[650px] h-40" />
+                    <input type="text" placeholder="Email..." className="mt-3 input input-bordered w-[99%] lg:w-[650px]" />
+                    <input type="text" placeholder="Phone..." className="mt-3 input input-bordered w-[99%] lg:w-[650px]" />
+                    <input type="text" placeholder="Address..." className="mt-3 input input-bordered    w-[99%] lg:w-[650px]" />
+                    <input type="text" placeholder="Town/city..." className="mt-3 input input-bordered  w-[99%] lg:w-[650px]" />
+                    <textarea type="text" placeholder="Order note..." className="mt-3 input input-bordered w-[99%] lg:w-[650px] h-40" />
                 </form>
             </div>
             {/* cart */}
-            <div className="border h-[400px] w-[400px] p-5">
+            <div className="border h-[400px] lg:w-[400px] p-5">
                 <h1 className="uppercase text-titleSm">Cart Totals</h1>
                 <p className="uppercase border-b flex justify-between">SubTotal: <span>200 $</span></p>
 
@@ -44,7 +44,7 @@ const CheckOut = () => {
 
 
                 <div >
-                    <button className="border bg-red mt-10 h-16 uppercase  text-white rounded-lg w-[300px] ml-7">
+                    <button className="border bg-red mt-10 h-16 uppercase  text-white rounded-lg w-[300px] lg:ml-7">
                         Confirm order
                     </button>
                 </div>
