@@ -193,7 +193,6 @@ location.reload();
 
         </div>
         {/* filter bar brand end*/}
-
         <div className="lg:w-[1200px]">
           <p className="text-titleMd ml-5 mt-5 mb-5">All Collections</p>
           <div className="w-full h-16 bg-[#f7f7f7] items-center flex justify-between  px-10 mb-3 mx-3">

@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import useLoader from '../../shared/loader/Loader';
 import FinalLoader from '../../shared/loader/FinalLoader';
 import shoe from "../../assets/backgrounds/shoe3.jpeg";
-import { FaEye, FaEyeSlash, FaLock, FaUser } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaFacebook, FaLock, FaUser } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
-
+import { FcGoogle } from 'react-icons/fc';
+import logo from "../../assets/logo/logo.png";
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -35,20 +36,31 @@ const Login = () => {
             }}
         >
             <div className="absolute inset-0 bg-black opacity-50"></div>
-            <form
+            <div className='w-[70vw] flex h-[80vh] border shadow-xl border-[#0000002a]  rounded-lg mt-8 items-center bg-transparent backdrop-blur-sm'>
+                
+                <div className='w-[50%] flex flex-col items-center justify-center text-center bg-[#ffffff15] h-full rounded-tl-lg rounded-bl-lg'>
+                    <img className='ml-20 floating' src={logo} alt="" />
+                    <div className='animate__animated animate__backInDown mt-5 text-[#9494a0] w-[400px]'>
+                        <h1 className='text-titleSm'>Walk good</h1>
+                        <p className='text-titleXXsm'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum dolore quasi possimus ratione doloribus, minima error maiores sequi similique provident.</p>
+                    </div>
+                </div>
+
+                <div className='flex justify-center w-[50%]'> 
+                <form
                 onSubmit={handleSubmit}
-                className="animate__animated animate__backInUp bg-transparent mx-3 lg:mx-0 backdrop-blur-md  p-6 rounded-lg shadow-2xl w-[400px] h-[400px] z-10 relative border border-[#180c003b]"
+                className="animate__animated animate__backInUp  bg-transparent mx-3 lg:mx-0   p-6 rounded-lg  w-[400px] h-[400px] z-10 relative"
             >
                 <div className="flex justify-center text-white">
-                    <h2 className="text-2xl font-semibold mb-4">Login</h2>
+                    <h2 className="text-titleMd font-semibold mb-4 uppercase">USER-Login</h2>
                 </div>
 
                 <div className="mb-4">
                     <label htmlFor="username" className="block text-sm font-medium text-white">
-                        Username
+                        Email/Phone Number
                     </label>
-                    <div className="flex items-center border border-white rounded-md p-2">
-                        <FaUser className="text-white mr-2" />
+                    <div className="flex items-center border border-[#9494a0] rounded-md p-2">
+                        <FaUser className="text-[#9494a0] mr-2" />
                         <input
                             type="text"
                             id="username"
@@ -64,8 +76,8 @@ const Login = () => {
                     <label htmlFor="password" className="block text-sm font-medium text-white">
                         Password
                     </label>
-                    <div className="flex items-center border border-gray-300 rounded-md p-2">
-                        <FaLock className="text-white mr-2" />
+                    <div className="flex items-center border border-[#9494a0] rounded-md p-2">
+                        <FaLock className="text-[#9494a0] mr-2" />
                         <input
                             type={showPassword ? "text" : "password"}
                             id="password"
@@ -107,15 +119,34 @@ const Login = () => {
                     Login
                 </button>
 
-                <div className="mt-4 text-center">
-                    <p className="text-white">Don&apos;t have an account?</p>
+                <div className='flex items-center gap-3 justify-center mt-5'>
+                    <div className='w-[100px] h-[2px] bg-white'></div>
+                    <p className='text-white'>OR</p>
+                    <div className='w-[100px] h-[2px] bg-white'></div>
+                </div>
+
+                <div>
+                    <div className='flex items-center gap-2 justify-center mt-3 cursor-pointer'>
+                        <FcGoogle className='text-titleSm' /> <span className='text-titleXXsm text-white'>Sign up with google</span> 
+                    </div>
+                    <div className='flex items-center gap-2 justify-center mt-3 cursor-pointer'>
+                        <FaFacebook className='text-titleSm text-[#0866ff]' /> <span className='text-titleXXsm text-white'>Sign up with Facebook</span> 
+                    </div>
+                </div>
+
+                <div className="mt-4 text-center flex gap-2 justify-center">
+                    <p className="text-white text-titleXXsm">Don&apos;t have an account?</p>
                     <NavLink to="/signUp">
-                        <a href="#" className="text-white hover:underline">
+                        <a href="#" className="text-green-300 hover:underline text-titleXXsm">
                             Sign-up
                         </a>
                     </NavLink>
                 </div>
-            </form>
+                </form> 
+                </div>
+
+            </div>
+           
         </div>
     );
 };

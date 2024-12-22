@@ -106,6 +106,7 @@ export default function HomeTrendyProduct() {
               </div>
               <div>
                 <p>{shoe?.product_name}</p>
+                <p>{shoe?.price}$</p>
                 {/* Review Stars */}
                 <div className="mt-2 flex">
                   {Array.from({ length: 5 }, (_, index) =>
