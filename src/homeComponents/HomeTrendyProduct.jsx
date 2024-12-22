@@ -4,11 +4,11 @@ import { CiHeart } from 'react-icons/ci';
 import { IoMdHeart } from 'react-icons/io';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import toast from 'react-hot-toast';
+import { NavLink } from 'react-router-dom';
 
 export default function HomeTrendyProduct() {
   const [shoeData, setShoeData] = useState([]);
   const [wishlist, setWishlist] = useState([]);
-  // const [cart, setCart] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
 
@@ -137,10 +137,12 @@ export default function HomeTrendyProduct() {
             {/* Product Info */}
             <div className="mt-4">
               <p className="text-titleXXsm text-gray-500 uppercase">{shoe.category}</p>
+             <NavLink to={`/shoe/${shoe.id}`}>   
               <div className="mt-2">
                 <p>{shoe.product_name}</p>
                 <p>${shoe.price}</p>
               </div>
+              </NavLink>
 
               {/* Wishlist Icon */}
               <div>

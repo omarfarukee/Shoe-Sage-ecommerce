@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { AiFillStar, AiOutlineStar, AiOutlineTable } from "react-icons/ai";
-import { IoIosArrowDown} from "react-icons/io";
+import { IoIosArrowDown, IoMdHeart } from "react-icons/io";
 import { CiHeart } from "react-icons/ci";
 import shoe from "../../assets/backgrounds/shoe3.jpeg";
 import { NavLink } from "react-router-dom";
@@ -17,9 +17,9 @@ export default function AllShoe() {
   const itemsPerPage = 8; // Number of items per page
   const [maxPrice, setMaxPrice] = useState(30000);
   const [cartItems, setCartItems] = useState([]);
-  
+  const [wishlist, setWishlist] = useState([]);
   const { loading, online } = useLoader();
-  
+
 
 
   const handleMaxPriceChange = (event) => {
@@ -90,12 +90,12 @@ export default function AllShoe() {
     if (cartItems?.some((item) => item.id === shoe.id)) {
       toast.success('', {
         style: {
-            borderRadius: '10px',
-            background: '#4caf50',
-            color: '#fff',
-            height: "70px"
+          borderRadius: '10px',
+          background: '#4caf50',
+          color: '#fff',
+          height: "70px"
         },
-    });
+      });
       return;
     }
 
@@ -106,13 +106,31 @@ export default function AllShoe() {
 
     toast.success(`${shoe?.product_name} Added to you cart`, {
       style: {
-          borderRadius: '10px',
-          background: '#333',
-          color: '#fff',
-          height: "70px"
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+        height: "70px"
       },
-  });
+    });
   };
+
+
+  // Toggle wishlist
+  const toggleWishlist = (shoe) => {
+    let updatedWishlist;
+
+    if (wishlist.some((item) => item.id === shoe.id)) {
+      updatedWishlist = wishlist.filter((item) => item.id !== shoe.id);
+      toast.success(`${shoe.product_name} removed from your wishlist!`);
+    } else {
+      updatedWishlist = [...wishlist, shoe];
+      toast.success(`${shoe.product_name} added to your wishlist!`);
+    }
+
+    setWishlist(updatedWishlist);
+    sessionStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+  };
+
   if (loading || !online) {
     return <FinalLoader />;
   }
@@ -206,78 +224,78 @@ export default function AllShoe() {
           </div>
           {/* product show using map  */}
           <div className="flex flex-wrap gap-6 w-[100%] justify-center ">
-      {currentData?.map((shoe) => (
-        <div key={shoe.id}  className="w-[260px] transition-all duration-300 p-2 hover:shadow-lg">
-          <div className="w-full  rounded px-2 h-[280px] flex flex-col justify-center items-center transition-all group relative overflow-hidden">
-            {/* First Image */}
-            <img
-              src={shoe.img_1}
-              alt={shoe.product_name}
-              className="w-[200px] transition-opacity duration-500 opacity-100 group-hover:opacity-0 absolute"
-            />
-            {/* Second Image (on hover) */}
-            <img
-              src={shoe.img_3}
-              alt={shoe.product_name}
-              className="w-[200px] transition-opacity duration-500 opacity-0 group-hover:opacity-100"
-            />
-            {cartItems?.some((item) => item.id === shoe.id) ? (
-              <button
-                className="absolute w-[230px] shadow-lg hover:bg-gray-200 transition-all duration-500 bg-gray-100 py-2 rounded uppercase top-[280px] group-hover:top-[230px] text-titleXXsm cursor-not-allowed"
-              >
-                Already Added
-              </button>
-            ) : (
-              <button
-                onClick={(e) => {
-                  e.preventDefault(); // Prevent navigation
-                  handleAddToCart(shoe);
-                }}
-                className="absolute w-[230px] shadow-lg hover:bg-gray-200 transition-all duration-500 bg-gray-100 py-2 rounded uppercase top-[280px] group-hover:top-[230px] text-titleXXsm"
-              >
-                Add to Cart
-              </button>
-            )}
-          </div>
-          <div className="mt-4 flex items-center">
-            <p className="text-titleXXsm text-gray-500 uppercase">
-              {shoe?.category}
-            </p>
-            <div className="absolute flex ml-56">
-              { (
-                <CiHeart
-                  className="text-titleSm"
-                 
-                />
-              )}
-              
-            </div>
-          </div>
-          <div>Price: {shoe?.price} $</div>
-       <NavLink to={`/shoe/${shoe.id}`}>  
-       <div>
-            <p>{shoe?.product_name}</p>
-            {/* Review Stars */}
-            <div className="mt-2 flex">
-              {Array.from({ length: 5 }, (_, index) =>
-                index < shoe.review ? (
-                  <AiFillStar
-                    key={index}
-                    className="text-yellow-500 text-titleXXsm"
+            {currentData?.map((shoe) => (
+              <div key={shoe.id} className="w-[260px] transition-all duration-300 p-2 hover:shadow-lg">
+                <div className="w-full  rounded px-2 h-[280px] flex flex-col justify-center items-center transition-all group relative overflow-hidden">
+                  {/* First Image */}
+                  <img
+                    src={shoe.img_1}
+                    alt={shoe.product_name}
+                    className="w-[200px] transition-opacity duration-500 opacity-100 group-hover:opacity-0 absolute"
                   />
-                ) : (
-                  <AiOutlineStar
-                    key={index}
-                    className="text-gray-400 text-titleXXsm"
+                  {/* Second Image (on hover) */}
+                  <img
+                    src={shoe.img_3}
+                    alt={shoe.product_name}
+                    className="w-[200px] transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                   />
-                )
-              )}
-            </div>
+                  {cartItems?.some((item) => item.id === shoe.id) ? (
+                    <button
+                      className="absolute w-[230px] shadow-lg hover:bg-gray-200 transition-all duration-500 bg-gray-100 py-2 rounded uppercase top-[280px] group-hover:top-[230px] text-titleXXsm cursor-not-allowed"
+                    >
+                      Already Added
+                    </button>
+                  ) : (
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault(); // Prevent navigation
+                        handleAddToCart(shoe);
+                      }}
+                      className="absolute w-[230px] shadow-lg hover:bg-gray-200 transition-all duration-500 bg-gray-100 py-2 rounded uppercase top-[280px] group-hover:top-[230px] text-titleXXsm"
+                    >
+                      Add to Cart
+                    </button>
+                  )}
+                </div>
+                {/* Wishlist Icon */}
+                <div>
+                  {wishlist.some((item) => item.id === shoe.id) ? (
+                    <IoMdHeart
+                      className="text-titleSm text-red cursor-pointer"
+                      onClick={() => toggleWishlist(shoe)}
+                    />
+                  ) : (
+                    <CiHeart
+                      className="text-titleSm cursor-pointer"
+                      onClick={() => toggleWishlist(shoe)}
+                    />
+                  )}
+                </div>
+                <div>Price: {shoe?.price} $</div>
+                <NavLink to={`/shoe/${shoe.id}`}>
+                  <div>
+                    <p>{shoe?.product_name}</p>
+                    {/* Review Stars */}
+                    <div className="mt-2 flex">
+                      {Array.from({ length: 5 }, (_, index) =>
+                        index < shoe.review ? (
+                          <AiFillStar
+                            key={index}
+                            className="text-yellow-500 text-titleXXsm"
+                          />
+                        ) : (
+                          <AiOutlineStar
+                            key={index}
+                            className="text-gray-400 text-titleXXsm"
+                          />
+                        )
+                      )}
+                    </div>
+                  </div>
+                </NavLink>
+              </div>
+            ))}
           </div>
-          </NavLink> 
-        </div>
-      ))}
-    </div>
           {/* product show using map end */}
 
           {/* Pagination Section */}
