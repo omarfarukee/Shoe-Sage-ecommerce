@@ -112,7 +112,6 @@ export default function AllShoe() {
           height: "70px"
       },
   });
-location.reload();
   };
   if (loading || !online) {
     return <FinalLoader />;

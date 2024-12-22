@@ -32,9 +32,9 @@ export default function Wishlist() {
       <div className="text-titleLg border-b mb-5 px-10"><p>Wishlist</p></div>
 
       {/* Wishlist Items */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-10 py-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-10 py-5">
         {wishlist.length === 0 ? (
-         <div className=''><p className="text-center text-gray-500">Your wishlist is empty!</p></div> 
+         <div className=''><p className="text-center text-gray-500 mb-60">Your wishlist is empty!</p></div> 
         ) : (
           wishlist?.map((item) => (
             <div

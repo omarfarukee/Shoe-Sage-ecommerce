@@ -33,10 +33,22 @@ export default function HomeNavbar() {
   useEffect(() => {
     const interval = setInterval(() => {
       fetchWishlist();
-    }, 1000); // Poll every 1 second
+    }, 100); // Poll every 1 second
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
   }, []);
+
+  const fetchCart = () => {
+    const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
+    setCartItems(storedCart)
+  }
+
+  useEffect(() => {
+    const cartInterval = setInterval(() => {
+      fetchCart()
+    }, 100);
+    return () => clearInterval(cartInterval)
+  })
 
   useEffect(() => {
     // Retrieve cart data from sessionStorage
@@ -84,8 +96,6 @@ export default function HomeNavbar() {
       },
     });
 
-    location.reload();
-
   };
 
   // Calculate the grand total
@@ -94,7 +104,7 @@ export default function HomeNavbar() {
 
   // get user data
   const user = JSON.parse(sessionStorage.getItem('user'));
-  console.log(user);
+  // console.log(user);
 
 
   const navigate = useNavigate();
@@ -210,7 +220,7 @@ export default function HomeNavbar() {
 
             <NavLink to="/cart"><div>
               <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
-                {cart}
+                {cartItems.length}
               </span>
               <CiShoppingCart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
             </div>
@@ -364,7 +374,7 @@ export default function HomeNavbar() {
             </NavLink>
             <NavLink to="/cart"><div>
               <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
-                {cart}
+                {cartItems.length}
               </span>
               <CiShoppingCart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
             </div>
