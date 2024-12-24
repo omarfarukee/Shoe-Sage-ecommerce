@@ -5,318 +5,329 @@ import Footer from '../../shared/Footer/Footer';
 import { AiFillStar, AiOutlineStar, AiOutlineTable } from 'react-icons/ai';
 import { NavLink } from 'react-router-dom';
 import { CiHeart } from 'react-icons/ci';
-import { IoIosArrowDown } from 'react-icons/io';
+import { IoIosArrowDown, IoMdHeart } from 'react-icons/io';
 import FinalLoader from '../../shared/loader/FinalLoader';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import useLoader from '../../shared/loader/Loader';
 export default function Sports(){
-    const [shoeData, setShoeData] = useState([]); // Store shoe data
-    const [currentPage, setCurrentPage] = useState(1); // Current page
-    const itemsPerPage = 8; // Number of items per page
-    const [maxPrice, setMaxPrice] = useState(30000);
-    const [cartItems, setCartItems] = useState([]);
-  
-    const { loading, online } = useLoader();
-  
-  
-  
-    const handleMaxPriceChange = (event) => {
-      setMaxPrice(parseInt(event.target.value));
-    };
-    // Fetch data with Axios
-    useEffect(() => {
-      axios
-        .get("/Shoe.json") // Replace with your actual JSON file path
-        .then((response) => {
-          setShoeData(response.data); // Set shoe data in state
-        })
-        .catch((error) => {
-          console.error("There was an error fetching the shoe data!", error);
-        });
-    }, []);
-  
-  // Filter data to include only "formal" shoes
-  const formalShoes = shoeData.filter((shoe) => shoe.category === "sports");
-  
-  // Calculate total pages based on filtered data
-  const totalPages = Math.ceil(formalShoes.length / itemsPerPage);
-  
-  // Get data for the current page from filtered data
-  const currentData = formalShoes.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-  
-  
-    // Scroll to top function
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth", // Smooth scrolling effect
-      });
-    };
-  
-    // Handle page navigation
-    const handleNextPage = () => {
-      if (currentPage < totalPages) {
-        setCurrentPage((prev) => prev + 1);
-        scrollToTop();
-      }
-    };
-  
-    const handlePreviousPage = () => {
-      if (currentPage > 1) {
-        setCurrentPage((prev) => prev - 1);
-        scrollToTop();
-      }
-    };
-  
-  
-    // Load cart items from sessionStorage on component mount
-    const fetchCart = () => {
-      const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
-      setCartItems(storedCart);
-    };
-    // Polling for updated wishlist every second
-    useEffect(() => {
-      const interval = setInterval(() => {
-        fetchCart();
-      }, 1000); // Poll every 1 second
-  
-      return () => clearInterval(interval); // Cleanup interval on component unmount
-    }, []);
-  
-  
-    const handleAddToCart = (shoe) => {
-      // Check if the item is already in the cart
-      if (cartItems?.some((item) => item.id === shoe.id)) {
-        toast.success('', {
-          style: {
-            borderRadius: '10px',
-            background: '#4caf50',
-            color: '#fff',
-            height: "70px"
-          },
-        });
-        return;
-      }
-  
-      // Add the new item to the cart
-      const updatedCart = [...cartItems, shoe];
-      setCartItems(updatedCart);
-      sessionStorage.setItem('cart', JSON.stringify(updatedCart));
-  
-      toast.success(`${shoe?.product_name} Added to you cart`, {
-        style: {
-          borderRadius: '10px',
-          background: '#333',
-          color: '#fff',
-          height: "70px"
-        },
-      });
-      location.reload();
-    };
-    if (loading || !online) {
-      return <FinalLoader />;
-    }
-  
-    return (
-      <div className="overflow-hidden">
-        {/* Background Section */}
-        <div
-          className="overflow-hidden h-[65vh] w-screen flex justify-center items-center"
-          style={{
-            backgroundImage: `url(${shoe})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          <div className="absolute h-[65vh] inset-0 bg-black opacity-50"></div>
-          <div className="relative z-10 formal-collection-text text-titleXl  lg:text-[12em] text-red">
-            <h1>Mens Sports</h1>
-          </div>
-        </div>
-  
-        {/* Shoe Items Section */}
-        <div
-          className="flex lg:flex-row flex-col items-center justify-center  mb-20"
-          data-aos="fade-up"
-          data-aos-duration="3000"
-        >
-          {/* filter bar with brand*/}
-          <div className="w-[250px] lg:h-[100vh]   pt-2 sticky">
-            <div className="bg-[#f7f7f7] rounded mx-3 h-10 flex gap-3 text-titleXsm px-3 items-center">
-              <IoIosArrowDown />
-              <p>Brands</p>
-            </div>
-            <div className="px-5 mt-5">
-              <div className="flex items-center gap-2">
-                <input className="" type="checkbox" />
-                <p>Adidas</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <input className="" type="checkbox" />
-                <p>Puma</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <input className="" type="checkbox" />
-                <p>Nike</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <input className="" type="checkbox" />
-                <p>Bata</p>
-              </div>
-  
-            </div>
-            {/* price range filter */}
-            <div className="mb-4 px-5 mt-8">
-              <label htmlFor="price-range" className="block text-sm font-medium text-gray-700">
-                Price Range
-              </label>
-              <div className="flex items-center 
-   border border-gray-300 rounded-md p-2">
-                <input
-                  type="range"
-                  id="max-price"
-                  min="20"
-                  max="30000"
-                  value={maxPrice}
-                  onChange={handleMaxPriceChange}
-                  className="w-full bg-transparent outline-none"
-  
-                />
-              </div>
-              <div className="flex justify-between mt-2">
-                <span className="text-sm text-gray-700 w-20">Min Price: $20</span>
-                <span className="text-sm text-gray-700 w-20">Max Price: ${maxPrice}</span>
-              </div>
-            </div>
-  
-          </div>
-          {/* filter bar brand end*/}
-  
-          <div className="lg:w-[1200px]">
-            <p className="text-titleMd ml-5 mt-5 mb-5">Sports</p>
-            <div className="w-full h-16 bg-[#f7f7f7] items-center flex justify-between  px-10 mb-3 mx-3">
-  
-              <p className=" flex items-center lg:gap-5 gap-2">View as: <AiOutlineTable className="lg:text-titleSm" />
-              </p>
-              <select className="select max-w-xs border border-[#0000002f]">
-                <option disabled selected>Featured</option>
-                <option>Price Low to heigh</option>
-                <option>Price heigh to low</option>
-              </select>
-            </div>
-            {/* product show using map  */}
-            <div className="flex flex-wrap gap-6 w-[100%] justify-center ">
-              {currentData
-                ?.filter((shoe) => shoe?.category === "sports") // Filter only 'formal' shoes
-                .map((shoe) => (
-                  <div
-                    key={shoe.id}
-                    className="w-[260px] transition-all duration-300 p-2 hover:shadow-lg"
-                  >
-                    <div className="w-full rounded px-2 h-[280px] flex flex-col justify-center items-center transition-all group relative overflow-hidden">
-                      {/* First Image */}
-                      <img
-                        src={shoe.img_1}
-                        alt={shoe.product_name}
-                        className="w-[200px] transition-opacity duration-500 opacity-100 group-hover:opacity-0 absolute"
-                      />
-                      {/* Second Image (on hover) */}
-                      <img
-                        src={shoe.img_3}
-                        alt={shoe.product_name}
-                        className="w-[200px] transition-opacity duration-500 opacity-0 group-hover:opacity-100"
-                      />
-                      {cartItems?.some((item) => item.id === shoe.id) ? (
-                        <button
-                          className="absolute w-[230px] shadow-lg hover:bg-gray-200 transition-all duration-500 bg-gray-100 py-2 rounded uppercase top-[280px] group-hover:top-[230px] text-titleXXsm cursor-not-allowed"
-                        >
-                          Already Added
-                        </button>
-                      ) : (
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault(); // Prevent navigation
-                            handleAddToCart(shoe);
-                          }}
-                          className="absolute w-[230px] shadow-lg hover:bg-gray-200 transition-all duration-500 bg-gray-100 py-2 rounded uppercase top-[280px] group-hover:top-[230px] text-titleXXsm"
-                        >
-                          Add to Cart
-                        </button>
-                      )}
-                    </div>
-                    <div className="mt-4 flex items-center">
-                      <p className="text-titleXXsm text-gray-500 uppercase">
-                        {shoe?.category}
-                      </p>
-                      <div className="absolute flex ml-56">
-                        {<CiHeart className="text-titleSm" />}
-                      </div>
-                    </div>
-                    <div>Price: {shoe?.price} $</div>
-                    <NavLink to={`/shoe/${shoe.id}`}>
-                      <div>
-                        <p>{shoe?.product_name}</p>
-                        {/* Review Stars */}
-                        <div className="mt-2 flex">
-                          {Array.from({ length: 5 }, (_, index) =>
-                            index < shoe.review ? (
-                              <AiFillStar
-                                key={index}
-                                className="text-yellow-500 text-titleXXsm"
-                              />
-                            ) : (
-                              <AiOutlineStar
-                                key={index}
-                                className="text-gray-400 text-titleXXsm"
-                              />
-                            )
-                          )}
-                        </div>
-                      </div>
-                    </NavLink>
-                  </div>
-                ))}
-  
-            </div>
-            {/* product show using map end */}
-  
-            {/* Pagination Section */}
-            <div className="flex justify-center items-center gap-4 mt-4 mb-8">
-              <button
-                onClick={handlePreviousPage}
-                disabled={currentPage === 1}
-                className={`px-4 py-2 rounded ${currentPage === 1
-                  ? "bg-gray-300 cursor-not-allowed"
-                  : "bg-gray-100 hover:bg-gray-200"
-                  }`}
-              >
-                {"<"}
-              </button>
-              <span className="text-lg font-medium">
-                Page {currentPage} of {totalPages}
-              </span>
-              <button
-                onClick={handleNextPage}
-                disabled={currentPage === totalPages}
-                className={`px-4 py-2 rounded ${currentPage === totalPages
-                  ? "bg-gray-300 cursor-not-allowed"
-                  : "bg-gray-100 hover:bg-gray-200"
-                  }`}
-              >
-                {">"}
-              </button>
-            </div>
-          </div>
-  
-        </div>
-  
-        <Footer />
-      </div>
+
+  const [shoeData, setShoeData] = useState([]);
+  const [filteredShoeData, setFilteredShoeData] = useState([]); // Filtered data state
+  const [wishlist, setWishlist] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1); // Current page
+  const itemsPerPage = 8; // Number of items per page
+  const [maxPrice, setMaxPrice] = useState(200);
+  const [selectedBrands, setSelectedBrands] = useState([]); // Selected brands
+  const [sortOrder, setSortOrder] = useState("featured"); // Sort order
+  const { loading, online } = useLoader();
+
+  const handleMaxPriceChange = (event) => {
+    setMaxPrice(parseInt(event.target.value));
+  };
+
+  const handleBrandChange = (brand) => {
+    setSelectedBrands((prev) =>
+      prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand]
     );
-  }
+  };
+
+  const handleSortChange = (event) => {
+    setSortOrder(event.target.value);
+  };
+
+  // Fetch data function
+  const fetchShoeData = async () => {
+    try {
+      const response = await axios.get('/Shoe.json'); // Replace with your actual JSON file path
+      setShoeData(response.data);
+    } catch (error) {
+      console.error('Error fetching shoe data:', error);
+    }
+  };
+
+  const fetchCart = () => {
+    const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
+    setCartItems(storedCart);
+  };
+
+  useEffect(() => {
+    const cartInterval = setInterval(() => {
+      fetchCart();
+    }, 100);
+    return () => clearInterval(cartInterval);
+  });
+
+  useEffect(() => {
+    fetchShoeData();
+    const storedWishlist = JSON.parse(sessionStorage.getItem('wishlist')) || [];
+    const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
+    setWishlist(storedWishlist);
+    setCartItems(storedCart);
+  }, []);
+
+  useEffect(() => {
+    let filteredData = shoeData.filter((shoe) => shoe.price <= maxPrice);
+
+    if (selectedBrands.length > 0) {
+      filteredData = filteredData.filter((shoe) => selectedBrands.includes(shoe.brand));
+    }
+
+    if (sortOrder === "price_low_high") {
+      filteredData.sort((a, b) => a.price - b.price);
+    } else if (sortOrder === "price_high_low") {
+      filteredData.sort((a, b) => b.price - a.price);
+    }
+
+    setFilteredShoeData(filteredData);
+  }, [shoeData, maxPrice, selectedBrands, sortOrder]);
+
+  // Toggle wishlist
+  const toggleWishlist = (shoe) => {
+    let updatedWishlist;
+
+    if (wishlist.some((item) => item.id === shoe.id)) {
+      updatedWishlist = wishlist.filter((item) => item.id !== shoe.id);
+      toast.success(`${shoe.product_name} removed from your wishlist!`);
+    } else {
+      updatedWishlist = [...wishlist, shoe];
+      toast.success(`${shoe.product_name} added to your wishlist!`);
+    }
+
+    setWishlist(updatedWishlist);
+    sessionStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+  };
+
+  // Toggle cart
+  const toggleCart = (shoe) => {
+    let updatedCart;
+
+    if (cartItems.some((item) => item.id === shoe.id)) {
+      updatedCart = cartItems.filter((item) => item.id !== shoe.id);
+      toast.success(`${shoe.product_name} removed from your cart!`);
+    } else {
+      updatedCart = [...cartItems, shoe];
+      toast.success(`${shoe.product_name} added to your cart!`);
+    }
+
+    setCartItems(updatedCart);
+    sessionStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
+
+  const totalFormalItems = filteredShoeData.filter((shoe) => shoe?.category === "sports").length;
+  const totalPages = Math.ceil(totalFormalItems / itemsPerPage);
   
+  const currentData = filteredShoeData
+    .filter((shoe) => shoe?.category === "sports")
+    .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
+      scrollToTop();
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+      scrollToTop();
+    }
+  };
+
+  console.log(currentData.length);
+
+  if (loading || !online) {
+    return <FinalLoader />;
+  }
+
+  return (
+    <div className="overflow-hidden">
+      <div
+        className="overflow-hidden h-[65vh] w-screen flex justify-center items-center"
+        style={{
+          backgroundImage: `url(${shoe})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="absolute h-[65vh] inset-0 bg-black opacity-50"></div>
+        <div className="relative z-10 formal-collection-text text-titleXl  lg:text-[12em] text-red">
+          <h1>Sports Collection</h1>
+        </div>
+      </div>
+
+      <div
+        className="flex lg:flex-row flex-col justify-center mb-20"
+        data-aos="fade-up"
+        data-aos-duration="3000"
+      >
+        <div className="w-[250px] lg:h-[100vh] pt-2 sticky">
+          <div className="bg-[#f7f7f7] rounded mx-3 h-10 flex gap-3 text-titleXsm px-3 items-center">
+            <IoIosArrowDown />
+            <p>Brands</p>
+          </div>
+          <div className="px-5 mt-5">
+            {[...new Set(shoeData?.map((data) => data.brand))].map((brand) => (
+              <div key={brand} className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={selectedBrands.includes(brand)}
+                  onChange={() => handleBrandChange(brand)}
+                />
+                <p>{brand}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mb-4 px-5 mt-8">
+            <label htmlFor="price-range" className="block text-sm font-medium text-gray-700">
+              Price Range
+            </label>
+            <div className="flex items-center border border-gray-300 rounded-md p-2">
+              <input
+                type="range"
+                id="max-price"
+                min="20"
+                max="200"
+                value={maxPrice}
+                onChange={handleMaxPriceChange}
+                className="w-full bg-transparent outline-none"
+              />
+            </div>
+            <div className="flex justify-between mt-2">
+              <span className="text-sm text-gray-700 w-20">Min Price: $20</span>
+              <span className="text-sm text-gray-700 w-20">Max Price: ${maxPrice}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="lg:w-[1200px]">
+          <p className="text-titleMd ml-5 mt-5 mb-5">Sports Collections</p>
+          <div className="w-full h-16 bg-[#f7f7f7] items-center flex justify-between px-10 mb-3 mx-3">
+            <p className="flex items-center lg:gap-5 gap-2">View as: <AiOutlineTable className="lg:text-titleSm" /></p>
+            <select
+              className="select max-w-xs border border-[#0000002f]"
+              value={sortOrder}
+              onChange={handleSortChange}
+            >
+              <option value="featured">Featured</option>
+              <option value="price_low_high">Price Low to High</option>
+              <option value="price_high_low">Price High to Low</option>
+            </select>
+          </div>
+
+          <div className="flex flex-wrap gap-6 w-[100%] justify-center">
+
+
+           { currentData.length ===0 && <div className="text-titleLg mt-5">
+              No product fround
+            </div>
+}
+            {currentData?.filter((shoe) => shoe?.category === "sports").map((shoe) => (
+              <div key={shoe.id} className="w-[260px]">
+                <div className="w-full shadow-lg rounded px-2 h-[280px] flex flex-col justify-center items-center transition-all group relative overflow-hidden">
+                  <img
+                    src={shoe.img_1}
+                    alt={shoe.product_name}
+                    className="w-[200px] transition-opacity duration-500 opacity-100 group-hover:opacity-0 absolute"
+                  />
+                  <img
+                    src={shoe.img_3}
+                    alt={shoe.product_name}
+                    className="w-[200px] transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                  />
+
+                  <button
+                    className={`absolute w-[230px] shadow-lg transition-all duration-500 py-2 rounded uppercase top-[280px] group-hover:top-[230px] text-titleXXsm ${cartItems.some((item) => item.id === shoe.id)
+                        ? 'bg-green-300 cursor-default'
+                        : 'bg-gray-100 hover:bg-gray-200 cursor-pointer'
+                      }`}
+                    onClick={() => {
+                      if (!cartItems.some((item) => item.id === shoe.id)) {
+                        toggleCart(shoe);
+                      }
+                    }}
+                  >
+                    {cartItems.some((item) => item.id === shoe.id) ? 'Already Added' : 'Add to Cart'}
+                  </button>
+                </div>
+
+                <div className="mt-4">
+                  <p className="text-titleXXsm text-gray-500 uppercase">{shoe.category}</p>
+                  <NavLink to={`/shoe/${shoe.id}`}>
+                    <div className="mt-2">
+                      <p>{shoe.product_name}</p>
+                      <p>${shoe.price}</p>
+                    </div>
+                  </NavLink>
+                  <div>
+                    {wishlist.some((item) => item.id === shoe.id) ? (
+                      <IoMdHeart
+                        className="text-titleSm text-red cursor-pointer"
+                        onClick={() => toggleWishlist(shoe)}
+                      />
+                    ) : (
+                      <CiHeart
+                        className="text-titleSm cursor-pointer"
+                        onClick={() => toggleWishlist(shoe)}
+                      />
+                    )}
+                  </div>
+                  <div className="mt-2 flex">
+                    {Array.from({ length: 5 }, (_, index) =>
+                      index < shoe.review ? (
+                        <AiFillStar key={index} className="text-yellow-500 text-titleXXsm" />
+                      ) : (
+                        <AiOutlineStar key={index} className="text-gray-400 text-titleXXsm" />
+                      )
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          {
+            currentData .length !==0 && 
+     
+          <div className="flex justify-center items-center gap-4 mt-4 mb-8">
+            <button
+              onClick={handlePreviousPage}
+              disabled={currentPage === 1}
+              className={`px-4 py-2 rounded ${currentPage === 1
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-gray-100 hover:bg-gray-200"
+                }`}
+            >
+              {"<"}
+            </button>
+            <span className="text-lg font-medium">
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+              className={`px-4 py-2 rounded ${currentPage === totalPages
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-gray-100 hover:bg-gray-200"
+                }`}
+            >
+              {">"}
+            </button>
+          </div>     }
+        </div>
+
+      </div>
+
+      <Footer />
+    </div>
+  );
+}
