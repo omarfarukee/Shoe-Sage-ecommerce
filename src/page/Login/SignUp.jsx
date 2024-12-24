@@ -51,7 +51,7 @@ const SignUp = () => {
     >
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
-      <div className='w-[70vw] flex h-[80vh] border shadow-xl border-[#0000002a]  rounded-lg mt-8 items-center bg-transparent backdrop-blur-sm'>
+      <div className='w-[70vw] flex h-[80vh] border shadow-xl border-[#0000002a]  rounded-lg mt-20 items-center bg-transparent backdrop-blur-sm'>
 
         <div className='w-[50%] flex flex-col items-center justify-center text-center bg-[#ffffff15] h-full rounded-tl-lg rounded-bl-lg'>
           <img className='ml-20 floating' src={logo} alt="" />
@@ -64,14 +64,14 @@ const SignUp = () => {
 
           <form
             onSubmit={handleSubmit}
-            className="mt-20 animate__animated animate__backInUp mx-3 lg:mx-0 p-6 rounded-lg l w-[400px]  z-10 relative"
+            className="mt-2 animate__animated animate__backInUp mx-3 lg:mx-0 p-6 rounded-lg l w-[400px]  z-10 relative"
           >
             <div className="flex justify-center text-white">
-              <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
+              <h2 className="text-2xl font-semibold mb-2">Sign Up</h2>
             </div>
 
             {/* Name Input */}
-            <div className="mb-4">
+            <div className="mb-2">
               <label htmlFor="name" className="block text-sm font-medium text-white">
                 Name
               </label>
@@ -90,7 +90,7 @@ const SignUp = () => {
             </div>
 
             {/* Username Input */}
-            <div className="mb-4">
+            <div className="mb-2">
               <label htmlFor="username" className="block text-sm font-medium text-white">
                 Email
               </label>
@@ -109,7 +109,7 @@ const SignUp = () => {
             </div>
 
             {/* Number Input */}
-            <div className="mb-4">
+            <div className="mb-2">
               <label htmlFor="number" className="block text-sm font-medium text-white">
                 Phone Number
               </label>
@@ -164,18 +164,18 @@ const SignUp = () => {
               Sign Up
             </button>
 
-            <div className='flex items-center gap-3 justify-center mt-5'>
+            <div className='flex items-center gap-3 justify-center mt-0'>
               <div className='w-[100px] h-[2px] bg-white'></div>
               <p className='text-white'>OR</p>
               <div className='w-[100px] h-[2px] bg-white'></div>
             </div>
 
-            <div>
-              <div className='flex items-center gap-2 justify-center mt-3 cursor-pointer'>
-                <FcGoogle className='text-titleSm' /> <span className='text-titleXXsm text-white'>Sign up with google</span>
+            <div className='flex items-center justify-evenly'>
+              <div className='flex items-center gap-2 justify-center  cursor-pointer '>
+                <FcGoogle className='text-titleSm' /> <span className='text-[10px] text-white'>Sign up with google</span>
               </div>
-              <div className='flex items-center gap-2 justify-center mt-3 cursor-pointer'>
-                <FaFacebook className='text-titleSm text-[#0866ff]' /> <span className='text-titleXXsm text-white'>Sign up with Facebook</span>
+              <div className='flex items-center gap-2 justify-center  cursor-pointer'>
+                <FaFacebook className='text-titleSm text-[#0866ff]' /> <span className='text-[10px] text-white'>Sign up with Facebook</span>
               </div>
             </div>
 

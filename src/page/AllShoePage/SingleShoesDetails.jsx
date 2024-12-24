@@ -21,15 +21,26 @@ export default function SingleShoesDetails() {
   const [rating, setRating] = useState(0);
   const [activeTab, setActiveTab] = useState("info"); // Default to "info"
   const [cartItems, setCartItems] = useState([]);
+  const colors = ["white", "black", "blue", "red", "green"]; // Define your colors here
+  const [selectedColor, setSelectedColor] = useState(""); // State to track the selected color
   const subtotal = quantity * shoe?.price
 
   const { loading, online } = useLoader();
 
   // Load cart items from sessionStorage on component mount
-  useEffect(() => {
+  const fetchCart = () => {
     const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
-    setCartItems(storedCart);
-  }, []);
+    setCartItems(storedCart)
+  }
+
+  useEffect(() => {
+    const cartInterval = setInterval(() => {
+      fetchCart()
+    }, 100);
+    return () => clearInterval(cartInterval)
+  })
+
+
 
   const handleSizeClick = (size) => {
     setSelectedSize(size); // Set the clicked size as the selected size
@@ -152,10 +163,14 @@ export default function SingleShoesDetails() {
         height: "70px"
       },
     });
-    setTimeout(() => {
-      location.reload();
-    }, 1000);
   };
+
+
+
+  const handleColorSelect = (color) => {
+    setSelectedColor(color); // Update the selected color
+  };
+
   if (loading || !online) {
     return <FinalLoader />;
   }
@@ -164,7 +179,7 @@ export default function SingleShoesDetails() {
     <div>
       <div className="flex justify-center">
         <div className="pt-36 flex lg:flex-row flex-col w-[1200px] justify-between">
-          <div className="lg:w-[600px] lg:h-[500px]  flex lg:flex-row flex-col justify-center gap-10 items-center">
+          <div className="lg:w-[600px] lg:h-[550px]  flex lg:flex-row flex-col justify-center gap-10 items-center">
             {/* Thumbnails */}
             <div className="flex lg:flex-col  gap-3">
               {[shoe.img_1, shoe.img_2, shoe.img_3, shoe.img_4]?.map((img, index) => (
@@ -225,6 +240,33 @@ export default function SingleShoesDetails() {
                   </p>
                 )}
               </div>
+
+              <div>
+                <p className="mt-5 flex items-center gap-10">Colors:</p>
+                <div className="flex gap-4 mt-2">
+                  {colors.map((color) => (
+                    <div
+                      key={color}
+                      className={`h-8 w-8 rounded-full cursor-pointer ${selectedColor === color ? "border-4 border-gray-700" : "border"} ${color === "white"
+                          ? "bg-white"
+                          : color === "black"
+                            ? "bg-black"
+                            : color === "blue"
+                              ? "bg-blue-500"
+                              : color === "red"
+                                ? "bg-red"
+                                : "bg-green-500"
+                        }`}
+                      onClick={() => handleColorSelect(color)}
+                    ></div>
+                  ))}
+                </div>
+
+                {selectedColor && (
+                  <p className="mt-4">Selected Color: <span className="font-semibold">{selectedColor}</span></p>
+                )}
+              </div>
+
             </div>
             <div className="flex lg:flex-row flex-col  items-center gap-5">
 
@@ -261,11 +303,11 @@ export default function SingleShoesDetails() {
               </div>
 
               {cartItems?.some((item) => item.id === shoe.id) ? (
-               <> <button className="w-48 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">Added in your cart </button> 
-              <NavLink to='/cart'>
-                <button className="w-24 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">View cart</button>
-              </NavLink> 
-               </>
+                <> <button className="w-48 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">Added in your cart </button>
+                  <NavLink to='/cart'>
+                    <button className="w-24 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">View cart</button>
+                  </NavLink>
+                </>
               ) : (
                 <button
                   onClick={(e) => {

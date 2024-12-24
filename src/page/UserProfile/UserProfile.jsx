@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import shoe from "../../assets/backgrounds/shoe3.jpeg";
 import { FaUserAlt } from 'react-icons/fa';
 import { SiGmail } from 'react-icons/si';
+import Footer from '../../shared/Footer/Footer';
 export default function UserProfile() {
     const { loading, online } = useLoader();
     const navigate = useNavigate();
@@ -42,14 +43,14 @@ export default function UserProfile() {
                 }}
             >
                 <div className="absolute h-[65vh] inset-0 bg-black opacity-50"></div>
-                <div className="relative z-10 formal-collection-text text-[12em] text-red">
+                <div className="relative z-10 formal-collection-text text-titleXl  lg:text-[12em] text-red">
                     <h1>My Profile</h1>
                 </div>
             </div>
             <div className=' bg-[#f6f6f6] h-[100vh] flex justify-center'>
 
-                <div className='w-[90vw] h-[500px] bg-white rounded-xl flex mt-5'>
-                    <div className='border-r-2  w-[300px] mt-5 h-[400px]'>
+                <div   className='w-[90vw] h-[500px] bg-white rounded-xl flex mt-5'>
+                    <div className='border-r-2 hidden lg:block w-[300px] mt-5 h-[400px]'>
                         <div className='px-5'>
                             <div className='uppercase text-titleSm border flex justify-center rounded-3xl bg-red text-white'>
                                 My profile
@@ -86,6 +87,7 @@ export default function UserProfile() {
 
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 }

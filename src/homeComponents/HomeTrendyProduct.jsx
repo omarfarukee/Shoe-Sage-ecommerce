@@ -98,7 +98,7 @@ export default function HomeTrendyProduct() {
 
       {/* Product Grid */}
       <div
-        className="flex flex-wrap gap-6 w-[1200px] justify-center mx-auto"
+        className="flex flex-wrap gap-6 lg:w-[1200px] justify-center mx-auto"
         data-aos="fade-up"
         data-aos-duration="3000"
       >

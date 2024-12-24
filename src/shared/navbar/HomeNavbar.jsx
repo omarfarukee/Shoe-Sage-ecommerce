@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import logo from "../../assets/logo/logo.png";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
@@ -23,6 +23,7 @@ export default function HomeNavbar() {
   const [wishlist, setWishlist] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const menuRef = useRef(null);
 
   const fetchWishlist = () => {
     const storedWishlist = JSON.parse(sessionStorage.getItem('wishlist')) || [];
@@ -50,11 +51,6 @@ export default function HomeNavbar() {
     return () => clearInterval(cartInterval)
   })
 
-  useEffect(() => {
-    // Retrieve cart data from sessionStorage
-    const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
-    setCartItems(storedCart);
-  }, []);
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -119,10 +115,26 @@ export default function HomeNavbar() {
     navigate('/login');
   };
 
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false); // Close the menu
+      }
+    };
+
+    // Add event listener
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    // Cleanup event listener
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
   
 
   return (
-    <section>
+    <section ref={menuRef}>
       <div className="hidden lg:block ">
         <div
           className={`border-b h-24 flex w-full fixed z-50 transition-all duration-500 ${scrolled
@@ -343,7 +355,7 @@ export default function HomeNavbar() {
                 className="text-2xl flex items-center cursor-pointer w-14"
                 onClick={() => setMenuOpen(!menuOpen)} // Toggle menu visibility
               >
-                <RiMenu2Fill />
+                <RiMenu2Fill className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
               </p>
             </div>:
             <div className="nav-items ml-3">
@@ -351,7 +363,7 @@ export default function HomeNavbar() {
                 className="text-2xl flex items-center cursor-pointer w-14"
                 onClick={() => setMenuOpen(!menuOpen)} // Toggle menu visibility
               >
-                <IoClose />
+                <IoClose className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
 
               </p>
             </div>}
@@ -364,19 +376,21 @@ export default function HomeNavbar() {
             >
               <div className="flex flex-col gap-3">
               <NavLink to='/wishlist'>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-5">
                 <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
                   {wishlist.length} 
                 </span>
-                <CiHeart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
+                <CiHeart className={`text-black text-fontXsm text-3xl `} />
                 WishList
               </div>
             </NavLink>
-            <NavLink to="/cart"><div>
+            <NavLink to="/cart">
+            <div className="flex items-center gap-5">
               <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
                 {cartItems.length}
               </span>
-              <CiShoppingCart className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
+              <CiShoppingCart className={`text-black text-fontXsm text-3xl `} />
+              Cart
             </div>
             </NavLink>
                 <a href="#" className="w-full">

@@ -14,12 +14,12 @@ export default function Footer() {
                 <p className='mt-5'>1418 River Drive, Suite 35 Cottonhall, CA 9622 United States</p>
                 <p className='mt-5'>sale@uomo.com +1 246-345-0695</p>
                 <div className='flex gap-10 mt-5'>
-                  <FaFacebook/>
-                  <FaLinkedin/>
-                  <FaInstagram/>
+                  <FaFacebook className='text-titleMd'/>
+                  <FaLinkedin className='text-titleMd'/>
+                  <FaInstagram className='text-titleMd'/>
                 </div>
             </div>
-            <div className='border w-[300px] h-[300px] flex flex-col items-center'>
+            <div className='border hidden lg:block w-[300px] h-[300px] flex flex-col items-center'>
                 <h3 className='text-lg mb-10'>Company</h3>
                 <a href="" className=''><p>Team</p></a>
                 <a href=""><p className='mt-2'>Links</p></a>
@@ -27,7 +27,7 @@ export default function Footer() {
                 <a href=""><p className='mt-2'>About us</p></a>
                 <a href=""><p className='mt-2'>About us</p></a>
             </div>
-            <div className='border w-[300px] h-[300px]  flex flex-col items-center'>
+            <div className='border hidden w-[300px] h-[300px]  flex flex-col items-center'>
                 <h3 className='text-lg mb-10'>Shop</h3>
                 <a href="" className=''><p>Dhaka</p></a>
                 <a href=""><p className='mt-2'>uttora</p></a>

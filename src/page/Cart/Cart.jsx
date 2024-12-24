@@ -15,10 +15,18 @@ const Cart = () => {
     const [quantities, setQuantities] = useState({}); // Initialize as an empty object
 
     // Load cart items from sessionStorage on component mount
-    useEffect(() => {
-        const storedCart = JSON.parse(sessionStorage.getItem("cart")) || [];
-        setCartItems(storedCart);
-    }, []);
+    const fetchCart = () => {
+        const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
+        setCartItems(storedCart)
+      }
+    
+      useEffect(() => {
+        const cartInterval = setInterval(() => {
+          fetchCart()
+        }, 100);
+        return () => clearInterval(cartInterval)
+      })
+    
 
     // Update quantities state whenever cartItems change
     useEffect(() => {
@@ -50,7 +58,6 @@ const Cart = () => {
                 height: "70px",
             },
         });
-        location.reload()
     };
 
     const handleIncrement = (itemId) => {

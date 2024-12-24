@@ -36,7 +36,7 @@ const Login = () => {
             }}
         >
             <div className="absolute inset-0 bg-black opacity-50"></div>
-            <div className='w-[70vw] flex h-[80vh] border shadow-xl border-[#0000002a]  rounded-lg mt-8 items-center bg-transparent backdrop-blur-sm'>
+            <div className='w-[70vw] flex h-[80vh] border shadow-xl border-[#0000002a]  rounded-lg mt-20 items-center bg-transparent backdrop-blur-sm'>
                 
                 <div className='w-[50%] flex flex-col items-center justify-center text-center bg-[#ffffff15] h-full rounded-tl-lg rounded-bl-lg'>
                     <img className='ml-20 floating' src={logo} alt="" />
@@ -46,13 +46,13 @@ const Login = () => {
                     </div>
                 </div>
 
-                <div className='flex justify-center w-[50%]'> 
+                <div className='flex justify-center w-[50%]  mb-20'> 
                 <form
                 onSubmit={handleSubmit}
                 className="animate__animated animate__backInUp  bg-transparent mx-3 lg:mx-0   p-6 rounded-lg  w-[400px] h-[400px] z-10 relative"
             >
                 <div className="flex justify-center text-white">
-                    <h2 className="text-titleMd font-semibold mb-4 uppercase">USER-Login</h2>
+                    <h2 className="text-titleSm font-semibold mb-4 uppercase">USER-LOGIN</h2>
                 </div>
 
                 <div className="mb-4">
