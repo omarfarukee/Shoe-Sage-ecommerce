@@ -27,7 +27,7 @@ const Login = () => {
 
     return (
         <div
-            className="overflow-hidden h-screen w-screen flex justify-center items-center" // Ensures the div spans the entire viewport
+            className="overflow-hidden h-screen w-screen  flex justify-center items-center" // Ensures the div spans the entire viewport
             style={{
                 backgroundImage: `url(${shoe})`,
                 backgroundSize: "cover",
@@ -36,9 +36,10 @@ const Login = () => {
             }}
         >
             <div className="absolute inset-0 bg-black opacity-50"></div>
-            <div className='w-[70vw] flex h-[80vh] border shadow-xl border-[#0000002a]  rounded-lg mt-20 items-center bg-transparent backdrop-blur-sm'>
-                
-                <div className='w-[50%] flex flex-col items-center justify-center text-center bg-[#ffffff15] h-full rounded-tl-lg rounded-bl-lg'>
+            <div className=''>
+                   <div className='lg:w-[70vw] flex lg:h-[80vh] border shadow-xl border-[#00000028]  rounded-lg lg:mt-20 mt-3 items-center bg-transparent backdrop-blur-sm '>
+               
+                <div className='w-[50%] lg:flex hidden  flex-col items-center justify-center text-center bg-[#ffffff15] h-full rounded-tl-lg rounded-bl-lg'>
                     <img className='ml-20 floating' src={logo} alt="" />
                     <div className='animate__animated animate__backInDown mt-5 text-[#9494a0] w-[400px]'>
                         <h1 className='text-titleSm'>Walk good</h1>
@@ -46,10 +47,10 @@ const Login = () => {
                     </div>
                 </div>
 
-                <div className='flex justify-center w-[50%]  mb-20'> 
+                <div className='flex justify-center lg:w-[50%]  mb-20'> 
                 <form
                 onSubmit={handleSubmit}
-                className="animate__animated animate__backInUp  bg-transparent mx-3 lg:mx-0   p-6 rounded-lg  w-[400px] h-[400px] z-10 relative"
+                className="animate__animated animate__backInUp  bg-transparent mx-3 lg:mx-0   p-6 rounded-lg  lg:w-[400px] h-[400px] z-10 relative"
             >
                 <div className="flex justify-center text-white">
                     <h2 className="text-titleSm font-semibold mb-4 uppercase">USER-LOGIN</h2>
@@ -146,6 +147,8 @@ const Login = () => {
                 </div>
 
             </div>
+            </div>
+         
            
         </div>
     );

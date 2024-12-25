@@ -4,7 +4,7 @@ import shoe from "../../assets/backgrounds/shoe3.jpeg";
 import Footer from '../../shared/Footer/Footer';
 import { AiFillStar, AiOutlineStar, AiOutlineTable } from 'react-icons/ai';
 import { NavLink } from 'react-router-dom';
-import { CiHeart } from 'react-icons/ci';
+import { CiHeart, CiShoppingCart } from 'react-icons/ci';
 import { IoIosArrowDown, IoMdHeart } from 'react-icons/io';
 import FinalLoader from '../../shared/loader/FinalLoader';
 import toast from 'react-hot-toast';
@@ -151,6 +151,16 @@ export default function Sneakers() {
 
   return (
     <div className="overflow-hidden">
+      {cartItems.length !== 0 &&
+            <NavLink to="/cart">
+              <div className="fixed hidden lg:block bottom-4 right-4 bg-white p-4 rounded-full shadow-lg border z-40">
+              <span className="absolute ml-7 bottom-11 border w-[25px] h-[25px] flex items-center justify-center rounded-full bg-red text-white">{cartItems?.length}</span>
+              <p className="text-titleLg">
+                <CiShoppingCart />
+              </p>
+      
+            </div>
+              </NavLink>}
       <div
         className="overflow-hidden h-[65vh] w-screen flex justify-center items-center"
         style={{
@@ -171,7 +181,7 @@ export default function Sneakers() {
         data-aos="fade-up"
         data-aos-duration="3000"
       >
-        <div className="w-[250px] lg:h-[100vh] pt-2 sticky">
+        <div className="w-[250px] lg:h-[100vh] hidden lg:block pt-2 sticky">
           <div className="bg-[#f7f7f7] rounded mx-3 h-10 flex gap-3 text-titleXsm px-3 items-center">
             <IoIosArrowDown />
             <p>Brands</p>

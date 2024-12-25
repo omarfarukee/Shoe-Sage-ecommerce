@@ -270,8 +270,8 @@ export default function SingleShoesDetails() {
             </div>
             <div className="flex lg:flex-row flex-col  items-center gap-5">
 
-
-              <div className="mb-4 mt-5 lg:w-48">
+              {/* quantity hidden */}
+              <div className="mb-4 mt-5 lg:w-48 hidden">
                 <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
                   Quantity
                 </label>
@@ -301,11 +301,11 @@ export default function SingleShoesDetails() {
                 </div>
                 <p className="mt-2 font-semibold">Subtotal: {subtotal} $</p>
               </div>
-
-              {cartItems?.some((item) => item.id === shoe.id) ? (
-                <> <button className="w-48 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">Added in your cart </button>
+              <div className="mt-5 flex">
+                 {cartItems?.some((item) => item.id === shoe.id) ? (
+                <> <button disabled  className="w-48 cursor-not-allowed mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">Added in your cart </button>
                   <NavLink to='/cart'>
-                    <button className="w-24 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">View cart</button>
+                    <button className="w-28 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">View cart <FaCartPlus /></button>
                   </NavLink>
                 </>
               ) : (
@@ -316,6 +316,8 @@ export default function SingleShoesDetails() {
                   }}
                   className="w-48 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">Add To cart <FaCartPlus /></button>
               )}
+              </div>
+             
 
 
 

@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 import { IoIosLogOut } from "react-icons/io";
 import { FaCaretDown } from "react-icons/fa";
 import { RiMenu2Fill } from "react-icons/ri";
+import BottomNavbar from "./BottomNavbar";
 export default function HomeNavbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -271,7 +272,7 @@ export default function HomeNavbar() {
         </div>
       </div>
       <div
-        className={`fixed top-0 right-0 h-[100vh] border-l border-[#696969] w-[85%] md:w-[500px] bg-white transition-transform duration-500 ease-in-out transform ${isSideMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed  top-0 right-0 h-[100vh] border-l border-[#696969] w-[85%] md:w-[500px] bg-white transition-transform duration-500 ease-in-out transform ${isSideMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
         style={{ zIndex: 1000 }}
       >
         {/* Close Button */}
@@ -473,34 +474,36 @@ export default function HomeNavbar() {
             {/* Main Menu end */}
           </div>
 
-          <img className="w-20 absolute ml-[35%]" src={logo} alt="Logo" />
+          <img className="w-20 absolute ml-[40%]" src={logo} alt="Logo" />
         </div>
 
         <div className="flex gap-3 justify-end items-center">
         <div className="mt-2">
               <SearchNavbar />
             </div>
-          {user ? (
-          <div onClick={toggleSideMenu}>
+        
+         {user&& <div onClick={toggleSideMenu}>
               <span className="absolute ml-6 py-[1px] px-[3px] text-[10px] text-center rounded-full bg-red text-white">
                 {cart}
               </span>
               <CiShoppingCart  className={`text-black text-fontXsm text-3xl ${isLoginPage ? "text-white" : ""}`} />
-            </div>
-          ) : (
-            <NavLink to="/login">
-               <button className="w-16 border py-1 rounded-lg hover:bg-[#8d3e3ec4] transition-all duration-300 hover:border-none">
-                Login
-              </button>
-            </NavLink>
-             
-            
-          )}
+            </div>}
+        
         </div>
         
       </div>
+
+
+
+
     </div>
     
+
+    <div className="lg:hidden block">
+
+      <BottomNavbar/>
+
+    </div>
 
     </section>
   );

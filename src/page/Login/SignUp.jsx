@@ -51,20 +51,20 @@ const SignUp = () => {
     >
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
-      <div className='w-[70vw] flex h-[80vh] border shadow-xl border-[#0000002a]  rounded-lg mt-20 items-center bg-transparent backdrop-blur-sm'>
+      <div className='lg:w-[70vw] flex  lg:h-[80vh] border shadow-xl border-[#0000002a]  rounded-lg mt-5 lg:mt-20 items-center bg-transparent backdrop-blur-sm'>
 
-        <div className='w-[50%] flex flex-col items-center justify-center text-center bg-[#ffffff15] h-full rounded-tl-lg rounded-bl-lg'>
+        <div className='w-[50%] lg:flex hidden flex-col items-center justify-center text-center bg-[#ffffff15] h-full rounded-tl-lg rounded-bl-lg'>
           <img className='ml-20 floating' src={logo} alt="" />
           <div className='animate__animated animate__backInDown mt-5 text-[#9494a0] w-[400px]'>
             <h1 className='text-titleSm'>Walk good</h1>
             <p className='text-titleXXsm'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum dolore quasi possimus ratione doloribus, minima error maiores sequi similique provident.</p>
           </div>
         </div>
-        <div className='flex justify-center w-[50%]'>
+        <div className='flex justify-center lg:w-[50%]'>
 
           <form
             onSubmit={handleSubmit}
-            className="mt-2 animate__animated animate__backInUp mx-3 lg:mx-0 p-6 rounded-lg l w-[400px]  z-10 relative"
+            className="mt-2 animate__animated animate__backInUp mx-3 lg:mx-0 p-6 rounded-lg l lg:w-[400px]  z-10 relative"
           >
             <div className="flex justify-center text-white">
               <h2 className="text-2xl font-semibold mb-2">Sign Up</h2>
@@ -170,7 +170,7 @@ const SignUp = () => {
               <div className='w-[100px] h-[2px] bg-white'></div>
             </div>
 
-            <div className='flex items-center justify-evenly'>
+            <div className='flex items-center justify-evenly gap-3'>
               <div className='flex items-center gap-2 justify-center  cursor-pointer '>
                 <FcGoogle className='text-titleSm' /> <span className='text-[10px] text-white'>Sign up with google</span>
               </div>

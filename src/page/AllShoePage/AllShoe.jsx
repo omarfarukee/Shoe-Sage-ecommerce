@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { AiFillStar, AiOutlineStar, AiOutlineTable } from "react-icons/ai";
 import { IoIosArrowDown, IoMdHeart } from "react-icons/io";
-import { CiHeart } from "react-icons/ci";
+import { CiFilter, CiHeart, CiShoppingCart } from "react-icons/ci";
 import shoe from "../../assets/backgrounds/shoe3.jpeg";
 import { NavLink } from "react-router-dom";
 import Footer from "../../shared/Footer/Footer";
@@ -17,7 +17,7 @@ export default function AllShoe() {
   const [filteredShoeData, setFilteredShoeData] = useState([]); // Filtered data state
   const [wishlist, setWishlist] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1); // Current page
   const itemsPerPage = 8; // Number of items per page
   const [maxPrice, setMaxPrice] = useState(200);
@@ -52,6 +52,11 @@ export default function AllShoe() {
   const fetchCart = () => {
     const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
     setCartItems(storedCart);
+  };
+
+  // Function to toggle the side menu
+  const toggleSideMenu = () => {
+    setIsSideMenuOpen(!isSideMenuOpen);
   };
 
   useEffect(() => {
@@ -145,7 +150,7 @@ export default function AllShoe() {
     }
   };
 
-  console.log(filteredShoeData.length);
+  console.log(cartItems.length);
 
   if (loading || !online) {
     return <FinalLoader />;
@@ -153,6 +158,88 @@ export default function AllShoe() {
 
   return (
     <div className="overflow-hidden">
+
+      {cartItems.length !== 0 &&
+        <NavLink to="/cart">
+          <div className="fixed bottom-4 hidden lg:block right-4 bg-white p-4 rounded-full shadow-lg border z-40">
+            <span className="absolute ml-7 bottom-11 border w-[25px] h-[25px] flex items-center justify-center rounded-full bg-red text-white">{cartItems?.length}</span>
+            <p className="text-titleLg">
+              <CiShoppingCart />
+            </p>
+
+          </div>
+        </NavLink>}
+
+
+
+      {/* Filtering side menu for mobile */}
+      {isSideMenuOpen && (
+        <div
+          onClick={() => setIsSideMenuOpen(false)}
+          className="fixed inset-0 bg-black bg-opacity-50 z-[900]"
+        ></div>
+      )}
+      <div
+        className={`fixed top-0 left-0 h-[100vh] border-r border-[#696969] w-[85%] md:w-[500px] bg-white transition-transform duration-500 ease-in-out transform ${isSideMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
+        style={{ zIndex: 1000 }}
+        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the menu
+      >
+        {/* Close Button */}
+        <div className="border border-[#f7f7f7] h-20 bg-[#f7f7f7]">
+          <p className="mt-6 pl-5">Filter Product</p>
+          <button
+            onClick={() => setIsSideMenuOpen(false)}
+            className="absolute text-4xl text-red top-5 right-5 hover:text-red-600"
+          >
+            &times; {/* Close (X) button */}
+          </button>
+        </div>
+
+        {/* Side Menu Content for mobile */}
+        <div className="overflow-y-auto h-[calc(100vh-80px)]"> {/* Adjust height dynamically */}
+          <div className="w-full border pt-2">
+            <div className="bg-[#f7f7f7] rounded mx-3 h-10 flex gap-3 text-titleXsm px-3 items-center">
+              <IoIosArrowDown />
+              <p>Brands</p>
+            </div>
+            <div className="px-5 mt-5">
+              {[...new Set(shoeData?.map((data) => data.brand))].map((brand) => (
+                <div key={brand} className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={selectedBrands.includes(brand)}
+                    onChange={() => handleBrandChange(brand)}
+                  />
+                  <p>{brand}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mb-4 px-5 mt-8">
+              <label htmlFor="price-range" className="block text-sm font-medium text-gray-700">
+                Price Range
+              </label>
+              <div className="flex items-center border border-gray-300 rounded-md p-2">
+                <input
+                  type="range"
+                  id="max-price"
+                  min="20"
+                  max="200"
+                  value={maxPrice}
+                  onChange={handleMaxPriceChange}
+                  className="w-full bg-transparent outline-none"
+                />
+              </div>
+              <div className="flex justify-between mt-2">
+                <span className="text-sm text-gray-700 w-20">Min Price: $20</span>
+                <span className="text-sm text-gray-700 w-20">Max Price: ${maxPrice}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* filtering side menu end */}
+
+
       <div
         className="overflow-hidden h-[65vh] w-screen flex justify-center items-center"
         style={{
@@ -173,7 +260,8 @@ export default function AllShoe() {
         data-aos="fade-up"
         data-aos-duration="3000"
       >
-        <div className="w-[250px] lg:h-[100vh] pt-2 sticky">
+        {/* desktop view filter */}
+        <div className="w-[250px] lg:h-[100vh] pt-2 sticky lg:block hidden">
           <div className="bg-[#f7f7f7] rounded mx-3 h-10 flex gap-3 text-titleXsm px-3 items-center">
             <IoIosArrowDown />
             <p>Brands</p>
@@ -213,9 +301,20 @@ export default function AllShoe() {
         </div>
 
         <div className="lg:w-[1200px]">
-          <p className="text-titleMd ml-5 mt-5 mb-5">All Collections</p>
+          <div className="flex lg:flex-row flex-col ml-6 items-start lg:items-center">
+            <p className="lg:text-titleMd   text-titleSm">All Collections</p>
+            <p className="mt-2 lg:ml-3">({filteredShoeData.length} Product Found)</p>
+          </div>
+
           <div className="w-full h-16 bg-[#f7f7f7] items-center flex justify-between px-10 mb-3 mx-3">
-            <p className="flex items-center lg:gap-5 gap-2">View as: <AiOutlineTable className="lg:text-titleSm" /></p>
+            <div className="hidden lg:block"><p className="flex items-center lg:gap-5 gap-2">View as: <AiOutlineTable className="lg:text-titleSm" /></p>
+            </div>
+            <div className="lg:hidden block">
+              <div onClick={toggleSideMenu} className="flex items-center ">
+                <CiFilter className="text-titleSm" /> Filter
+              </div>
+            </div>
+
             <select
               className="select max-w-xs border border-[#0000002f]"
               value={sortOrder}
@@ -230,10 +329,10 @@ export default function AllShoe() {
           <div className="flex flex-wrap gap-6 w-[100%] justify-center">
 
 
-           { filteredShoeData.length ===0 && <div className="text-titleLg mt-5">
+            {filteredShoeData.length === 0 && <div className="text-titleLg mt-5">
               No product fround
             </div>
-}
+            }
             {currentData.map((shoe) => (
               <div key={shoe.id} className="w-[260px]">
                 <div className="w-full shadow-lg rounded px-2 h-[280px] flex flex-col justify-center items-center transition-all group relative overflow-hidden">
@@ -250,8 +349,8 @@ export default function AllShoe() {
 
                   <button
                     className={`absolute w-[230px] shadow-lg transition-all duration-500 py-2 rounded uppercase top-[280px] group-hover:top-[230px] text-titleXXsm ${cartItems.some((item) => item.id === shoe.id)
-                        ? 'bg-green-300 cursor-default'
-                        : 'bg-gray-100 hover:bg-gray-200 cursor-pointer'
+                      ? 'bg-green-300 cursor-default'
+                      : 'bg-gray-100 hover:bg-gray-200 cursor-pointer'
                       }`}
                     onClick={() => {
                       if (!cartItems.some((item) => item.id === shoe.id)) {
@@ -298,36 +397,39 @@ export default function AllShoe() {
             ))}
           </div>
           {
-            filteredShoeData.length !==0 && 
-     
-          <div className="flex justify-center items-center gap-4 mt-4 mb-8">
-            <button
-              onClick={handlePreviousPage}
-              disabled={currentPage === 1}
-              className={`px-4 py-2 rounded ${currentPage === 1
-                ? "bg-gray-300 cursor-not-allowed"
-                : "bg-gray-100 hover:bg-gray-200"
-                }`}
-            >
-              {"<"}
-            </button>
-            <span className="text-lg font-medium">
-              Page {currentPage} of {totalPages}
-            </span>
-            <button
-              onClick={handleNextPage}
-              disabled={currentPage === totalPages}
-              className={`px-4 py-2 rounded ${currentPage === totalPages
-                ? "bg-gray-300 cursor-not-allowed"
-                : "bg-gray-100 hover:bg-gray-200"
-                }`}
-            >
-              {">"}
-            </button>
-          </div>     }
+            filteredShoeData.length !== 0 &&
+
+            <div className="flex justify-center items-center gap-4 mt-4 mb-8">
+              <button
+                onClick={handlePreviousPage}
+                disabled={currentPage === 1}
+                className={`px-4 py-2 rounded ${currentPage === 1
+                  ? "bg-gray-300 cursor-not-allowed"
+                  : "bg-gray-100 hover:bg-gray-200"
+                  }`}
+              >
+                {"<"}
+              </button>
+              <span className="text-lg font-medium">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+                className={`px-4 py-2 rounded ${currentPage === totalPages
+                  ? "bg-gray-300 cursor-not-allowed"
+                  : "bg-gray-100 hover:bg-gray-200"
+                  }`}
+              >
+                {">"}
+              </button>
+            </div>}
         </div>
 
       </div>
+
+
+
 
       <Footer />
     </div>
