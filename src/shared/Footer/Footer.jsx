@@ -4,7 +4,7 @@ import logo from "../../assets/logo/logo.png"
 import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa'
 export default function Footer() {
   return (
-    <div>
+    <div className='mb-[70px] lg:mb-0'>
       <div className='border lg:h-[500px]   bg-[#e4e4e4] justify-center pt-20'>
           <div className='flex lg:flex-row items-center flex-col justify-center gap-10 px-5'>
 

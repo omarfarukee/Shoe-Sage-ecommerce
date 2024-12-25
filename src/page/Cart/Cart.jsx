@@ -12,44 +12,32 @@ import Footer from "../../shared/Footer/Footer";
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const { loading, online } = useLoader();
-    const [quantities, setQuantities] = useState({}); // Initialize as an empty object
+    const [quantities, setQuantities] = useState({});
 
     // Load cart items from sessionStorage on component mount
-    const fetchCart = () => {
-        const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
-        setCartItems(storedCart)
-      }
-    
-      useEffect(() => {
-        const cartInterval = setInterval(() => {
-          fetchCart()
-        }, 100);
-        return () => clearInterval(cartInterval)
-      })
-    
-
-    // Update quantities state whenever cartItems change
     useEffect(() => {
-        const initialQuantities = cartItems.reduce((acc, item) => {
-            acc[item.id] = 1; // Default quantity for each item
+        const storedCart = JSON.parse(sessionStorage.getItem("cart")) || [];
+        setCartItems(storedCart);
+
+        // Initialize quantities
+        const initialQuantities = storedCart.reduce((acc, item) => {
+            acc[item.id] = 1; // Default quantity
             return acc;
         }, {});
         setQuantities(initialQuantities);
-    }, [cartItems]);
+    }, []);
 
     // Calculate the grand total
     const Total = cartItems.reduce((total, item) => {
         return total + (quantities[item.id] || 1) * item.price;
     }, 0);
+    const grandTotal = Total + 40 + 20;
 
-    const grandTotal = Total + 40 + 20
-    console.log(Total);
     // Function to remove an item
     const removeItem = (id) => {
         const updatedCart = cartItems.filter((item) => item.id !== id);
         setCartItems(updatedCart);
         sessionStorage.setItem("cart", JSON.stringify(updatedCart));
-
         toast.success(`Removed...`, {
             style: {
                 borderRadius: "10px",
@@ -60,17 +48,38 @@ const Cart = () => {
         });
     };
 
+    // Handle checkout: Save order details in sessionStorage
+    const handleCheckout = () => {
+        const orderCart = cartItems.map((item) => ({
+            id: item.id,
+            name: item.product_name,
+            img: item.img_1, // Include the image
+            quantity: quantities[item.id] || 1,
+            price: item.price,
+            subtotal: (quantities[item.id] || 1) * item.price,
+        }));
+        const orderSummary = {
+            items: orderCart,
+            subtotal: Total,
+            shippingFee: 40,
+            vat: 20,
+            grandTotal,
+        };
+    
+        sessionStorage.setItem("orderCart", JSON.stringify(orderSummary));
+    };
+    
     const handleIncrement = (itemId) => {
         setQuantities((prev) => ({
             ...prev,
-            [itemId]: prev[itemId] + 1,
+            [itemId]: (prev[itemId] || 1) + 1, // Increment by 1
         }));
     };
 
     const handleDecrement = (itemId) => {
         setQuantities((prev) => ({
             ...prev,
-            [itemId]: Math.max(1, prev[itemId] - 1), // Prevent quantity less than 1
+            [itemId]: Math.max(1, (prev[itemId] || 1) - 1), // Decrement but prevent going below 1
         }));
     };
 
@@ -94,10 +103,15 @@ const Cart = () => {
                         Cart ({cartItems?.length})
                     </h1>
                     <div className="lg:flex justify-center gap-5 mt-20">
-                        <div className=" lg:w-[50%] px-5">
+                        {/* cart product area */}
+                        <div className="lg:w-[50%] px-5">
                             {cartItems.length > 0 ? (
                                 <>
-                                    <div className="mt-5   lg:h-[70vh] overflow-y-scroll mb-2">
+                                    <div
+                                        className="mt-5 lg:h-[70vh] overflow-y-auto mb-2"
+                                        style={{ WebkitOverflowScrolling: 'touch' }}
+                                        onWheel={(e) => e.stopPropagation()} // Ensures smooth scrolling when hovering
+                                    >
                                         {cartItems?.map((item) => (
                                             <div key={item.id}>
                                                 <div className="lg:p-4 rounded border-b w-full flex lg:flex-row items-center gap-3 relative flex-col">
@@ -135,7 +149,9 @@ const Cart = () => {
                                                                 type="number"
                                                                 id={`quantity-${item.id}`}
                                                                 value={quantities[item.id] || 1}
-                                                                onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+                                                                onChange={(e) =>
+                                                                    handleQuantityChange(item.id, e.target.value)
+                                                                }
                                                                 className="w-full ml-4 bg-transparent outline-none text-center"
                                                                 min="1"
                                                             />
@@ -152,39 +168,50 @@ const Cart = () => {
                                                         </p>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         ))}
                                     </div>
                                 </>
                             ) : (
+                               <div className="flex flex-col items-center">
                                 <div className="flex justify-center mt-20 items-center text-titleSm">
                                     <p>Your cart is empty!</p>
                                     <TbShoppingCartOff className="text-titleMd" />
                                 </div>
+                                  <NavLink to="/allShoes">
+                                    <button className="mt-5 border-b border-red">
+                                        Shop
+                                    </button>
+                                    </NavLink>  
+                               </div>
+                                
                             )}
                         </div>
-                        <div className="border h-[400px] lg:w-[400px] lg:p-5 p-2">
+
+                        {/* cart total area */}
+                        <div className="border h-[400px] lg:w-[400px] lg:p-5 p-2 mb-3 rounded-lg shadow-lg">
                             <h1 className="uppercase text-titleSm">Cart Totals</h1>
                             <p className="uppercase border-b flex justify-between">SubTotal: <span>{Total} $</span></p>
-
-                            {Total !== 0 && <div className="mt-20 border-b">
-                                <p className="uppercase flex justify-between">Shipping Fee : <span>40 $</span></p>
-                                <p className="uppercase  flex justify-between">Vat : <span>20 $</span></p>
-                            </div>}
+                            {Total !== 0 && (
+                                <div className="mt-20 border-b">
+                                    <p className="uppercase flex justify-between">Shipping Fee : <span>40 $</span></p>
+                                    <p className="uppercase flex justify-between">Vat : <span>20 $</span></p>
+                                </div>
+                            )}
                             <p className="uppercase font-bold flex justify-between mt-5">
                                 Total: {Total === 0 ? "0" : <span>{grandTotal} $</span>}
                             </p>
-                            <NavLink to="/checkout">
-                                <button className="border bg-red mt-10 h-16 uppercase  text-white rounded-lg w-[300px] lg:ml-7">
+                            <NavLink
+                                to="/checkout"
+                                onClick={handleCheckout}
+                            >
+                                <button className="border bg-red mt-10 h-16 uppercase text-white rounded-lg w-[300px] lg:ml-7">
                                     Proceed to check out
                                 </button>
                             </NavLink>
                         </div>
-
                     </div>
                 </div>
-
             </div>
             <Footer />
         </div>

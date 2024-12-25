@@ -38,7 +38,7 @@
   top: 40px; /* Position submenu just below the parent */
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: white;
   border: 1px solid #ebebeb;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   opacity: 0;
@@ -88,7 +88,7 @@
   top: 40px; /* Position submenu just below the parent */
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: white;
   border: 1px solid #ebebeb;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   opacity: 0;

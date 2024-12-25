@@ -10,6 +10,7 @@ import Footer from "../../shared/Footer/Footer";
 import toast from "react-hot-toast";
 import useLoader from "../../shared/loader/Loader";
 import FinalLoader from "../../shared/loader/FinalLoader";
+import { RxRulerHorizontal } from "react-icons/rx";
 
 export default function AllShoe() {
 
@@ -23,6 +24,10 @@ export default function AllShoe() {
   const [maxPrice, setMaxPrice] = useState(200);
   const [selectedBrands, setSelectedBrands] = useState([]); // Selected brands
   const [sortOrder, setSortOrder] = useState("featured"); // Sort order
+  const colors = ["white", "black", "blue", "red", "green"]; // Define your colors here
+  const [selectedColor, setSelectedColor] = useState(""); // State to track the selected color
+  const [selectedSize, setSelectedSize] = useState(null); // State to track the selected size
+  const sizes = [5, 6, 7, 8, 9, 10]; // Available sizes
   const { loading, online } = useLoader();
 
   const handleMaxPriceChange = (event) => {
@@ -152,6 +157,14 @@ export default function AllShoe() {
 
   console.log(cartItems.length);
 
+  const handleSizeClick = (size) => {
+    setSelectedSize(size); // Set the clicked size as the selected size
+  };
+  const handleColorSelect = (color) => {
+    setSelectedColor(color); // Update the selected color
+  };
+
+
   if (loading || !online) {
     return <FinalLoader />;
   }
@@ -229,15 +242,68 @@ export default function AllShoe() {
                   className="w-full bg-transparent outline-none"
                 />
               </div>
-              <div className="flex justify-between mt-2">
+              <div className="flex justify-between mt-2 border">
                 <span className="text-sm text-gray-700 w-20">Min Price: $20</span>
                 <span className="text-sm text-gray-700 w-20">Max Price: ${maxPrice}</span>
+              </div>
+              {/* sizes */}
+              <div>
+                <p className="mt-5 flex items-center gap-10">Select Size: <RxRulerHorizontal className="text-titleSm" />
+                </p>
+                <div className="flex flex-wrap  gap-4">
+                  {sizes?.map((size) => (
+                    <button
+                      key={size}
+                      className={`w-12 h-12 flex justify-center items-center border rounded-md text-lg font-semibold transition-all duration-300 ${selectedSize === size
+                        ? "bg-red text-white"
+                        : "bg-gray-200 text-gray-700 hover:bg-rose-300"
+                        }`}
+                      onClick={() => handleSizeClick(size)}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+                {selectedSize && (
+                  <p className="mt-4 text-gray-700 text-md">
+                    Selected Size: <span className="font-bold">{selectedSize}</span>
+                  </p>
+                )}
+              </div>
+              {/* colors */}
+              <div>
+                <p className="mt-5 flex items-center gap-10">Colors:</p>
+                <div className="flex gap-4 mt-2">
+                  {colors.map((color) => (
+                    <div
+                      key={color}
+                      className={`h-8 w-8 rounded-full cursor-pointer ${selectedColor === color ? "border-4 border-gray-700" : "border"} ${color === "white"
+                        ? "bg-white"
+                        : color === "black"
+                          ? "bg-black"
+                          : color === "blue"
+                            ? "bg-blue-500"
+                            : color === "red"
+                              ? "bg-red"
+                              : "bg-green-500"
+                        }`}
+                      onClick={() => handleColorSelect(color)}
+                    ></div>
+                  ))}
+                </div>
+
+                {selectedColor && (
+                  <p className="mt-4">Selected Color: <span className="font-semibold">{selectedColor}</span></p>
+                )}
               </div>
             </div>
           </div>
         </div>
+
+
+
       </div>
-      {/* filtering side menu end */}
+      {/* filtering side menu end mobile */}
 
 
       <div
@@ -261,7 +327,7 @@ export default function AllShoe() {
         data-aos-duration="3000"
       >
         {/* desktop view filter */}
-        <div className="w-[250px] lg:h-[100vh] pt-2 sticky lg:block hidden">
+        <div className="w-[250px] min-h-[120vh] pt-2 sticky lg:block hidden">
           <div className="bg-[#f7f7f7] rounded mx-3 h-10 flex gap-3 text-titleXsm px-3 items-center">
             <IoIosArrowDown />
             <p>Brands</p>
@@ -297,6 +363,59 @@ export default function AllShoe() {
               <span className="text-sm text-gray-700 w-20">Min Price: $20</span>
               <span className="text-sm text-gray-700 w-20">Max Price: ${maxPrice}</span>
             </div>
+
+
+            {/* sizes */}
+            <div>
+              <p className="mt-5 flex items-center gap-10">Select Size: <RxRulerHorizontal className="text-titleSm" />
+              </p>
+              <div className="flex flex-wrap  gap-4">
+                {sizes?.map((size) => (
+                  <button
+                    key={size}
+                    className={`w-12 h-12 flex justify-center items-center border rounded-md text-lg font-semibold transition-all duration-300 ${selectedSize === size
+                      ? "bg-red text-white"
+                      : "bg-gray-200 text-gray-700 hover:bg-rose-300"
+                      }`}
+                    onClick={() => handleSizeClick(size)}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+              {selectedSize && (
+                <p className="mt-4 text-gray-700 text-md">
+                  Selected Size: <span className="font-bold">{selectedSize}</span>
+                </p>
+              )}
+            </div>
+            {/* colors */}
+            <div>
+              <p className="mt-5 flex items-center gap-10">Colors:</p>
+              <div className="flex gap-4 mt-2">
+                {colors.map((color) => (
+                  <div
+                    key={color}
+                    className={`h-6 w-6 rounded-full cursor-pointer ${selectedColor === color ? "border-4 border-gray-700" : "border"} ${color === "white"
+                      ? "bg-white"
+                      : color === "black"
+                        ? "bg-black"
+                        : color === "blue"
+                          ? "bg-blue-500"
+                          : color === "red"
+                            ? "bg-red"
+                            : "bg-green-500"
+                      }`}
+                    onClick={() => handleColorSelect(color)}
+                  ></div>
+                ))}
+              </div>
+
+              {selectedColor && (
+                <p className="mt-4">Selected Color: <span className="font-semibold">{selectedColor}</span></p>
+              )}
+            </div>
+
           </div>
         </div>
 
@@ -329,8 +448,8 @@ export default function AllShoe() {
           <div className="flex flex-wrap gap-6 w-[100%] justify-center">
 
 
-            {filteredShoeData.length === 0 && <div className="text-titleLg mt-5">
-              No product fround
+            {filteredShoeData.length === 0 && <div className="text-titleLg text-center mt-5">
+              No product found
             </div>
             }
             {currentData.map((shoe) => (

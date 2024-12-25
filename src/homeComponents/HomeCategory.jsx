@@ -119,6 +119,7 @@ export default function HomeCategory() {
                   <span className="font-bold leading-[60px]">Sandal</span>{" "}
                   Collection
                 </div>
+                <NavLink to="/allShoes">
                 <button className="group uppercase transition-all duration-300 mt-3">
                   <span className="flex items-center">
                     Shop Now
@@ -126,6 +127,7 @@ export default function HomeCategory() {
                   </span>
                   <div className="w-5 h-[2px] bg-white group-hover:w-20 transition-all duration-300"></div>
                 </button>
+                </NavLink>
               </div>
 
               {/* Overlay with gradient */}
