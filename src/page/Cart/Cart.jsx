@@ -14,18 +14,29 @@ const Cart = () => {
     const { loading, online } = useLoader();
     const [quantities, setQuantities] = useState({});
 
-    // Load cart items from sessionStorage on component mount
     useEffect(() => {
-        const storedCart = JSON.parse(sessionStorage.getItem("cart")) || [];
-        setCartItems(storedCart);
-
-        // Initialize quantities
-        const initialQuantities = storedCart.reduce((acc, item) => {
+        const fetchCartData = () => {
+          const storedCart = JSON.parse(sessionStorage.getItem("cart")) || [];
+          setCartItems(storedCart);
+      
+          // Initialize quantities
+          const initialQuantities = storedCart.reduce((acc, item) => {
             acc[item.id] = 1; // Default quantity
             return acc;
-        }, {});
-        setQuantities(initialQuantities);
-    }, []);
+          }, {});
+          setQuantities(initialQuantities);
+        };
+      
+        // Fetch data immediately
+        fetchCartData();
+      
+        // Set interval to fetch data every second
+        const interval = setInterval(fetchCartData, 100);
+      
+        // Cleanup interval on component unmount
+        return () => clearInterval(interval);
+      }, []);
+      
 
     // Calculate the grand total
     const Total = cartItems.reduce((total, item) => {
@@ -179,7 +190,7 @@ const Cart = () => {
                                     <TbShoppingCartOff className="text-titleMd" />
                                 </div>
                                   <NavLink to="/allShoes">
-                                    <button className="mt-5 border-b border-red">
+                                    <button className="mt-5 border-b border px-6 rounded-lg bg-red text-white py-2">
                                         Shop
                                     </button>
                                     </NavLink>  

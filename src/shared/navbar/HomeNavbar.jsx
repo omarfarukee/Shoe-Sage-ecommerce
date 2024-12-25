@@ -337,15 +337,11 @@ export default function HomeNavbar() {
               </div>
               <div className="flex flex-col gap-2 justify-center items-center mt-5">
                 <NavLink to="/cart">
-                  <button className="w-[300px] hover:bg-gray-100 transition-all duration-300 rounded-md h-10 bg-[#f7f7f7]">
+                  <button className="w-[300px] hover:bg-gray-100 hover:text-black transition-all duration-300 rounded-md h-10 bg-red text-white">
                     View Cart
                   </button>
                 </NavLink>
-                <NavLink to="/checkout">
-                  <button className="border bg-red text-white rounded-lg w-[300px] h-10">
-                    Check Out
-                  </button>
-                </NavLink>
+               
               </div>
             </div>
           </>

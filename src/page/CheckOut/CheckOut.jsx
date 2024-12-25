@@ -21,7 +21,7 @@ const CheckOut = () => {
     const subtotal = orderCart?.items?.map((item) => item?.subtotal)
     if (!orderCart || subtotal?.length === 0) {
         return (
-            <div className="text-center pt-20">
+            <div className="text-center pt-40">
                 <h2 className="text-2xl font-bold">No items in your checkout!</h2>
                 <NavLink to="/cart" className="text-red-500 underline mt-5 block">
                     Go to Cart
