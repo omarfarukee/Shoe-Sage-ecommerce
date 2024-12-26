@@ -21,12 +21,15 @@ export default function Contact() {
 
       <div className='pt-40 mb-40'>
         <div className='flex flex-col justify-center items-center text-center'>
-          <h1 className='formal-collection-text lg:text-titleXxxl text-titleXl text-red'>Get in touch</h1>
-          <p className=''>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate nobis quidem doloremque.</p>
+          <h1 className='formal-collection-text lg:text-titleXxxl text-titleXl text-red' data-aos="fade-down"
+            data-aos-duration="3000">Get in touch</h1>
+          <p className='' data-aos="fade-down"
+            data-aos-duration="2000">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate nobis quidem doloremque.</p>
         </div>
 
         <div className='flex flex-wrap gap-5 justify-center mt-10'>
-          <div className='w-[300px] h-[250px] border border-[#0000000a] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
+          <div data-aos="fade-up"
+            data-aos-duration="1000" className='w-[300px] h-[250px] border border-[#0000000a] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
             <div>
               <p className='p-3 w-16 rounded-xl bg-rose-50'>
                 <LiaFacebookMessenger className='text-titleMd text-red' />
@@ -36,7 +39,8 @@ export default function Contact() {
               <button className='px-3  py-1 rounded-lg mt-5 bg-rose-50 hover:text-white hover:bg-red transition-all duration-300 flex items-center gap-1'>Via Messenger <LiaFacebookMessenger /></button>
             </div>
           </div>
-          <div className='w-[300px] h-[250px] border border-[#0000000a] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
+          <div data-aos="fade-up"
+            data-aos-duration="1500" className='w-[300px] h-[250px] border border-[#0000000a] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
             <div>
               <p className='p-3 w-16 rounded-xl bg-rose-50'>
                 <LiaWhatsapp className='text-titleMd text-red' />
@@ -46,7 +50,8 @@ export default function Contact() {
               <button className='px-3  py-1 rounded-lg mt-5 bg-rose-50 hover:text-white hover:bg-red transition-all duration-300 flex items-center gap-1'>Via What&apos;s app <LiaWhatsapp /></button>
             </div>
           </div>
-          <div className='w-[300px] h-[250px] border border-[#0000000a] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
+          <div data-aos="fade-up"
+            data-aos-duration="2000" className='w-[300px] h-[250px] border border-[#0000000a] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
             <div>
               <p className='p-3 w-16 rounded-xl bg-rose-50'>
                 <IoLocationOutline className='text-titleMd text-red' />
@@ -56,7 +61,8 @@ export default function Contact() {
               <button className='px-3  py-1 rounded-lg mt-5 bg-rose-50 hover:text-white hover:bg-red transition-all duration-300 flex items-center gap-1'>Get direction <IoLocationOutline /></button>
             </div>
           </div>
-          <div className='w-[300px] h-[250px] border border-[#0000000a] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
+          <div data-aos="fade-up"
+            data-aos-duration="3000" className='w-[300px] h-[250px] border border-[#0000000a] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
             <div>
               <p className='p-3 w-16 rounded-xl bg-rose-50'>
                 <IoCallOutline className='text-titleMd text-red' />
@@ -70,12 +76,14 @@ export default function Contact() {
 
         <div className='flex flex-col items-center mt-10 justify-center'>
 
-          <div className='mt-4 mb-5 flex flex-col items-center'>
+          <div className='mt-4 mb-5 flex flex-col items-center' data-aos="fade-up"
+            data-aos-duration="3000">
             <h1 className='text-titleMd'>Message us</h1>
             <p>We will get back you within 24 hours.</p>
           </div>
 
-          <div className='lg:w-[70%] w-[90%] border border-[#0000000a] p-5 rounded-xl bg-transparent backdrop-blur-contact z-10'>
+          <div data-aos="fade-down"
+            data-aos-duration="3000" className='lg:w-[70%] w-[90%] border border-[#0000000a] p-5 rounded-xl bg-transparent backdrop-blur-contact z-10'>
             <form className=''>
               <div className='flex w-full gap-3'>
                 <div className='w-full'>
@@ -117,9 +125,9 @@ export default function Contact() {
 
 
               <button type='submit' className='px-3  py-1 w-[200px] h-[50px] justify-center rounded-lg mt-5 bg-rose-100 hover:text-white hover:bg-red transition-all duration-300 flex items-center gap-1'>Submit<AiOutlineSend /></button>
-             
+
             </form>
-            
+
           </div>
           <ContactSVG />
         </div>

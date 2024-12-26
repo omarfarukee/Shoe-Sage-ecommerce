@@ -41,7 +41,7 @@ export default function HomeOfferCollection() {
     }, []);
     return (
         <div className="mb-20 mt-20">
-            <div className="lg:px-10 px-5">
+            <div className="lg:px-10">
                 <div
                     className="relative items-center flex justify-center lg:h-[75vh] h-[600px] rounded-sm "
                     style={{
@@ -59,7 +59,7 @@ export default function HomeOfferCollection() {
                         <div className="">
                             <p className="text-red uppercase" data-aos="fade-right"
                                 data-aos-duration="3000">Deal of the week</p>
-                            <h1 className=" mb-4 lg:text-titleXl text-titleSm text-titleSm uppercase" data-aos="fade-right"
+                            <h1 className=" mb-4 lg:text-titleXl text-titleSm uppercase" data-aos="fade-right"
                                 data-aos-duration="3000"><span className="font-bold">Winter</span> Collection</h1>
                             <p className="text-lg" data-aos="fade-right"
                                 data-aos-duration="3000">
