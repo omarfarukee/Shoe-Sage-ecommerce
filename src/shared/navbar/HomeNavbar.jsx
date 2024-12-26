@@ -82,7 +82,8 @@ export default function HomeNavbar() {
   };
 
   const location = useLocation();
-  const isLoginPage = location.pathname === '/login' || location.pathname === '/signUp' || location.pathname === '/allShoes' || location.pathname === '/shop/formal' || location.pathname === '/shop/sports' || location.pathname === '/shop/sneakers' || location.pathname === '/settings' || location.pathname === '/contact';
+  const isLoginPage = location.pathname === '/login' || location.pathname === '/signUp' || location.pathname === '/allShoes' || location.pathname === '/shop/formal' || location.pathname === '/shop/sports' || location.pathname === '/shop/sneakers' || location.pathname === '/settings' 
+  ;
   const navBg = location.pathname === '/allShoes' || location.pathname === '/allShoes' || location.pathname === '/shop/formal' || location.pathname === '/shop/sports' || location.pathname === '/shop/sneakers' || location.pathname === '/settings' || location.pathname === '/contact';
 
   // Function to remove an item
@@ -147,7 +148,7 @@ export default function HomeNavbar() {
         <div
           className={`border-b h-24 flex w-full fixed z-50 transition-all duration-500 ${scrolled
             ? `${navBg ? "bg-red shadow-md border-none px-[5.5%]" : "shadow-md bg-white px-[5.5%]"} `
-            : "px-[5%] bg-transparent backdrop-blur-sm border-b border-[#37363844]"
+            : "px-[5%] bg-transparent backdrop-blur-sm border-b border-[#3736380f]"
             }`}
         >
           <div className="flex h-full  items-center px-4 py-2 w-[60%]">
