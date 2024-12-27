@@ -310,7 +310,8 @@ export default function Formal() {
       >
         <div className="absolute h-[65vh] inset-0 bg-black opacity-50"></div>
         <div className="relative z-10 formal-collection-text text-titleXl  lg:text-[12em] text-red">
-          <h1>Formal Collections</h1>
+          <h1 data-aos="fade-down"
+            data-aos-duration="2000">Formal Collections</h1>
         </div>
       </div>
 

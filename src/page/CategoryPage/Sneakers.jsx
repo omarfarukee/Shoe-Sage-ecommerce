@@ -311,7 +311,8 @@ export default function Sneakers() {
       >
         <div className="absolute h-[65vh] inset-0 bg-black opacity-50"></div>
         <div className="relative z-10 formal-collection-text text-titleXl  lg:text-[12em] text-red">
-          <h1>Sports Collections</h1>
+          <h1 data-aos="fade-down"
+            data-aos-duration="2000">Sneakers Collections</h1>
         </div>
       </div>
 

@@ -29,7 +29,7 @@ export default function Contact() {
 
         <div className='flex flex-wrap gap-5 justify-center mt-10'>
           <div data-aos="fade-up"
-            data-aos-duration="1000" className='w-[300px] h-[250px] border border-[#0000000a] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
+            data-aos-duration="1000" className='w-[300px] h-[250px] border border-[#c3001031] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
             <div>
               <p className='p-3 w-16 rounded-xl bg-rose-50'>
                 <LiaFacebookMessenger className='text-titleMd text-red' />
@@ -40,7 +40,7 @@ export default function Contact() {
             </div>
           </div>
           <div data-aos="fade-up"
-            data-aos-duration="1500" className='w-[300px] h-[250px] border border-[#0000000a] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
+            data-aos-duration="1500" className='w-[300px] h-[250px] border border-[#c3001031] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
             <div>
               <p className='p-3 w-16 rounded-xl bg-rose-50'>
                 <LiaWhatsapp className='text-titleMd text-red' />
@@ -51,7 +51,7 @@ export default function Contact() {
             </div>
           </div>
           <div data-aos="fade-up"
-            data-aos-duration="2000" className='w-[300px] h-[250px] border border-[#0000000a] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
+            data-aos-duration="2000" className='w-[300px] h-[250px] border border-[#c3001031] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
             <div>
               <p className='p-3 w-16 rounded-xl bg-rose-50'>
                 <IoLocationOutline className='text-titleMd text-red' />
@@ -62,7 +62,7 @@ export default function Contact() {
             </div>
           </div>
           <div data-aos="fade-up"
-            data-aos-duration="3000" className='w-[300px] h-[250px] border border-[#0000000a] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
+            data-aos-duration="3000" className='w-[300px] h-[250px] border border-[#c3001031] rounded-lg p-5 hover:shadow-lg z-10 transition-all duration-300'>
             <div>
               <p className='p-3 w-16 rounded-xl bg-rose-50'>
                 <IoCallOutline className='text-titleMd text-red' />
@@ -83,7 +83,7 @@ export default function Contact() {
           </div>
 
           <div data-aos="fade-down"
-            data-aos-duration="3000" className='lg:w-[70%] w-[90%] border border-[#0000000a] p-5 rounded-xl bg-transparent backdrop-blur-contact z-10'>
+            data-aos-duration="3000" className='lg:w-[70%] w-[90%] border border-[#c3001031] p-5 rounded-xl bg-transparent backdrop-blur-contact z-10'>
             <form className=''>
               <div className='flex w-full gap-3'>
                 <div className='w-full'>
