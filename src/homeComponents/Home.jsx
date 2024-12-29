@@ -21,7 +21,7 @@ const Home = () => {
     <div className=''>
       <Helmet>
         {/* for SEC */}
-        <title>Home - CoderXen</title>
+        <title>Home - Shoesage</title>
         <meta name="description" content="Learn more about our company and team on our About Us page." />
         <meta name="keywords" content="About, Company, Team, Services" />
         <meta property="og:title" content="About Us - Your Website Name" />

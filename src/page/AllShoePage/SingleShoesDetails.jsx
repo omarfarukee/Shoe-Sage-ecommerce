@@ -171,6 +171,9 @@ export default function SingleShoesDetails() {
     setSelectedColor(color); // Update the selected color
   };
 
+
+  // console.log(shoe?.img_black);
+
   if (loading || !online) {
     return <FinalLoader />;
   }
@@ -216,6 +219,7 @@ export default function SingleShoesDetails() {
             <div className="mt-10">
               <p className="text-titleMd font-semibold">{shoe?.product_name}</p>
               <p className="text-titleXsm mt-5">Price: {shoe?.price}$</p>
+              <img className="w-20" src={shoe?.img_black} alt="" />
               <p className="mt-5">{shoe?.description}</p>
               <div>
                 <p className="mt-5 flex items-center gap-10">Select Size: <RxRulerHorizontal className="text-titleSm" />
