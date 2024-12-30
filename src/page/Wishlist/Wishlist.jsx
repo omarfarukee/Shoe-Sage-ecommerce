@@ -5,6 +5,7 @@ import FinalLoader from '../../shared/loader/FinalLoader';
 import { IoMdClose } from 'react-icons/io';
 import Footer from '../../shared/Footer/Footer';
 import { NavLink } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 export default function Wishlist() {
   const { loading, online } = useLoader();
@@ -29,6 +30,15 @@ export default function Wishlist() {
 
   return (
     <div className="pt-28">
+      <Helmet>
+        {/* for SEC */}
+        <title>Wishlist - Shoesage</title>
+        <meta name="description" content="Learn more about our company and team on our About Us page." />
+        <meta name="keywords" content="About, Company, Team, Services" />
+        <meta property="og:title" content="About Us - Your Website Name" />
+        <meta property="og:description" content="Learn more about our company and team on our About Us page." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <div className="text-titleLg border-b mb-5 px-10"><p>Wishlist</p></div>
 
       {/* Wishlist Items */}

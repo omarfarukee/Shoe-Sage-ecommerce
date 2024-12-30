@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import useLoader from "../../shared/loader/Loader";
 import FinalLoader from "../../shared/loader/FinalLoader";
 import { RxRulerHorizontal } from "react-icons/rx";
+import { Helmet } from "react-helmet";
 
 export default function AllShoe() {
 
@@ -171,6 +172,16 @@ export default function AllShoe() {
 
   return (
     <div className="overflow-hidden">
+
+      <Helmet>
+        {/* for SEC */}
+        <title>All Shoe - Shoesage</title>
+        <meta name="description" content="Learn more about our company and team on our About Us page." />
+        <meta name="keywords" content="About, Company, Team, Services" />
+        <meta property="og:title" content="About Us - Your Website Name" />
+        <meta property="og:description" content="Learn more about our company and team on our About Us page." />
+        <meta property="og:type" content="website" />
+      </Helmet>
 
       {cartItems.length !== 0 &&
         <NavLink to="/cart">

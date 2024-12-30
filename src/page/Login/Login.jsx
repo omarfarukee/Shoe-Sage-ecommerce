@@ -7,6 +7,7 @@ import { FaEye, FaEyeSlash, FaFacebook, FaLock, FaUser } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import logo from "../../assets/logo/logo.png";
+import { Helmet } from 'react-helmet';
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -35,6 +36,15 @@ const Login = () => {
                 backgroundRepeat: "no-repeat",
             }}
         >
+            <Helmet>
+        {/* for SEC */}
+        <title>Login - Shoesage</title>
+        <meta name="description" content="Learn more about our company and team on our About Us page." />
+        <meta name="keywords" content="About, Company, Team, Services" />
+        <meta property="og:title" content="About Us - Your Website Name" />
+        <meta property="og:description" content="Learn more about our company and team on our About Us page." />
+        <meta property="og:type" content="website" />
+      </Helmet>
             <div className="absolute inset-0 bg-black opacity-50"></div>
             <div className=''>
                    <div className='lg:w-[70vw] flex lg:h-[80vh] border shadow-xl border-[#00000028]  rounded-lg lg:mt-20 mt-3 items-center bg-transparent backdrop-blur-sm '>

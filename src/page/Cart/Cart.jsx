@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import Footer from "../../shared/Footer/Footer";
+import { Helmet } from "react-helmet";
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -65,10 +66,10 @@ const Cart = () => {
             vat: 20,
             grandTotal,
         };
-    
+
         sessionStorage.setItem("orderCart", JSON.stringify(orderSummary));
     };
-    
+
     const handleIncrement = (itemId) => {
         setQuantities((prev) => ({
             ...prev,
@@ -97,6 +98,15 @@ const Cart = () => {
 
     return (
         <div>
+            <Helmet>
+                {/* for SEC */}
+                <title>Cart - Shoesage</title>
+                <meta name="description" content="Learn more about our company and team on our About Us page." />
+                <meta name="keywords" content="About, Company, Team, Services" />
+                <meta property="og:title" content="About Us - Your Website Name" />
+                <meta property="og:description" content="Learn more about our company and team on our About Us page." />
+                <meta property="og:type" content="website" />
+            </Helmet>
             <div className="pt-28 flex justify-center">
                 <div className="lg:w-[90vw] lg:h-[100vh]">
                     <h1 className="text-titleLg font-semibold border-b border-red">
@@ -173,18 +183,18 @@ const Cart = () => {
                                     </div>
                                 </>
                             ) : (
-                               <div className="flex flex-col items-center">
-                                <div className="flex justify-center mt-20 items-center text-titleSm ">
-                                    <p>Your cart is empty!</p>
-                                    <TbShoppingCartOff className="text-titleMd" />
+                                <div className="flex flex-col items-center">
+                                    <div className="flex justify-center mt-20 items-center text-titleSm ">
+                                        <p>Your cart is empty!</p>
+                                        <TbShoppingCartOff className="text-titleMd" />
+                                    </div>
+                                    <NavLink to="/allShoes">
+                                        <button className="mt-5 border-b border px-6 mb-10 rounded-lg bg-red text-white py-2">
+                                            Shop
+                                        </button>
+                                    </NavLink>
                                 </div>
-                                  <NavLink to="/allShoes">
-                                    <button className="mt-5 border-b border px-6 mb-10 rounded-lg bg-red text-white py-2">
-                                        Shop
-                                    </button>
-                                    </NavLink>  
-                               </div>
-                                
+
                             )}
                         </div>
 

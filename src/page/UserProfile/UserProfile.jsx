@@ -9,6 +9,7 @@ import shoe from "../../assets/backgrounds/shoe3.jpeg";
 import { FaUserAlt } from 'react-icons/fa';
 import { SiGmail } from 'react-icons/si';
 import Footer from '../../shared/Footer/Footer';
+import { Helmet } from 'react-helmet';
 export default function UserProfile() {
     const { loading, online } = useLoader();
     const navigate = useNavigate();
@@ -32,6 +33,15 @@ export default function UserProfile() {
     }
     return (
         <div className='overflow-hidden'>
+            <Helmet>
+        {/* for SEC */}
+        <title>Profile - Shoesage</title>
+        <meta name="description" content="Learn more about our company and team on our About Us page." />
+        <meta name="keywords" content="About, Company, Team, Services" />
+        <meta property="og:title" content="About Us - Your Website Name" />
+        <meta property="og:description" content="Learn more about our company and team on our About Us page." />
+        <meta property="og:type" content="website" />
+      </Helmet>
             {/* Background Section */}
             <div
                 className="overflow-hidden h-[65vh] w-screen flex justify-center items-center"

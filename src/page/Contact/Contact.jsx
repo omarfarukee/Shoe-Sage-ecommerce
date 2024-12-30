@@ -8,6 +8,7 @@ import { LiaFacebookMessenger, LiaWhatsapp } from 'react-icons/lia';
 import { IoCallOutline, IoLocationOutline } from 'react-icons/io5';
 import Footer from '../../shared/Footer/Footer';
 import { AiOutlineSend } from 'react-icons/ai';
+import { Helmet } from 'react-helmet';
 
 export default function Contact() {
   const { loading, online } = useLoader();
@@ -16,7 +17,15 @@ export default function Contact() {
   }
   return (
     <div className=''>
-
+      <Helmet>
+        {/* for SEC */}
+        <title>Contact - Shoesage</title>
+        <meta name="description" content="Learn more about our company and team on our About Us page." />
+        <meta name="keywords" content="About, Company, Team, Services" />
+        <meta property="og:title" content="About Us - Your Website Name" />
+        <meta property="og:description" content="Learn more about our company and team on our About Us page." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <ContactSVG />
 
       <div className='pt-40 mb-40'>

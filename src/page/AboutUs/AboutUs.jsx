@@ -10,6 +10,7 @@ import img2 from "../../assets/shoe-images/part2.jpg"
 import img3 from "../../assets/shoe-images/part3.jpg"
 import img4 from "../../assets/shoe-images/part4.jpg"
 import img5 from "../../assets/shoe-images/part5.jpg"
+import { Helmet } from 'react-helmet';
 const AboutUs = () => {
     const { loading, online } = useLoader();
     if (loading || !online) {
@@ -18,6 +19,15 @@ const AboutUs = () => {
 
     return (
         <div className='overflow-hidden'>
+            <Helmet>
+        {/* for SEC */}
+        <title>About US - Shoesage</title>
+        <meta name="description" content="Learn more about our company and team on our About Us page." />
+        <meta name="keywords" content="About, Company, Team, Services" />
+        <meta property="og:title" content="About Us - Your Website Name" />
+        <meta property="og:description" content="Learn more about our company and team on our About Us page." />
+        <meta property="og:type" content="website" />
+      </Helmet>
             <div>
                 <div className="relative flex justify-center items-center w-full h-[70vh] mb-20">
                     {/* Image */}

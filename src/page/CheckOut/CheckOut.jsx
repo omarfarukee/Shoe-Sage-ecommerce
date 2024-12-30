@@ -4,6 +4,7 @@ import Footer from '../../shared/Footer/Footer';
 import useLoader from '../../shared/loader/Loader';
 import FinalLoader from '../../shared/loader/FinalLoader';
 import { NavLink } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const CheckOut = () => {
     const { loading, online } = useLoader();
@@ -34,6 +35,15 @@ const CheckOut = () => {
     }
     return (
         <div className='p-2'>
+            <Helmet>
+        {/* for SEC */}
+        <title>Checkout - Shoesage</title>
+        <meta name="description" content="Learn more about our company and team on our About Us page." />
+        <meta name="keywords" content="About, Company, Team, Services" />
+        <meta property="og:title" content="About Us - Your Website Name" />
+        <meta property="og:description" content="Learn more about our company and team on our About Us page." />
+        <meta property="og:type" content="website" />
+      </Helmet>
             <div className='pt-28 text-titleMd lg:text-titleLg p-5 border-b'>
                 Shipping and Checkout
             </div>

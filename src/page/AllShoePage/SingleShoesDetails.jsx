@@ -9,6 +9,7 @@ import Footer from "../../shared/Footer/Footer";
 import FinalLoader from "../../shared/loader/FinalLoader";
 import toast from "react-hot-toast";
 import useLoader from "../../shared/loader/Loader";
+import { Helmet } from "react-helmet";
 
 export default function SingleShoesDetails() {
   const { id } = useParams(); // Get the ID from the URL
@@ -186,6 +187,15 @@ export default function SingleShoesDetails() {
   console.log(selectedImage)
   return (
     <div>
+      <Helmet>
+        {/* for SEC */}
+        <title>Details - Shoesage</title>
+        <meta name="description" content="Learn more about our company and team on our About Us page." />
+        <meta name="keywords" content="About, Company, Team, Services" />
+        <meta property="og:title" content="About Us - Your Website Name" />
+        <meta property="og:description" content="Learn more about our company and team on our About Us page." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <div className="flex justify-center">
         <div className="pt-36 flex lg:flex-row flex-col w-[1200px] justify-between">
           <div className="lg:w-[600px] lg:h-[550px]  flex lg:flex-row flex-col justify-center gap-10 items-center">

@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 import logo from "../../assets/logo/logo.png";
 import { FcGoogle } from 'react-icons/fc';
 import { SiGmail } from 'react-icons/si';
+import { Helmet } from 'react-helmet';
 const SignUp = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -49,6 +50,15 @@ const SignUp = () => {
         backgroundRepeat: 'no-repeat',
       }}
     >
+      <Helmet>
+        {/* for SEC */}
+        <title>Signup - Shoesage</title>
+        <meta name="description" content="Learn more about our company and team on our About Us page." />
+        <meta name="keywords" content="About, Company, Team, Services" />
+        <meta property="og:title" content="About Us - Your Website Name" />
+        <meta property="og:description" content="Learn more about our company and team on our About Us page." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
       <div className='lg:w-[70vw] flex  lg:h-[80vh] border shadow-xl border-[#0000002a]  rounded-lg mt-5 lg:mt-20 items-center bg-transparent backdrop-blur-sm'>
