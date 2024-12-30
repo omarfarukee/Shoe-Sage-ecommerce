@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import axios from "axios";
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
@@ -30,28 +29,15 @@ export default function SingleShoesDetails() {
   // Load cart items from sessionStorage on component mount
   const fetchCart = () => {
     const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
-    setCartItems(storedCart)
+    setCartItems(storedCart);
   }
 
   useEffect(() => {
-    const cartInterval = setInterval(() => {
-      fetchCart()
-    }, 100);
-    return () => clearInterval(cartInterval)
-  })
+    const cartInterval = setInterval(fetchCart, 100);
+    return () => clearInterval(cartInterval);
+  }, []);
 
-
-
-  const handleSizeClick = (size) => {
-    setSelectedSize(size); // Set the clicked size as the selected size
-  };
-
-  const [zoomStyles, setZoomStyles] = useState({
-    backgroundImage: "",
-    backgroundPosition: "center",
-    backgroundSize: "contain",
-  });
-
+  // Fetch shoe data
   useEffect(() => {
     axios
       .get("/Shoe.json") // Replace with your actual JSON file path
@@ -67,16 +53,86 @@ export default function SingleShoesDetails() {
       });
   }, [id]);
 
-  if (!shoe) {
-    return <p>Loading...</p>;
-  }
+  // Handle size click
+  const handleSizeClick = (size) => {
+    setSelectedSize(size);
+  };
 
-  // Handle image click
+  // Handle color select and update the selected image
+  const handleColorSelect = (color) => {
+    setSelectedColor(color);
+    const colorImageKey = `img_${color}`; // Generate the key dynamically (e.g., img_green)
+
+    // Check if the selected color image exists
+    if (shoe[colorImageKey]) {
+      setSelectedImage(shoe[colorImageKey]); // Set the big image to the selected color's image
+    } else {
+      // If the color image doesn't exist, show an alert
+      toast.error(`The color ${color} is not available for this shoe.`, {
+        style: {
+          borderRadius: "10px",
+          background: "#f44336",
+          color: "#fff",
+          height: "70px",
+        },
+      });
+    }
+  };
+
+
+  // Handle image click to update the big image
   const handleImageClick = (img) => {
     setSelectedImage(img);
   };
 
-  // Handle mouse move to show the zoom effect
+  // Add to cart with color-specific image
+  const handleAddToCart = () => {
+    // Clone the shoe object to avoid direct state mutation
+    const shoeForCart = { ...shoe };
+
+    // If a valid color is selected and its image exists, set it as img_1
+    if (selectedColor) {
+      const colorImageKey = `img_${selectedColor}`;
+      if (shoeForCart[colorImageKey]) {
+        shoeForCart.img_1 = shoeForCart[colorImageKey]; // Update img_1
+      }
+    }
+
+    // Check if the item is already in the cart
+    if (cartItems.some((item) => item.id === shoe.id)) {
+      toast.success("This item is already in your cart.", {
+        style: {
+          borderRadius: "10px",
+          background: "#4caf50",
+          color: "#fff",
+          height: "70px",
+        },
+      });
+      return;
+    }
+
+    // Add the updated shoe to the cart
+    const updatedCart = [...cartItems, shoeForCart];
+    setCartItems(updatedCart);
+    sessionStorage.setItem("cart", JSON.stringify(updatedCart));
+
+    toast.success(`${shoe.product_name} added to your cart`, {
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+        height: "70px",
+      },
+    });
+  };
+
+  // Handle zoom effect on image
+  const [zoomStyles, setZoomStyles] = useState({
+    backgroundImage: "",
+    backgroundPosition: "center",
+    backgroundSize: "contain",
+  });
+
   const handleMouseMove = (e) => {
     const rect = e.target.getBoundingClientRect(); // Get the bounding box of the image
     const xPercent = ((e.clientX - rect.left) / rect.width) * 100; // Calculate X as a percentage
@@ -98,86 +154,36 @@ export default function SingleShoesDetails() {
     });
   };
 
-  const handleIncrement = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
-
-  // reviews area 
+  const handleIncrement = () => setQuantity(quantity + 1);
+  const handleDecrement = () => quantity > 1 && setQuantity(quantity - 1);
 
   const handleRatingClick = (value) => {
     setRating(value === rating ? 0 : value);
   };
 
   const renderRatingStars = () => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      const starClass = i <= rating ? 'text-yellow-500' : 'text-gray-300';
-      stars.push(
-        <span
-          key={i}
-          onClick={() => handleRatingClick(i)}
-          className={`text-titleSm font-extrabold cursor-pointer ${starClass}`}
-        >
-          ★
-        </span>
-      );
-    }
-    return stars;
+    return [...Array(5)].map((_, i) => (
+      <span
+        key={i}
+        onClick={() => handleRatingClick(i + 1)}
+        className={`text-titleSm font-extrabold cursor-pointer ${i < rating ? "text-yellow-500" : "text-gray-300"
+          }`}
+      >
+        ★
+      </span>
+    ));
   };
 
-  // reviews area end
-
-
-
-
-  const handleAddToCart = (shoe) => {
-    // Check if the item is already in the cart
-    if (cartItems?.some((item) => item.id === shoe.id)) {
-      toast.success('', {
-        style: {
-          borderRadius: '10px',
-          background: '#4caf50',
-          color: '#fff',
-          height: "70px"
-        },
-      });
-      return;
-    }
-
-    // Add the new item to the cart
-    const updatedCart = [...cartItems, shoe];
-    setCartItems(updatedCart);
-    sessionStorage.setItem('cart', JSON.stringify(updatedCart));
-
-    toast.success(`${shoe?.product_name} Added to you cart`, {
-      style: {
-        borderRadius: '10px',
-        background: '#333',
-        color: '#fff',
-        height: "70px"
-      },
-    });
-  };
-
-
-
-  const handleColorSelect = (color) => {
-    setSelectedColor(color); // Update the selected color
-  };
-
-
-  // console.log(shoe?.img_black);
-
+  // Return loading or main content
   if (loading || !online) {
     return <FinalLoader />;
   }
 
+  if (!shoe) {
+    return <p>Loading...</p>;
+  }
+
+  console.log(selectedImage)
   return (
     <div>
       <div className="flex justify-center">
@@ -198,6 +204,7 @@ export default function SingleShoesDetails() {
             </div>
 
             {/* Big Image with Zoom Effect */}
+            {/* Big Image with Zoom Effect */}
             <div
               className="relative lg:w-[400px] w-[300px] h-[300px] lg:h-[400px] overflow-hidden cursor-zoom-in"
               style={zoomStyles.backgroundImage ? zoomStyles : {}} // Apply dynamic styles
@@ -206,12 +213,13 @@ export default function SingleShoesDetails() {
             >
               {!zoomStyles.backgroundImage && (
                 <img
-                  className="w-full h-full object-contain "
+                  className="w-full h-full object-contain"
                   src={selectedImage}
-                  alt=""
+                  alt="Selected Shoe"
                 />
               )}
             </div>
+
           </div>
           <div className="lg:w-[600px] lg:h-[500px] lg:ml-16 ml-3">
             <NavLink to="/">Home /</NavLink>
@@ -219,7 +227,6 @@ export default function SingleShoesDetails() {
             <div className="mt-10">
               <p className="text-titleMd font-semibold">{shoe?.product_name}</p>
               <p className="text-titleXsm mt-5">Price: {shoe?.price}$</p>
-              <img className="w-20" src={shoe?.img_black} alt="" />
               <p className="mt-5">{shoe?.description}</p>
               <div>
                 <p className="mt-5 flex items-center gap-10">Select Size: <RxRulerHorizontal className="text-titleSm" />
@@ -252,14 +259,14 @@ export default function SingleShoesDetails() {
                     <div
                       key={color}
                       className={`h-8 w-8 rounded-full cursor-pointer ${selectedColor === color ? "border-4 border-gray-700" : "border"} ${color === "white"
-                          ? "bg-white"
-                          : color === "black"
-                            ? "bg-black"
-                            : color === "blue"
-                              ? "bg-blue-500"
-                              : color === "red"
-                                ? "bg-red"
-                                : "bg-green-500"
+                        ? "bg-white"
+                        : color === "black"
+                          ? "bg-black"
+                          : color === "blue"
+                            ? "bg-blue-500"
+                            : color === "red"
+                              ? "bg-red"
+                              : "bg-green-500"
                         }`}
                       onClick={() => handleColorSelect(color)}
                     ></div>
@@ -270,6 +277,13 @@ export default function SingleShoesDetails() {
                   <p className="mt-4">Selected Color: <span className="font-semibold">{selectedColor}</span></p>
                 )}
               </div>
+
+
+
+
+
+
+
 
             </div>
             <div className="flex lg:flex-row flex-col  items-center gap-5">
@@ -306,22 +320,22 @@ export default function SingleShoesDetails() {
                 <p className="mt-2 font-semibold">Subtotal: {subtotal} $</p>
               </div>
               <div className="mt-5 flex">
-                 {cartItems?.some((item) => item.id === shoe.id) ? (
-                <> <button disabled  className="w-48 cursor-not-allowed mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">Added in your cart </button>
-                  <NavLink to='/cart'>
-                    <button className="w-28 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">View cart <FaCartPlus /></button>
-                  </NavLink>
-                </>
-              ) : (
-                <button
-                  onClick={(e) => {
-                    e.preventDefault(); // Prevent navigation
-                    handleAddToCart(shoe);
-                  }}
-                  className="w-48 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">Add To cart <FaCartPlus /></button>
-              )}
+                {cartItems?.some((item) => item.id === shoe.id) ? (
+                  <> <button disabled className="w-48 cursor-not-allowed mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">Added in your cart </button>
+                    <NavLink to='/cart'>
+                      <button className="w-28 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">View cart <FaCartPlus /></button>
+                    </NavLink>
+                  </>
+                ) : (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault(); // Prevent navigation
+                      handleAddToCart(shoe);
+                    }}
+                    className="w-48 mb-2 flex items-center h-16 rounded justify-center bg-red text-white gap-2 border">Add To cart <FaCartPlus /></button>
+                )}
               </div>
-             
+
 
 
 
@@ -333,7 +347,7 @@ export default function SingleShoesDetails() {
 
       </div>
 
-      <div>
+      <div className="border">
         {/* Tab Buttons */}
         <div className="flex gap-5 justify-center mt-20 mb-20">
           <button

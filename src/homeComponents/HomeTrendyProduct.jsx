@@ -91,7 +91,7 @@ export default function HomeTrendyProduct() {
     <div>
       {/* Header */}
       <div className="flex justify-center mb-5 px-5">
-        <div className="text-titleMd uppercase" data-aos="fade-down" data-aos-duration="3000">
+        <div className="text-titleMd uppercase text-center" data-aos="fade-down" data-aos-duration="3000">
           Our trendy <span className="font-bold text-red">Products</span>
         </div>
       </div>

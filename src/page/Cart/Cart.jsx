@@ -174,12 +174,12 @@ const Cart = () => {
                                 </>
                             ) : (
                                <div className="flex flex-col items-center">
-                                <div className="flex justify-center mt-20 items-center text-titleSm">
+                                <div className="flex justify-center mt-20 items-center text-titleSm ">
                                     <p>Your cart is empty!</p>
                                     <TbShoppingCartOff className="text-titleMd" />
                                 </div>
                                   <NavLink to="/allShoes">
-                                    <button className="mt-5 border-b border px-6 rounded-lg bg-red text-white py-2">
+                                    <button className="mt-5 border-b border px-6 mb-10 rounded-lg bg-red text-white py-2">
                                         Shop
                                     </button>
                                     </NavLink>  
